@@ -34,7 +34,7 @@ public class tankStars extends Game {
 	@Override
 	public void render () {
 		super.render();
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //		GameStateManager.update(Gdx.graphics.getDeltaTime());
 //		GameStateManager.render(sprite);
 	}

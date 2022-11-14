@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.hud;
+import com.mygdx.game.Scenes.hud;
 import com.mygdx.game.tankStars;
 
 
@@ -21,7 +21,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(tankStars game){
         this.game=game;
         gamecam=new OrthographicCamera();
-        gamePort=new FitViewport(800,480,gamecam);
+        gamePort=new FitViewport(850,500,gamecam);
         backGround = new Texture("background.jpg");
         gamecam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/2,0);
         hud = new hud(game.sprite);
