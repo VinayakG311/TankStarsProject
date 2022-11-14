@@ -1,13 +1,18 @@
 package com.mygdx.game.states;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class mainMenuState extends State{
-    private Texture backGround;
+    private final Texture backGround;
+
     public mainMenuState(gameStateManager GameStateManager) {
         super(GameStateManager);
         backGround = new Texture("background.jpg");
+
     }
 
     @Override
