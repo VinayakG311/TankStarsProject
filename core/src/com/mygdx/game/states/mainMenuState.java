@@ -15,7 +15,7 @@ public class mainMenuState extends State{
 
     public mainMenuState(gameStateManager GameStateManager) {
         super(GameStateManager);
-        backGround = new Texture("background.jpg");
+        backGround = new Texture("img.jpg");
         gamecam=new OrthographicCamera();
         gamePort=new FitViewport(850,500,gamecam);
 
