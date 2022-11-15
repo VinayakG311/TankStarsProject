@@ -47,6 +47,8 @@ public class hud {
         ProgressBar progressBar = new ProgressBar(0,10,0.5f,false,progressBarStyle);
         progressBar.setPosition(380,405);
         progressBar.setSize(1,5);
+
+        progressBar.setAnimateDuration(0.25f);
         stage.addActor(progressBar);
 
 //        Texture texture = new Texture("title.png");
