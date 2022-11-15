@@ -34,22 +34,38 @@ public class hud {
 //        shapeRenderer.rect(0, 0, 5, 5);
 //        shapeRenderer.end();
 
-
-
-
-        Skin skin=new Skin();
         Pixmap pixmap = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.WHITE);
+        pixmap.setColor(Color.RED);
         pixmap.fill();
-        skin.add("white", new Texture(pixmap));
-        TextureRegionDrawable texturebar = new TextureRegionDrawable(new TextureRegion(new Texture("healthbar.jpeg")));
-        ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle(skin.newDrawable("white",Color.DARK_GRAY),texturebar);
-        ProgressBar progressBar = new ProgressBar(0,10,0.5f,false,progressBarStyle);
-        progressBar.setPosition(380,405);
-        progressBar.setSize(1,5);
 
+        TextureRegionDrawable texturebar = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+        ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
+        progressBarStyle.background=texturebar;
+        pixmap = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+        texturebar = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
+        progressBarStyle.knob = texturebar;
+
+        pixmap = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+        texturebar = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
+        progressBarStyle.knobBefore = texturebar;
+        ProgressBar progressBar = new ProgressBar(0.0f,1.0f,0.1f,false,progressBarStyle);
+       // progressBar.setPosition(380,405);
+        progressBar.setBounds(230, 405, 100, 20);
         progressBar.setAnimateDuration(0.25f);
         stage.addActor(progressBar);
+        ProgressBar progressBar1 = new ProgressBar(0.0f,1.0f,0.1f,false,progressBarStyle);
+        progressBar1.setBounds(420, 405, 100, 20);
+        
+        stage.addActor(progressBar1);
 
 //        Texture texture = new Texture("title.png");
 //        Table table=new Table();
