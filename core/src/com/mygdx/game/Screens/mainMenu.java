@@ -59,21 +59,21 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
         sprite2.setBounds(Gdx.graphics.getWidth()/2-125,Gdx.graphics.getHeight()/2,250,40 );
 
-        newGame = new Texture("newGame.png");
-        ImageButton button1 = new ImageButton((Drawable) newGame);
-        button1.setBounds(Gdx.graphics.getWidth()/2-125,Gdx.graphics.getHeight()/2,250,40);
-        button1.addListener(new InputListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
-                return true;
-            }
-        });
-        stage.addActor(button1);
+//        newGame = new Texture("newGame.png");
+//        ImageButton button1 = new ImageButton((Drawable) newGame);
+//        button1.setBounds(Gdx.graphics.getWidth()/2-125,Gdx.graphics.getHeight()/2,250,40);
+//        button1.addListener(new InputListener(){
+//            @Override
+//            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new PlayScreen(game));
+//            }
+//            @Override
+//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new PlayScreen(game));
+//                return true;
+//            }
+//        });
+//        stage.addActor(button1);
 //        Gdx.input.setInputProcessor(new InputAdapter() {
 //            @Override
 //            public boolean keyDown(int keyCode) {
