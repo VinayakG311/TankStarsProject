@@ -3,15 +3,19 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.mygdx.game.tankStars;
 
@@ -33,13 +37,31 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
 
 
-    public mainMenu(tankStars game) {
+    public mainMenu(final tankStars game) {
         super();
+
         this.game = game;
 
         stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
         img = new Texture("background.png");
         newGame = new Texture("newGame.png");
+        skin= new Skin();
+        skin.add("white","newGame.png");
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font= new BitmapFont();
+
+        Button button = new TextButton("Play",textButtonStyle);
+        button.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("hi");
+                game.setScreen(new PlayScreen(game));
+            }
+        });
+
+        button.setBounds(50,50,25,25);
+        stage.addActor(button);
 
     }
 
@@ -94,7 +116,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
         sb.begin();
         sprite.draw(sb);
-        sprite2.draw(sb);
+        //sprite2.draw(sb);
         sb.end();
         stage.draw();
     }
