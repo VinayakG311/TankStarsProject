@@ -32,7 +32,7 @@ public class PlayScreen implements Screen {
     private TmxMapLoader maploader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-    private World world;
+    //private World world;
 
 
     public PlayScreen(tankStars game){
@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
         gamePort=new ExtendViewport(850,500,gamecam);
         backGround = new Texture("background.jpg");
         ground=new Texture("map.png");
-        
+
         hud = new hud(game.sprite);
         bf_loadProgress = new BitmapFont();
         bf_loadProgress.getData().setScale(2,1);
@@ -62,7 +62,7 @@ public class PlayScreen implements Screen {
     public void update(float dt){
         handleinput(dt);
 
-        world.step(1/60f,6,2)
+        //world.step(1/60f,6,2);
         gamecam.update();
       //  renderer.setView(gamecam);
 
