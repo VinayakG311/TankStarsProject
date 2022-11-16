@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -31,6 +32,7 @@ public class PlayScreen implements Screen {
     private TmxMapLoader maploader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+    private World world;
 
 
     public PlayScreen(tankStars game){
@@ -39,7 +41,7 @@ public class PlayScreen implements Screen {
         gamePort=new ExtendViewport(850,500,gamecam);
         backGround = new Texture("background.jpg");
         ground=new Texture("map.png");
-
+        
         hud = new hud(game.sprite);
         bf_loadProgress = new BitmapFont();
         bf_loadProgress.getData().setScale(2,1);
@@ -59,6 +61,8 @@ public class PlayScreen implements Screen {
     }
     public void update(float dt){
         handleinput(dt);
+
+        world.step(1/60f,6,2)
         gamecam.update();
       //  renderer.setView(gamecam);
 
