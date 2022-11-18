@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,11 +13,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Scenes.hud;
+import com.mygdx.game.Tank;
 import com.mygdx.game.tankStars;
 
 
@@ -32,12 +35,16 @@ public class PlayScreen implements Screen {
     private TmxMapLoader maploader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+    private World world;
+    private Box2DDebugRenderer b2dr;
+    private Tank player ;
+    public Body b2body;
     //private World world;
 
 
     public PlayScreen(tankStars game){
         this.game=game;
-        gamecam=new OrthographicCamera();
+        gamecam=new OrthographicCamera(Gdx.graphics.getWidth()/100,Gdx.graphics.getHeight()/100);
         gamePort=new ExtendViewport(850,500,gamecam);
         backGround = new Texture("background.jpg");
         ground=new Texture("map.png");
@@ -46,6 +53,9 @@ public class PlayScreen implements Screen {
         bf_loadProgress = new BitmapFont();
         bf_loadProgress.getData().setScale(2,1);
         shapeRenderer = new ShapeRenderer();
+
+       // player= new Tank(world);
+
 //        maploader=new TmxMapLoader();
 //        map=maploader.load("map.jpg");
 //        renderer=new OrthogonalTiledMapRenderer(map);
@@ -54,22 +64,42 @@ public class PlayScreen implements Screen {
 
     }
     public void handleinput(float dt){
-        if(Gdx.input.isTouched()){
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
             gamecam.position.x+=100*dt;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            gamecam.position.x-=100*dt;
         }
 
     }
     public void update(float dt){
         handleinput(dt);
 
-        //world.step(1/60f,6,2);
+        world.step(1/60f,6,2);
         gamecam.update();
       //  renderer.setView(gamecam);
 
     }
     @Override
     public void show() {
-
+        world=new World(new Vector2(0,-10),true);
+        b2dr = new Box2DDebugRenderer();
+        player = new Tank(world);
+//        player.def();
+//        BodyDef bdef = new BodyDef();
+//        bdef.position.set(0,1);
+//        bdef.type=BodyDef.BodyType.DynamicBody;
+//        b2body=world.createBody(bdef);
+//        FixtureDef fdef = new FixtureDef();
+//        fdef.density=2.5f;
+//        fdef.friction = 0.25f;
+//        fdef.restitution=0.75f;
+//        System.out.println(Gdx.graphics.getWidth());
+//
+//        CircleShape shape = new CircleShape();
+//        shape.setRadius(10f);
+//        fdef.shape=shape;
+//        b2body.createFixture(fdef);
     }
 
     @Override
@@ -77,6 +107,7 @@ public class PlayScreen implements Screen {
         update(delta);
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
        // renderer.render();
         //   game.sprite.setProjectionMatrix(gamecam.combined);
         game.sprite.begin();
@@ -84,6 +115,7 @@ public class PlayScreen implements Screen {
         game.sprite.draw(ground,0,0,850,100);
         game.sprite.end();
         showHealth();
+        b2dr.render(player.world,player.gamecam.combined);
         game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
 
 
