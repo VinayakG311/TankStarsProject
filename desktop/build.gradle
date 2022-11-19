@@ -41,6 +41,10 @@ task dist(type: Jar) {
     with jar
 }
 
+dependencies {
+    implementation 'com.google.guava:guava:31.1-jre'
+}
+
 
 dist.dependsOn classes
 
