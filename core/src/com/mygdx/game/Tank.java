@@ -19,10 +19,11 @@ public class Tank extends Sprite {
     public Tank(World world){
         this.world=world;
         gamecam=new OrthographicCamera(Gdx.graphics.getWidth()/100,Gdx.graphics.getHeight()/100);
+//        gamecam = new OrthographicCamera(50,50);
         this.deftank();
         this.defground();
         this.hello();
-        movement=new Vector2();
+        movement=new Vector2(50,50);
 
 
     }

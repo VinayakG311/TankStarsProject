@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -37,11 +38,13 @@ public class PlayScreen implements Screen {
     private Box2DDebugRenderer b2dr;
     private Tank player ;
     public Body b2body;
+    private Sprite sprite;
     //private World world;
 
 
     public PlayScreen(tankStars game){
         this.game=game;
+        sprite = new Sprite();
         gamecam=new OrthographicCamera();
         gamePort=new ExtendViewport(850,480,gamecam);
         backGround = new Texture("background.jpg");
@@ -67,9 +70,11 @@ public class PlayScreen implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.character.getLinearVelocity().x <=2){
             player.character.applyLinearImpulse(new Vector2(0.1f,0),player.character.getWorldCenter(),true);
 
+
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.character.getLinearVelocity().x >=-2){
             player.character.applyLinearImpulse(new Vector2(-0.1f,0),player.character.getWorldCenter(),true);
+
 
         }
 
@@ -123,13 +128,28 @@ public class PlayScreen implements Screen {
        // System.out.println(gamecam.position);
         //System.out.println(gamecam.position);
         //g
+
         game.sprite.begin();
         game.sprite.draw(backGround,0,0,850,500);
         game.sprite.draw(ground,0,0,850,100);
+
         game.sprite.end();
+        gamecam.position.x = player.movement.x;
+        System.out.println(player.movement.x);
+
+        gamecam.update();
+
+
+//        player.gamecam.position.x = player.getX() + 100;
+//        player.gamecam.update();
+//        game.sprite.setProjectionMatrix(player.gamecam.combined);
+//        game.sprite.setProjectionMatrix(gamecam.combined);
+//        game.sprite.setProjectionMatrix(player.gamecam.combined);
         hud.showHealth();
+
+        game.sprite.setProjectionMatrix(gamecam.combined);
         b2dr.render(player.world,player.gamecam.combined);
-       // game.sprite.setProjectionMatrix(gamecam.combined);
+        game.sprite.setProjectionMatrix(player.gamecam.combined);
         game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
 
 

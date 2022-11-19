@@ -37,7 +37,7 @@ public class hud {
 
         shapeRenderer.setProjectionMatrix(stage.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.setColor(Color.GREEN);
         shapeRenderer.rect(460, 425, health, 30);
         shapeRenderer.rect(150, 425, health, 30);
         shapeRenderer.end();
