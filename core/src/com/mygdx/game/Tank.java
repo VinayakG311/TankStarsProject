@@ -14,10 +14,12 @@ public class Tank extends Sprite {
 
     public OrthographicCamera gamecam;
     public Vector2 movement;
+    float pos;
 
 
-    public Tank(World world){
+    public Tank(World world,float pos){
         this.world=world;
+        this.pos=pos;
         gamecam=new OrthographicCamera(Gdx.graphics.getWidth()/100,Gdx.graphics.getHeight()/100);
 //        gamecam = new OrthographicCamera(50,50);
         this.deftank();
@@ -26,11 +28,13 @@ public class Tank extends Sprite {
         movement=new Vector2(50,50);
 
 
+
+
     }
     public void deftank(){
         BodyDef bdef = new BodyDef();
         //bdef.position.set(-1.5f,0);
-        bdef.position.set(0,1);
+        bdef.position.set(pos,-1.5f);
         bdef.type=BodyDef.BodyType.DynamicBody;
         // b2body=world.createBody(bdef);
         character = world.createBody(bdef);

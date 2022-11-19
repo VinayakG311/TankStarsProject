@@ -87,11 +87,11 @@ public class mainMenu extends ScreenAdapter implements Screen {
         button1.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
+                game.setScreen(new PlayScreen(game,0f));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
+                game.setScreen(new PlayScreen(game,0f));
                 return true;
             }
         });
@@ -104,11 +104,11 @@ public class mainMenu extends ScreenAdapter implements Screen {
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
+                game.setScreen(new PlayScreen(game,0f));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
+                game.setScreen(new PlayScreen(game,0f));
                 return true;
             }
         });

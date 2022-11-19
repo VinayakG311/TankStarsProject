@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Screens.homeScreen;
 import com.mygdx.game.states.gameStateManager;
 
@@ -19,6 +20,8 @@ public class tankStars extends Game {
 	public void create () {
 		sprite = new SpriteBatch();
 		setScreen(new homeScreen(this));
+
+
 		//		GameStateManager = new gameStateManager();
 //		Gdx.gl.glClearColor(1,0,0,1);
 //		GameStateManager.push(new mainMenuState(GameStateManager));

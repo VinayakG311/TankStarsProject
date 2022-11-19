@@ -40,9 +40,10 @@ public class PlayScreen implements Screen {
     public Body b2body;
     private Sprite sprite;
     //private World world;
+    Float pos;
 
 
-    public PlayScreen(tankStars game){
+    public PlayScreen(tankStars game,float pos){
         this.game=game;
         sprite = new Sprite();
         gamecam=new OrthographicCamera();
@@ -54,6 +55,10 @@ public class PlayScreen implements Screen {
         bf_loadProgress = new BitmapFont();
         bf_loadProgress.getData().setScale(2,1);
         shapeRenderer = new ShapeRenderer();
+        world=new World(new Vector2(0,-10),true);
+        b2dr = new Box2DDebugRenderer();
+        this.pos=pos;
+        player = new Tank(world,pos);
 
        // player= new Tank(world);
 
@@ -94,9 +99,8 @@ public class PlayScreen implements Screen {
     }
     @Override
     public void show() {
-        world=new World(new Vector2(0,-10),true);
-        b2dr = new Box2DDebugRenderer();
-        player = new Tank(world);
+
+
 
         if(Gdx.input.getInputProcessor().keyDown(Input.Keys.D)){
             player.movement.x=500;
@@ -135,7 +139,6 @@ public class PlayScreen implements Screen {
 
         game.sprite.end();
         gamecam.position.x = player.movement.x;
-        System.out.println(player.movement.x);
 
         gamecam.update();
 
@@ -151,7 +154,12 @@ public class PlayScreen implements Screen {
         b2dr.render(player.world,player.gamecam.combined);
         game.sprite.setProjectionMatrix(player.gamecam.combined);
         game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
+       // System.out.println(player.character.getPosition().x);
+        if(player.character.getPosition().x>3){
 
+            System.out.println(player.character.getPosition().x-6);
+            game.setScreen(new PlayScreen(game,(player.character.getPosition().x-6)));
+        }
 
     }
     public void showHealth(){
