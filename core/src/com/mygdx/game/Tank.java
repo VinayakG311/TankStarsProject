@@ -10,7 +10,10 @@ public class Tank extends Sprite {
     public World world;
     public Body b2body;
 
+    public Body character;
+
     public OrthographicCamera gamecam;
+    public Vector2 movement;
 
 
     public Tank(World world){
@@ -19,14 +22,17 @@ public class Tank extends Sprite {
         this.deftank();
         this.defground();
         this.hello();
+        movement=new Vector2();
 
 
     }
     public void deftank(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(-1.5f,0);
+        //bdef.position.set(-1.5f,0);
+        bdef.position.set(0,1);
         bdef.type=BodyDef.BodyType.DynamicBody;
-        b2body=world.createBody(bdef);
+        // b2body=world.createBody(bdef);
+        character = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         fdef.density=2.5f;
         fdef.friction = 0.25f;
@@ -35,7 +41,8 @@ public class Tank extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(0.1f);
         fdef.shape=shape;
-        b2body.createFixture(fdef);
+     //   b2body.createFixture(fdef);
+        character.createFixture(fdef);
 
     }
     public void defground(){

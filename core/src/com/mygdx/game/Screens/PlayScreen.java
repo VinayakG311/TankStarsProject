@@ -44,8 +44,8 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(tankStars game){
         this.game=game;
-        gamecam=new OrthographicCamera(Gdx.graphics.getWidth()/100,Gdx.graphics.getHeight()/100);
-        gamePort=new ExtendViewport(850,500,gamecam);
+        gamecam=new OrthographicCamera();
+        gamePort=new ExtendViewport(850,480,gamecam);
         backGround = new Texture("background.jpg");
         ground=new Texture("map.png");
 
@@ -59,23 +59,32 @@ public class PlayScreen implements Screen {
 //        maploader=new TmxMapLoader();
 //        map=maploader.load("map.jpg");
 //        renderer=new OrthogonalTiledMapRenderer(map);
-//        gamecam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/2,0);
+        gamecam.position.set(400,240,0);
+
+
 
 
     }
     public void handleinput(float dt){
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            gamecam.position.x+=100*dt;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.character.getLinearVelocity().x <=2){
+            player.character.applyLinearImpulse(new Vector2(0.1f,0),player.character.getWorldCenter(),true);
+
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            gamecam.position.x-=100*dt;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.character.getLinearVelocity().x >=-2){
+            player.character.applyLinearImpulse(new Vector2(-0.1f,0),player.character.getWorldCenter(),true);
+
         }
+
+
 
     }
     public void update(float dt){
         handleinput(dt);
 
         world.step(1/60f,6,2);
+       // player.character.applyForceToCenter(player.movement,true);
+        gamecam.position.x = player.character.getPosition().x;
+        //hud.stage.getCamera().position.x = player.character.getPosition().x;
         gamecam.update();
       //  renderer.setView(gamecam);
 
@@ -85,6 +94,10 @@ public class PlayScreen implements Screen {
         world=new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
         player = new Tank(world);
+
+        if(Gdx.input.getInputProcessor().keyDown(Input.Keys.D)){
+            player.movement.x=500;
+        }
 //        player.def();
 //        BodyDef bdef = new BodyDef();
 //        bdef.position.set(0,1);
@@ -109,13 +122,16 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
        // renderer.render();
-        //   game.sprite.setProjectionMatrix(gamecam.combined);
+       // System.out.println(gamecam.position);
+        System.out.println(gamecam.position);
+        //g
         game.sprite.begin();
         game.sprite.draw(backGround,0,0,850,500);
         game.sprite.draw(ground,0,0,850,100);
         game.sprite.end();
-        showHealth();
+        hud.showHealth();
         b2dr.render(player.world,player.gamecam.combined);
+       // game.sprite.setProjectionMatrix(gamecam.combined);
         game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
 
 
