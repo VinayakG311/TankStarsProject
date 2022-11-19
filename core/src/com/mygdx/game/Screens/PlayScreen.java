@@ -123,7 +123,7 @@ public class PlayScreen implements Screen {
 
        // renderer.render();
        // System.out.println(gamecam.position);
-        System.out.println(gamecam.position);
+        //System.out.println(gamecam.position);
         //g
         game.sprite.begin();
         game.sprite.draw(backGround,0,0,850,500);
