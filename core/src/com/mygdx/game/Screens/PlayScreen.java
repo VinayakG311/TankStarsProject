@@ -47,13 +47,13 @@ public class PlayScreen implements Screen {
         this.game=game;
         sprite = new Sprite();
         gamecam=new OrthographicCamera();
+        //gamecam.zoom-=0.3;
         gamePort=new ExtendViewport(850,480,gamecam);
+        gamePort.apply();
         backGround = new Texture("background.jpg");
         ground=new Texture("map.png");
 
         hud = new hud(game.sprite);
-        bf_loadProgress = new BitmapFont();
-        bf_loadProgress.getData().setScale(2,1);
         shapeRenderer = new ShapeRenderer();
         world=new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
@@ -65,7 +65,7 @@ public class PlayScreen implements Screen {
 //        maploader=new TmxMapLoader();
 //        map=maploader.load("map.jpg");
 //        renderer=new OrthogonalTiledMapRenderer(map);
-        gamecam.position.set(400,240,0);
+        gamecam.position.set(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),0);
 
 
 
@@ -91,75 +91,41 @@ public class PlayScreen implements Screen {
 
         world.step(1/60f,6,2);
        // player.character.applyForceToCenter(player.movement,true);
-        gamecam.position.x = player.character.getPosition().x;
+     //   gamecam.position.x = player.character.getPosition().x;
         //hud.stage.getCamera().position.x = player.character.getPosition().x;
         gamecam.update();
       //  renderer.setView(gamecam);
 
     }
     @Override
-    public void show() {
-
-
-
-        if(Gdx.input.getInputProcessor().keyDown(Input.Keys.D)){
-            player.movement.x=500;
-        }
-//        player.def();
-//        BodyDef bdef = new BodyDef();
-//        bdef.position.set(0,1);
-//        bdef.type=BodyDef.BodyType.DynamicBody;
-//        b2body=world.createBody(bdef);
-//        FixtureDef fdef = new FixtureDef();
-//        fdef.density=2.5f;
-//        fdef.friction = 0.25f;
-//        fdef.restitution=0.75f;
-//        System.out.println(Gdx.graphics.getWidth());
-//
-//        CircleShape shape = new CircleShape();
-//        shape.setRadius(10f);
-//        fdef.shape=shape;
-//        b2body.createFixture(fdef);
-    }
+    public void show() {}
 
     @Override
     public void render(float delta) {
+        
         update(delta);
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-       // renderer.render();
-       // System.out.println(gamecam.position);
-        //System.out.println(gamecam.position);
-        //g
-
-        game.sprite.begin();
-        game.sprite.draw(backGround,0,0,850,500);
-        game.sprite.draw(ground,0,0,850,100);
-
-        game.sprite.end();
-        gamecam.position.x = player.movement.x;
-
-        gamecam.update();
-
-
-//        player.gamecam.position.x = player.getX() + 100;
-//        player.gamecam.update();
-//        game.sprite.setProjectionMatrix(player.gamecam.combined);
-//        game.sprite.setProjectionMatrix(gamecam.combined);
-//        game.sprite.setProjectionMatrix(player.gamecam.combined);
-        hud.showHealth();
 
         game.sprite.setProjectionMatrix(gamecam.combined);
-        b2dr.render(player.world,player.gamecam.combined);
-        game.sprite.setProjectionMatrix(player.gamecam.combined);
-        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
-       // System.out.println(player.character.getPosition().x);
-        if(player.character.getPosition().x>3){
 
-            System.out.println(player.character.getPosition().x-6);
-            game.setScreen(new PlayScreen(game,(player.character.getPosition().x-6)));
-        }
+        game.sprite.begin();
+
+        game.sprite.draw(backGround,170,160,900,660);
+        game.sprite.draw(ground,220,160,850,100);
+        game.sprite.end();
+       // gamecam.position.x = player.movement.x;
+       // gamecam.zoom+=100;
+//
+        hud.showHealth();
+//
+//
+        b2dr.render(player.world,player.gamecam.combined);
+//        game.sprite.setProjectionMatrix(player.gamecam.combined);
+//        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
+       // System.out.println(player.character.getPosition().x);
+
 
     }
     public void showHealth(){
