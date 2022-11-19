@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -40,11 +41,13 @@ public class PlayScreen implements Screen {
     public Body b2body;
     private Sprite sprite;
     //private World world;
+    private TextureAtlas atlas;
     Float pos;
 
 
     public PlayScreen(tankStars game,float pos){
         this.game=game;
+        atlas = new TextureAtlas("tanks_pics.pack");
         sprite = new Sprite();
         gamecam=new OrthographicCamera();
         //gamecam.zoom-=0.3;
@@ -58,7 +61,7 @@ public class PlayScreen implements Screen {
         world=new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
         this.pos=pos;
-        player = new Tank(world,pos);
+        player = new Tank(world,pos,this);
 
        // player= new Tank(world);
 
@@ -90,6 +93,7 @@ public class PlayScreen implements Screen {
         handleinput(dt);
 
         world.step(1/60f,6,2);
+        player.update(dt);
        // player.character.applyForceToCenter(player.movement,true);
      //   gamecam.position.x = player.character.getPosition().x;
         //hud.stage.getCamera().position.x = player.character.getPosition().x;
@@ -97,6 +101,11 @@ public class PlayScreen implements Screen {
       //  renderer.setView(gamecam);
 
     }
+
+    public TextureAtlas getAtlas(){
+        return atlas;
+    }
+
     @Override
     public void show() {}
 
@@ -114,6 +123,7 @@ public class PlayScreen implements Screen {
 
         game.sprite.draw(backGround,170,160,900,660);
         game.sprite.draw(ground,220,160,850,100);
+        player.draw(game.sprite);
         game.sprite.end();
        // gamecam.position.x = player.movement.x;
        // gamecam.zoom+=100;
