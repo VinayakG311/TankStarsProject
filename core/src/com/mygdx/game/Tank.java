@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Screens.PlayScreen;
 
@@ -21,10 +22,11 @@ public class Tank extends Sprite {
     private TextureRegion tankStand;
 
     private Texture tank;
+    private Vector3 position;
+    private Vector3 velocity;
 
-
-    public Tank(World world, float pos, PlayScreen screen){
-       // super(screen.getAtlas().findRegion("tank1"));
+    public Tank(World world, float pos, PlayScreen screen,int x,int y){
+        super(screen.getAtlas().findRegion("tank1"));
         this.world=world;
         this.pos=pos;
         gamecam=new OrthographicCamera(Gdx.graphics.getWidth()/100,Gdx.graphics.getHeight()/100);
@@ -33,17 +35,24 @@ public class Tank extends Sprite {
         this.defground();
         this.hello();
         movement=new Vector2(50,50);
-        tankStand = new TextureRegion(screen.getAtlas().findRegion("tank1"),0,0,566,340);
-        setBounds(0,0,564/100 ,340/100 );
+        tankStand = new TextureRegion(new Texture("tank.png"),0,0,566,340);
+        setBounds(250,250,564/100,340/100 );
 
         setRegion(tankStand);
         tank=new Texture("tank.png");
+        System.out.println(character.getPosition().x+" "+x);
+        position= new Vector3(x,y,0);
+        velocity=new Vector3(0,0,0);
 
 
     }
 
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y-getHeight()/2);
+        velocity.add(0,-15,0);
+        velocity.scl(dt);
+        position.add(0,0,0);
+        velocity.scl(1/dt);
     }
 
     public void deftank(){
@@ -197,5 +206,13 @@ public class Tank extends Sprite {
 
     public Texture getTank() {
         return tank;
+    }
+
+    public Vector3 getPosition() {
+        return position;
+    }
+
+    public TextureRegion getTankStand() {
+        return tankStand;
     }
 }

@@ -61,7 +61,7 @@ public class PlayScreen implements Screen {
         world=new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
         this.pos=pos;
-        player = new Tank(world,pos,this);
+        player = new Tank(world,pos,this,250,250);
 
        // player= new Tank(world);
 
@@ -115,16 +115,14 @@ public class PlayScreen implements Screen {
         update(delta);
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
         game.sprite.setProjectionMatrix(gamecam.combined);
-
         game.sprite.begin();
-
         game.sprite.draw(backGround,170,160,900,660);
         game.sprite.draw(ground,220,160,850,100);
-        game.sprite.draw(player.getTank(),250,180,25,25);
+        game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
+        game.sprite.draw(player.getTankStand(),300,220,50,50);
         game.sprite.end();
+        System.out.println(player.character.getPosition().x+" "+Gdx.input.getX());
        // gamecam.position.x = player.movement.x;
        // gamecam.zoom+=100;
      
