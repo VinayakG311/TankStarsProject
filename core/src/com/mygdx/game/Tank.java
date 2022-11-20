@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -19,9 +20,11 @@ public class Tank extends Sprite {
     float pos;
     private TextureRegion tankStand;
 
+    private Texture tank;
+
 
     public Tank(World world, float pos, PlayScreen screen){
-
+       // super(screen.getAtlas().findRegion("tank1"));
         this.world=world;
         this.pos=pos;
         gamecam=new OrthographicCamera(Gdx.graphics.getWidth()/100,Gdx.graphics.getHeight()/100);
@@ -31,9 +34,10 @@ public class Tank extends Sprite {
         this.hello();
         movement=new Vector2(50,50);
         tankStand = new TextureRegion(screen.getAtlas().findRegion("tank1"),0,0,566,340);
-        setBounds(0,0,564 / 100,340 / 100);
+        setBounds(0,0,564/100 ,340/100 );
 
         setRegion(tankStand);
+        tank=new Texture("tank.png");
 
 
     }
@@ -123,5 +127,9 @@ public class Tank extends Sprite {
         fdef.shape=shape1;
         b2body.createFixture(fdef);
 
+    }
+
+    public Texture getTank() {
+        return tank;
     }
 }

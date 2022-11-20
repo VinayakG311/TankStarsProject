@@ -123,10 +123,11 @@ public class PlayScreen implements Screen {
 
         game.sprite.draw(backGround,170,160,900,660);
         game.sprite.draw(ground,220,160,850,100);
-        player.draw(game.sprite);
+        game.sprite.draw(player.getTank(),250,180,25,25);
         game.sprite.end();
        // gamecam.position.x = player.movement.x;
        // gamecam.zoom+=100;
+     
 //
         hud.showHealth();
 //
