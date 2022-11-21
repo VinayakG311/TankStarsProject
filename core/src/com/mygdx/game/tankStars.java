@@ -14,6 +14,7 @@ public class tankStars extends Game {
 	public SpriteBatch sprite;
 	public int ppm = 100;
 	private gameStateManager GameStateManager;
+	public Texture tank;
 
 
 

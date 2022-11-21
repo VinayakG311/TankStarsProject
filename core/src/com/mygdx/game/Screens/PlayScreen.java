@@ -58,7 +58,7 @@ public class PlayScreen implements Screen {
     Float pos;
 
 
-    public PlayScreen(final tankStars game, float pos){
+    public PlayScreen(final tankStars game, float pos,Texture tank){
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
@@ -80,7 +80,7 @@ public class PlayScreen implements Screen {
         world=new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
         this.pos=pos;
-        player = new Tank(world,pos,this,250,250);
+        player = new Tank(world,pos,this,250,250,tank);
 
        // player= new Tank(world);
 

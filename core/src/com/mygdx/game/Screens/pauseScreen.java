@@ -104,11 +104,11 @@ public class pauseScreen extends ScreenAdapter implements Screen {
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f));
+                game.setScreen(new PlayScreen(game,0f,game.tank));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f));
+                game.setScreen(new PlayScreen(game,0f,game.tank));
                 return true;
             }
         });

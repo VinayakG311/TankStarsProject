@@ -57,11 +57,14 @@ public class chooseTank implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0.1f));
+                game.tank = tank1;
+                game.setScreen(new PlayScreen(game,0.1f,tank1));
+
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0.1f));
+                game.tank = tank1;
+                game.setScreen(new PlayScreen(game,0.1f,tank1));
                 return true;
             }
         });
@@ -78,11 +81,13 @@ public class chooseTank implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0.1f));
+                game.tank = tank2;
+                game.setScreen(new PlayScreen(game,0.1f,tank2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0.1f));
+                game.tank = tank2;
+                game.setScreen(new PlayScreen(game,0.1f,tank2));
                 return true;
             }
         });
@@ -99,11 +104,13 @@ public class chooseTank implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0.1f));
+                game.tank = tank3;
+                game.setScreen(new PlayScreen(game,0.1f,tank3));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0.1f));
+                game.tank = tank3;
+                game.setScreen(new PlayScreen(game,0.1f,tank3));
                 return true;
             }
         });

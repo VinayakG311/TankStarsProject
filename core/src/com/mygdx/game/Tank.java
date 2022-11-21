@@ -28,7 +28,7 @@ public class Tank extends Sprite {
     private Vector3 velocity;
     private Sprite sprite;
 
-    public Tank(World world, float pos, PlayScreen screen,int x,int y){
+    public Tank(World world, float pos, PlayScreen screen,int x,int y,Texture tankSkin){
         Box2D.init();
         this.world=world;
         this.pos=pos;
@@ -38,7 +38,7 @@ public class Tank extends Sprite {
         this.defground();
         this.hello();
         movement=new Vector2(50,50);
-        tankStand = new TextureRegion(new Texture("tank.png"),0,0,566,340);
+        tankStand = new TextureRegion(tankSkin,0,0,566,340);
         setBounds(250,250,564/100,340/100 );
 
         setRegion(tankStand);
@@ -46,7 +46,7 @@ public class Tank extends Sprite {
         System.out.println(character.getPosition().x+" "+x);
         position= new Vector3(x,y,0);
         velocity=new Vector3(0,0,0);
-        sprite = new Sprite(tank);
+        sprite = new Sprite(tankSkin);
        // sprite.setBounds(300,200,25,25);
         sprite.setSize(25,25);
 
