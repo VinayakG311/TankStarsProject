@@ -16,7 +16,14 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Scenes.hud;
 import com.mygdx.game.Tank;
@@ -41,15 +48,27 @@ public class PlayScreen implements Screen {
     public Body b2body;
     private Sprite sprite;
     //private World world;
-    private TextureAtlas atlas;
+    private TextureAtlas atlas,pauseAtlas;
+    private Texture pause;
+    private Skin buttonSkin;
+    private ImageButton pauseButton;
+    private Stage stage;
+    private Texture pausebutton;
+
     Float pos;
 
 
-    public PlayScreen(tankStars game,float pos){
+    public PlayScreen(final tankStars game, float pos){
         this.game=game;
+        stage = new Stage(new ScreenViewport());
+        pausebutton = new Texture("pause.jpg");
+
         atlas = new TextureAtlas("tanks_pics.pack");
+
+
         sprite = new Sprite();
         gamecam=new OrthographicCamera();
+
         //gamecam.zoom-=0.3;
         gamePort=new ExtendViewport(850,480,gamecam);
         gamePort.apply();
@@ -107,7 +126,28 @@ public class PlayScreen implements Screen {
     }
 
     @Override
-    public void show() {}
+    public void show() {
+        Drawable drawable = new TextureRegionDrawable(pausebutton);
+        Gdx.input.setInputProcessor(stage);
+        pauseButton = new ImageButton(drawable);
+        pauseButton.setSize(45,45);
+        pauseButton.setPosition(45,420);
+        pauseButton.addListener(new ClickListener(){
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+             game.setScreen(new pauseScreen(game));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new pauseScreen(game));
+                return true;
+            }
+        });
+
+
+        stage.addActor(pauseButton);
+    }
 
     @Override
     public void render(float delta) {
@@ -117,13 +157,17 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.sprite.setProjectionMatrix(gamecam.combined);
         game.sprite.begin();
+        stage.act();
+
         game.sprite.draw(backGround,170,160,900,660);
         game.sprite.draw(ground,220,160,850,100);
         game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
+
         //game.sprite.draw(player.getTankStand(),300,220,50,50);
         player.render(game.sprite);
+        stage.draw();
         game.sprite.end();
-        System.out.println(player.character.getPosition().x+" "+player.character.getPosition().y);
+
        // System.out.println(player.character.getUserData());
        // gamecam.position.x = player.movement.x;
        // gamecam.zoom+=100;

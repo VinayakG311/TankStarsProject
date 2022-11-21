@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.tankStars;
 
-public class mainMenu extends ScreenAdapter implements Screen {
+public class pauseScreen extends ScreenAdapter implements Screen {
     private tankStars game;
     private SpriteBatch sb;
     private Sprite sprite;
@@ -42,7 +42,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
 
 
-    public mainMenu(final tankStars game) {
+    public pauseScreen(final tankStars game) {
         super();
 
         this.game = game;
@@ -81,26 +81,26 @@ public class mainMenu extends ScreenAdapter implements Screen {
         stage.addActor(title);
 
         // Button
-        Button button1 = new TextButton("NEW GAME",mySkin);
-        button1.setSize(col_width*8,row_height*2);
+        Button button1 = new TextButton("EXIT",mySkin);
+        button1.setSize((float) (col_width*8), (float) (row_height*1.5));
         button1.setPosition(100,250);
         button1.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new chooseTank(game));
+                game.setScreen(new mainMenu(game));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new chooseTank(game));
+                game.setScreen(new mainMenu(game));
                 return true;
             }
         });
         stage.addActor(button1);
 
         // Text Button
-        Button button2 = new TextButton("CONTINUE",mySkin);
-        button2.setSize(col_width*8,row_height*2);
-        button2.setPosition(100,125);
+        Button button2 = new TextButton("RESUME",mySkin);
+        button2.setSize((float) (col_width*8), (float) (row_height*1.5));
+        button2.setPosition(100,150);
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -113,6 +113,22 @@ public class mainMenu extends ScreenAdapter implements Screen {
             }
         });
         stage.addActor(button2);
+
+        Button button3 = new TextButton("SAVE",mySkin);
+        button3.setSize((float) (col_width*8), (float) (row_height*1.5));
+        button3.setPosition(100,60);
+        button3.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new mainMenu(game));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new mainMenu(game));
+                return true;
+            }
+        });
+        stage.addActor(button3);
 
     }
 
