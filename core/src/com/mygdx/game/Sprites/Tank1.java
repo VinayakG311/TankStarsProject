@@ -14,6 +14,7 @@ public class Tank1 {
         velocity = new Vector3(0,0,0);
 
         tank = new Texture("tank1.png");
+
     }
 
     public void update(float dt){

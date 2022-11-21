@@ -56,6 +56,8 @@ public class PlayScreen implements Screen {
     private Stage stage;
     private Texture pausebutton;
     private Tank1 tank1;
+    private Texture flatGround;
+    private Texture reverseTank1;
 
     Float pos;
 
@@ -67,7 +69,8 @@ public class PlayScreen implements Screen {
         tank1 = new Tank1(50,80);
         atlas = new TextureAtlas("tanks_pics.pack");
 
-
+        flatGround = new Texture("flatGround.png");
+        reverseTank1 = new Texture("reverseTank1.png");
         sprite = new Sprite();
         gamecam=new OrthographicCamera();
 
@@ -172,17 +175,19 @@ public class PlayScreen implements Screen {
         stage.act();
 
         game.sprite.draw(backGround,170,160,900,660);
-        game.sprite.draw(ground,220,160,850,100);
+//        game.sprite.draw(ground,220,160,850,200);
+        game.sprite.draw(flatGround,220,160,950,100);
 //        game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
         game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
-        //game.sprite.draw(player.getTankStand(),300,220,50,50);
+//        game.sprite.draw(reverseTank1,200,500);
+//        game.sprite.draw(player.getTankStand(),300,220,50,50);
 //        player.render(game.sprite);
-        if(tank1.getPosition().x < 15){
-            tank1.getPosition().x = 15;
+        if(tank1.getPosition().x < 10){
+            tank1.getPosition().x = 10;
         }
 
-        if(tank1.getPosition().x > 500){
-            tank1.getPosition().x = 500;
+        if(tank1.getPosition().x > 550){
+            tank1.getPosition().x = 550;
         }
         stage.draw();
         game.sprite.end();
@@ -195,7 +200,7 @@ public class PlayScreen implements Screen {
         hud.showHealth();
 //
 //
-        b2dr.render(player.world,player.gamecam.combined);
+//        b2dr.render(player.world,player.gamecam.combined);
 //        game.sprite.setProjectionMatrix(player.gamecam.combined);
 //        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
        // System.out.println(player.character.getPosition().x);
