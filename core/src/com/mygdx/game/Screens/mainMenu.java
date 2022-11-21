@@ -83,7 +83,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
         // Button
         Button button1 = new TextButton("NEW GAME",mySkin);
         button1.setSize(col_width*8,row_height*2);
-        button1.setPosition(100,250);
+        button1.setPosition(225,400);
         button1.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -100,7 +100,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
         // Text Button
         Button button2 = new TextButton("CONTINUE",mySkin);
         button2.setSize(col_width*8,row_height*2);
-        button2.setPosition(100,125);
+        button2.setPosition(225,125);
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -120,46 +120,6 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
 
 
-//    @Override
-//    public void show() {
-//        sb = new SpriteBatch();
-//        Texture img = new Texture("background.png");
-//        sprite = new Sprite(img);
-//        Texture newGame = new Texture("newGame.png");
-//        sprite2 = new Sprite(newGame);
-//        sprite.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-//
-//
-//        sprite2.setBounds(Gdx.graphics.getWidth()/2-125,Gdx.graphics.getHeight()/2,250,40 );
-//
-////        newGame = new Texture("newGame.png");
-////        ImageButton button1 = new ImageButton((Drawable) newGame);
-////        button1.setBounds(Gdx.graphics.getWidth()/2-125,Gdx.graphics.getHeight()/2,250,40);
-////        button1.addListener(new InputListener(){
-////            @Override
-////            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-////                game.setScreen(new PlayScreen(game));
-////            }
-////            @Override
-////            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-////                game.setScreen(new PlayScreen(game));
-////                return true;
-////            }
-////        });
-////        stage.addActor(button1);
-////        Gdx.input.setInputProcessor(new InputAdapter() {
-////            @Override
-////            public boolean keyDown(int keyCode) {
-////                if (keyCode == Input.Keys.SPACE) {
-////                    game.setScreen(new PlayScreen(game));
-////                }
-////                return true;
-////            }
-////        });
-//    }
-
-
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
@@ -173,7 +133,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
         stage.act();
         stage.getBatch().begin();
-        stage.getBatch().draw(img,0,0,850,500);
+        stage.getBatch().draw(img,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         stage.getBatch().end();
         stage.draw();
     }

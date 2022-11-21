@@ -159,8 +159,8 @@ public class PlayScreen implements Screen {
         game.sprite.begin();
         stage.act();
 
-        game.sprite.draw(backGround,170,160,900,660);
-        game.sprite.draw(ground,220,160,850,100);
+        game.sprite.draw(backGround,170,160,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        game.sprite.draw(ground,220,175,850,130);
         game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
 
         //game.sprite.draw(player.getTankStand(),300,220,50,50);

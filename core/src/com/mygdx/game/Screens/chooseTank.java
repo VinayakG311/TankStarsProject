@@ -127,7 +127,7 @@ public class chooseTank implements Screen {
 
         stage.act();
         stage.getBatch().begin();
-        stage.getBatch().draw(img,0,0,850,500);
+        stage.getBatch().draw(img,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         stage.getBatch().end();
         stage.draw();
     }
