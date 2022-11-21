@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Scenes.hud;
+import com.mygdx.game.Sprites.Tank1;
 import com.mygdx.game.Tank;
 import com.mygdx.game.tankStars;
 
@@ -54,6 +55,7 @@ public class PlayScreen implements Screen {
     private ImageButton pauseButton;
     private Stage stage;
     private Texture pausebutton;
+    private Tank1 tank1;
 
     Float pos;
 
@@ -62,7 +64,7 @@ public class PlayScreen implements Screen {
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
-
+        tank1 = new Tank1(50,80);
         atlas = new TextureAtlas("tanks_pics.pack");
 
 
@@ -94,22 +96,32 @@ public class PlayScreen implements Screen {
 
     }
     public void handleinput(float dt){
+
+
+
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.character.getLinearVelocity().x <=2){
             player.character.applyLinearImpulse(new Vector2(0.1f,0),player.character.getWorldCenter(),true);
+            tank1.movef();
 
 
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.character.getLinearVelocity().x >=-2){
             player.character.applyLinearImpulse(new Vector2(-0.1f,0),player.character.getWorldCenter(),true);
-
+            tank1.moveb();
 
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.S) && player.character.getLinearVelocity().x <=2) {
+            player.character.applyLinearImpulse(new Vector2(0.1f, 0), player.character.getWorldCenter(), true);
+            tank1.moves();
+        }
 
 
     }
     public void update(float dt){
         handleinput(dt);
+        tank1.update(dt);
 
         world.step(1/60f,6,2);
         player.update(dt);
@@ -161,10 +173,17 @@ public class PlayScreen implements Screen {
 
         game.sprite.draw(backGround,170,160,900,660);
         game.sprite.draw(ground,220,160,850,100);
-        game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
-
+//        game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
+        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         //game.sprite.draw(player.getTankStand(),300,220,50,50);
-        player.render(game.sprite);
+//        player.render(game.sprite);
+        if(tank1.getPosition().x < 15){
+            tank1.getPosition().x = 15;
+        }
+
+        if(tank1.getPosition().x > 500){
+            tank1.getPosition().x = 500;
+        }
         stage.draw();
         game.sprite.end();
 
