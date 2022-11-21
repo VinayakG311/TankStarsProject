@@ -120,9 +120,11 @@ public class PlayScreen implements Screen {
         game.sprite.draw(backGround,170,160,900,660);
         game.sprite.draw(ground,220,160,850,100);
         game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
-        game.sprite.draw(player.getTankStand(),300,220,50,50);
+        //game.sprite.draw(player.getTankStand(),300,220,50,50);
+        player.render(game.sprite);
         game.sprite.end();
-        System.out.println(player.character.getPosition().x+" "+Gdx.input.getX());
+        System.out.println(player.character.getPosition().x+" "+player.character.getPosition().y);
+       // System.out.println(player.character.getUserData());
        // gamecam.position.x = player.movement.x;
        // gamecam.zoom+=100;
      

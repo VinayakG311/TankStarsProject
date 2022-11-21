@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -15,6 +16,7 @@ public class Tank extends Sprite {
     public Body b2body;
 
     public Body character;
+    public Body body;
 
     public OrthographicCamera gamecam;
     public Vector2 movement;
@@ -24,9 +26,10 @@ public class Tank extends Sprite {
     private Texture tank;
     private Vector3 position;
     private Vector3 velocity;
+    private Sprite sprite;
 
     public Tank(World world, float pos, PlayScreen screen,int x,int y){
-        super(screen.getAtlas().findRegion("tank1"));
+        Box2D.init();
         this.world=world;
         this.pos=pos;
         gamecam=new OrthographicCamera(Gdx.graphics.getWidth()/100,Gdx.graphics.getHeight()/100);
@@ -43,8 +46,14 @@ public class Tank extends Sprite {
         System.out.println(character.getPosition().x+" "+x);
         position= new Vector3(x,y,0);
         velocity=new Vector3(0,0,0);
+        sprite = new Sprite(tank);
+       // sprite.setBounds(300,200,25,25);
+        sprite.setSize(25,25);
 
-
+    }
+    public void render(SpriteBatch batch){
+        sprite.setPosition(300,230);
+        sprite.draw(batch);
     }
 
     public void update(float dt){
@@ -63,6 +72,8 @@ public class Tank extends Sprite {
         // b2body=world.createBody(bdef);
         character = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
+
+
         fdef.density=2.5f;
         fdef.friction = 0.25f;
         fdef.restitution=0.75f;
@@ -71,7 +82,12 @@ public class Tank extends Sprite {
         shape.setRadius(0.1f);
         fdef.shape=shape;
      //   b2body.createFixture(fdef);
+        
+        character.setUserData(this);
         character.createFixture(fdef);
+
+
+        System.out.println(character.getUserData());
 
     }
     public void defground(){
