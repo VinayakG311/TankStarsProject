@@ -56,8 +56,10 @@ public class PlayScreen implements Screen {
     private Stage stage;
     private Texture pausebutton;
     private Tank1 tank1;
+    private Tank1 tank2;
     private Texture flatGround;
     private Texture reverseTank1;
+    private int turn;
 
     Float pos;
 
@@ -66,7 +68,8 @@ public class PlayScreen implements Screen {
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
-        tank1 = new Tank1(50,80);
+        tank1 = new Tank1(50,80,tank,true,false);
+        tank2 = new Tank1(550,80,tank,false,true);
         atlas = new TextureAtlas("tanks_pics.pack");
 
         flatGround = new Texture("flatGround.png");
@@ -86,6 +89,7 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         this.pos=pos;
         player = new Tank(world,pos,this,250,250,tank);
+        turn=0;
 
        // player= new Tank(world);
 
@@ -101,30 +105,64 @@ public class PlayScreen implements Screen {
     public void handleinput(float dt){
 
 
-
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.character.getLinearVelocity().x <=2){
             player.character.applyLinearImpulse(new Vector2(0.1f,0),player.character.getWorldCenter(),true);
-            tank1.movef();
+            if(turn==0) {
+                tank1.movef();
+            }
+            else{
+                tank2.movef();
+            }
+
 
 
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.character.getLinearVelocity().x >=-2){
             player.character.applyLinearImpulse(new Vector2(-0.1f,0),player.character.getWorldCenter(),true);
-            tank1.moveb();
+            if(turn==0) {
+                tank1.moveb();
+            }
+            else{
+                tank2.moveb();
+            }
 
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.S) && player.character.getLinearVelocity().x <=2) {
             player.character.applyLinearImpulse(new Vector2(0.1f, 0), player.character.getWorldCenter(), true);
-            tank1.moves();
+            if(turn==0) {
+                tank1.moves();
+            }
+            else{
+                tank2.moves();
+            }
+
         }
 
 
     }
     public void update(float dt){
+
         handleinput(dt);
-        tank1.update(dt);
+        if(turn==0 ){
+            tank1.update(dt);
+            turn=1;
+
+
+        }
+        else {
+            tank2.update(dt);
+            turn=0;
+
+        }
+//        if(turn==0 && tank1.getFuel()>0){
+//            System.out.println(tank1.getFuel());
+//            tank1.update(dt);
+//           // tank2.setFuel(100);
+//            if(tank1.getFuel()<=0){
+//                turn=1;
+//            }
+//        }
 
         world.step(1/60f,6,2);
         player.update(dt);
@@ -179,15 +217,21 @@ public class PlayScreen implements Screen {
         game.sprite.draw(flatGround,220,160,950,100);
 //        game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
         game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
+        game.sprite.draw(tank2.getTank(),tank2.getPosition().x,tank2.getPosition().y);
 //        game.sprite.draw(reverseTank1,200,500);
 //        game.sprite.draw(player.getTankStand(),300,220,50,50);
 //        player.render(game.sprite);
         if(tank1.getPosition().x < 10){
             tank1.getPosition().x = 10;
         }
-
         if(tank1.getPosition().x > 550){
             tank1.getPosition().x = 550;
+        }
+        if(tank2.getPosition().x < 10){
+            tank2.getPosition().x = 10;
+        }
+        if(tank2.getPosition().x > 550){
+            tank2.getPosition().x = 550;
         }
         stage.draw();
         game.sprite.end();
