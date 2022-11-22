@@ -37,7 +37,7 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
 
     private Label outputLabel;
-
+    private Texture revTank;
 
 
 
@@ -56,7 +56,7 @@ public class pauseScreen extends ScreenAdapter implements Screen {
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font= new BitmapFont();
 
-
+        revTank = new Texture("reverseTank1.png");
     }
 
 
@@ -104,11 +104,11 @@ public class pauseScreen extends ScreenAdapter implements Screen {
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f,game.tank));
+                game.setScreen(new PlayScreen(game,0f,game.tank,revTank));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f,game.tank));
+                game.setScreen(new PlayScreen(game,0f,game.tank,revTank));
                 return true;
             }
         });

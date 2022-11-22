@@ -32,7 +32,7 @@ public class Tank1 {
         velocity.scl(dt);
         position.add(velocity.x,0,0);
         velocity.scl(1/dt);
-        fuel-=(Math.abs(velocity.x))/50;
+//        fuel-=(Math.abs(velocity.x))/50;
         }
 
 

@@ -60,11 +60,13 @@ public class PlayScreen implements Screen {
     private Texture flatGround;
     private Texture reverseTank1;
     private int turn;
+    private int count = 0;
+    private Sprite revTanksprite;
 
     Float pos;
 
 
-    public PlayScreen(final tankStars game, float pos,Texture tank){
+    public PlayScreen(final tankStars game, float pos,Texture tank,Texture revTank){
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
@@ -72,10 +74,14 @@ public class PlayScreen implements Screen {
         tank2 = new Tank1(550,80,tank,false,true);
         atlas = new TextureAtlas("tanks_pics.pack");
 
+
         flatGround = new Texture("flatGround.png");
         reverseTank1 = new Texture("reverseTank1.png");
         sprite = new Sprite();
         gamecam=new OrthographicCamera();
+
+        revTanksprite = new Sprite(tank1.getTank());
+        revTanksprite.flip(true,false);
 
         //gamecam.zoom-=0.3;
         gamePort=new ExtendViewport(850,480,gamecam);
@@ -130,11 +136,19 @@ public class PlayScreen implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.S) && player.character.getLinearVelocity().x <=2) {
             player.character.applyLinearImpulse(new Vector2(0.1f, 0), player.character.getWorldCenter(), true);
-            if(turn==0) {
-                tank1.moves();
+//            if(turn==0) {
+//                tank1.moves();
+//            }
+//            else{
+//                tank2.moves();
+//            }
+            tank1.moves();
+            tank2.moves();
+            if(turn==0){
+                turn = 1;
             }
-            else{
-                tank2.moves();
+            else if(turn==1){
+                turn = 0;
             }
 
         }
@@ -146,13 +160,10 @@ public class PlayScreen implements Screen {
         handleinput(dt);
         if(turn==0 ){
             tank1.update(dt);
-            turn=1;
-
 
         }
         else {
             tank2.update(dt);
-            turn=0;
 
         }
 //        if(turn==0 && tank1.getFuel()>0){
@@ -216,8 +227,9 @@ public class PlayScreen implements Screen {
 //        game.sprite.draw(ground,220,160,850,200);
         game.sprite.draw(flatGround,220,160,950,100);
 //        game.sprite.draw(player.getTank(),player.getPosition().x,player.getPosition().y,25,25);
+
+        game.sprite.draw(tank1.getTank(),tank2.getPosition().x,tank2.getPosition().y,tank1.getTank().getWidth(),tank1.getTank().getHeight(),0,0,72,44,true,false);
         game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
-        game.sprite.draw(tank2.getTank(),tank2.getPosition().x,tank2.getPosition().y);
 //        game.sprite.draw(reverseTank1,200,500);
 //        game.sprite.draw(player.getTankStand(),300,220,50,50);
 //        player.render(game.sprite);
