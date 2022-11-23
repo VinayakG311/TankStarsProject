@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.MapScreen;
 import com.mygdx.game.tankStars;
 
 public class mainMenu extends ScreenAdapter implements Screen {
@@ -85,7 +86,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
         // Button
         Button button1 = new TextButton("NEW GAME",mySkin);
         button1.setSize(col_width*8,row_height*2);
-        button1.setPosition(100,250);
+        button1.setPosition(200,250);
         button1.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -102,15 +103,15 @@ public class mainMenu extends ScreenAdapter implements Screen {
         // Text Button
         Button button2 = new TextButton("CONTINUE",mySkin);
         button2.setSize(col_width*8,row_height*2);
-        button2.setPosition(100,125);
+        button2.setPosition(200,125);
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f,game.tank,revTank));
+                game.setScreen(new MapScreen(game));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f,game.tank,revTank));
+                game.setScreen(new MapScreen(game));
                 return true;
             }
         });
@@ -175,7 +176,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
         stage.act();
         stage.getBatch().begin();
-        stage.getBatch().draw(img,0,0,850,500);
+        stage.getBatch().draw(img,0,0,1600,620);
         stage.getBatch().end();
         stage.draw();
     }

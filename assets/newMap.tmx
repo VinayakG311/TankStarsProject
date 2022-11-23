@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="2">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="43" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="2">
  <tileset firstgid="1" source="background.tsx"/>
- <tileset firstgid="8805" source="flatGround.tsx"/>
- <layer id="1" name="background" width="240" height="13">
+ <tileset firstgid="6931" source="flatGround.tsx"/>
+ <tileset firstgid="7475" source="../../background.tsx"/>
+ <tileset firstgid="16279" source="../../flatGround.tsx"/>
+ <layer id="1" name="background" width="240" height="43">
   <data encoding="base64" compression="zlib">
-   eJztw7ENAAAMAiDTg/1/9IpukNBLqqqqqqqqqqqqqqqq+nhA9lVM
+   eJztwzEJAAAIADAxha8F7X+aQvDYYNURpaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr4+qaqqqqqqqqqqqqqqensBQV6Yxg==
   </data>
  </layer>
  <objectgroup id="3" name="ground">
-  <object id="1" x="1.45666" y="144.938">
+  <object id="1" x="1.45666" y="624.938">
    <polyline points="0,0 48.0699,0 47.3416,-14.5666 123.816,-16.7516 126.001,-1.45666 157.32,0 158.048,13.8383 174.8,16.0233 174.8,32.0466 192.28,31.3183 192.28,48.0699 208.303,48.0699 207.575,31.3183 221.413,32.0466 222.87,14.5666 238.165,15.295 239.621,0 256.373,0.728332 256.373,-14.5666 302.986,-15.295 304.443,-32.0466 476.329,-31.3183 479.243,-2.91333 528.769,-2.185 526.584,15.295 574.654,16.0233 576.111,-0.728332 607.429,-0.728332 608.886,-14.5666 637.291,-17.48 638.019,-29.8616 744.355,-30.5899 751.639,-17.48 780.044,-17.48 782.957,-3.64166 797.524,-0.728332 799.709,16.7516 893.664,18.9366 895.849,0.728332 927.167,0 928.623,-14.5666 959.942,-14.5666 960.67,-30.5899 1183.54,-33.5033 1184.27,-16.7516 1229.42,-16.0233 1230.88,-1.45666 1276.77,0 1276.77,-14.5666 1325.56,-16.0233 1325.56,-34.2316 1406.41,-31.3183 1407.14,-16.0233 1458.12,-15.295 1457.39,-2.185 1488.71,2.185 1486.53,15.295 1570.28,17.48 1565.91,-2.185 1583.39,-2.185 1585.58,-18.2083 1612.53,-18.2083 1615.44,-37.1449 1745.08,-32.0466 1743.63,-17.48 1775.67,-15.295 1774.95,-3.64166 1790.97,-0.728332 1791.7,13.11 1903.86,15.295 1906.05,2.185 1914.79,0.728332 1917.7,-13.8383 1932.99,-16.0233 1935.91,-33.5033 2091.77,-32.7749 2093.95,-7.28332 2114.35,2.185 2114.35,13.8383 2144.94,16.0233"/>
   </object>
  </objectgroup>
- <layer id="2" name="graphics" width="240" height="13">
+ <layer id="2" name="graphics" width="240" height="43">
   <data encoding="base64" compression="zlib">
-   eJztldsNgDAMAzsL++8IC/BoEscgeif5j9hNmooxAAAAAAAAAAAAAAAAYDX27VyunEq2wiN7xmiW64xqvyvfbL5zvooMZU20h2rPT99W/R07MEP17iMzc+29uu/Zuq45q+czk9FREzl/Z69POR3e6rtXz+Frs7yj4ufMnPFV3WXGr1oTnadj77oy0Pflel9d+5bxzHyfeb+Ou3t7f9C/teI/YrV+EUJjHNj4EWk=
+   eJzt2u1pw0AMBuAM0A06TLtwV2hXKyYYjDnHX5LOSZ4H3h8x4XSRfCYpvd0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAWPL7dQ9wbeNZnebj+57pNeAaWmd1Lb3O8db9tfIMpn1tPUvnOVsnaj3q7T2zVzjHZ/YafY6z6u55nu7t/6O13+kMR98jEffl1trT90XVrHqGV/Uout68dmsfZ56nW3q/Zf2I+UX2P1LmWcq4R/5msxhnl1k7+wxXnN+smaz1LPO70J71j84v43xEib5fKu6Lsc6gNbusfUznHzmrjP5krd0zS79tj/Rn7SxHz+Foncz9TWtUzrG63ryXZ+bV8ir9eaZUzKFVp9caV8vS58j8fFv796jXc737+M6pmEPE+tl77Nn71vWKmo/qtPY2fb20d6lN1Qwi6lTt9VVnMNY6+reYV+2/SFQGz7y+iORl0HsPInIsgz3XReT6+fm8Z+19g957FRERERGpztn/5xUREZF9+QeqF0D1
   </data>
  </layer>
 </map>
