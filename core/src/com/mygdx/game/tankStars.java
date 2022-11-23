@@ -22,6 +22,7 @@ public class tankStars extends Game {
 	public void create () {
 		sprite = new SpriteBatch();
 		setScreen(new homeScreen(this));
+		//setScreen(new MapScreen(this));
 
 
 		//		GameStateManager = new gameStateManager();
