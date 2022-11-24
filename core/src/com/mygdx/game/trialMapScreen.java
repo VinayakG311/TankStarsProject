@@ -97,8 +97,6 @@ public class trialMapScreen implements Screen {
         this.game=game;
 
         camera=new OrthographicCamera();
-
-
         camPort = new FitViewport(400,200,camera);
 
         tiledMap= new TmxMapLoader().load("newMap.tmx");
@@ -107,6 +105,7 @@ public class trialMapScreen implements Screen {
 
         world = new World(new Vector2(0,-100),true);
         b2dr = new Box2DDebugRenderer();
+        tank1=new Tank1(100,55,new Texture("tank1.png"),true,false);
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape2 = new PolygonShape();
@@ -167,12 +166,12 @@ public class trialMapScreen implements Screen {
             camera.position.x+=100*dt;
             camera.update();
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x <=4){
-            player.b2body.applyLinearImpulse(new Vector2(0.1f,-0.1f),player.b2body.getWorldCenter(),true);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <=4){
+            player.b2body.applyLinearImpulse(new Vector2(100f,-0.1f),player.b2body.getWorldCenter(),true);
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <=-4){
-            player.b2body.applyLinearImpulse(new Vector2(-0.1f,0),player.b2body.getWorldCenter(),true);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >=-4){
+            player.b2body.applyLinearImpulse(new Vector2(-100f,0),player.b2body.getWorldCenter(),true);
         }
 
 
@@ -186,7 +185,7 @@ public class trialMapScreen implements Screen {
 
 //        camera.position.x = player.b2body.getPosition().x;
 
-//        tank1.setPosition(new Vector3((float) (body.getPosition().x-tank1.getTank().getWidth()/2), (float) (body.getPosition().y-1.3*tank1.getTank().getHeight()),0));
+        tank1.setPosition(new Vector3((float) (player.b2body.getPosition().x-tank1.getTank().getWidth()/2), (float) (player.b2body.getPosition().y-1.5*tank1.getTank().getHeight()),0));
 
         camera.update();
 
@@ -199,6 +198,9 @@ public class trialMapScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
+        game.sprite.begin();
+        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
+        game.sprite.end();
 
         renderer.setView(camera);
         b2dr.render(world,camera.combined);
