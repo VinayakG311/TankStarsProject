@@ -105,7 +105,7 @@ public class trialMapScreen implements Screen {
         camera=new OrthographicCamera();
         camPort = new FitViewport(400,200,camera);
 
-        tiledMap= new TmxMapLoader().load("newMap.tmx");
+        tiledMap= new TmxMapLoader().load("GameMap.tmx");
         camera.position.set(600,350,0);
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
@@ -136,7 +136,7 @@ public class trialMapScreen implements Screen {
 //        }
 
 
-        for(MapObject object : tiledMap.getLayers().get(1).getObjects()){
+        for(MapObject object : tiledMap.getLayers().get(2).getObjects()){
 
             Shape shape;
             if (object instanceof RectangleMapObject) {
