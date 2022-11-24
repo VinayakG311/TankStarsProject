@@ -26,7 +26,7 @@ public class Tanktry extends Sprite {
 
     public void defTank(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(50 ,320 );
+        bdef.position.set(3350 ,320 );
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

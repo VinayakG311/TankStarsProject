@@ -118,6 +118,8 @@ public class trialMapScreen implements Screen {
         FixtureDef fdef = new FixtureDef();
         Body body;
         tank_player1 = new Texture("tank1.png");
+        this.Wall(15,-170,15,1700);
+        this.Wall(3625,-170,3625,1700);
 
 
 
@@ -208,8 +210,8 @@ public class trialMapScreen implements Screen {
     public void render(float delta) {
         this.update(delta);
 
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        Gdx.gl.glClearColor(0.349f, 0.188f, 0, 1);
+      //  Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
@@ -224,6 +226,25 @@ public class trialMapScreen implements Screen {
         b2dr.render(world,camera.combined);
 
     }
+    public void Wall(int a,int b,int c,int d){
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(0,100);
+        bdef.type=BodyDef.BodyType.StaticBody;
+        b2body=world.createBody(bdef);
+        FixtureDef fdef = new FixtureDef();
+        fdef.density=2.5f;
+        fdef.friction = 0.5f;
+        fdef.restitution=0;
+
+        ChainShape shape = new ChainShape();
+
+        shape.createChain(new Vector2[]{new Vector2(a,b),new Vector2(c,d)});
+        shape.setRadius(0.1f);
+        fdef.shape=shape;
+        b2body.createFixture(fdef);
+
+    }
+
 
     @Override
     public void resize(int width, int height) {
