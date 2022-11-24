@@ -19,6 +19,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Scenes.hud;
 import com.mygdx.game.Sprites.Tank1;
 import com.mygdx.game.Sprites.Tanktry;
 
@@ -37,6 +38,9 @@ public class trialMapScreen implements Screen {
     Tank1 tank1;
     Tank tank;
     private Tanktry player;
+    private hud hud;
+    private Texture tank_player1;
+    private int count = 1;
 
 
     private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
@@ -96,6 +100,8 @@ public class trialMapScreen implements Screen {
     public trialMapScreen(tankStars game){
         this.game=game;
 
+        hud = new hud(game.sprite);
+
         camera=new OrthographicCamera();
         camPort = new FitViewport(400,200,camera);
 
@@ -105,12 +111,13 @@ public class trialMapScreen implements Screen {
 
         world = new World(new Vector2(0,-100),true);
         b2dr = new Box2DDebugRenderer();
-        tank1=new Tank1(100,55,new Texture("tank1.png"),true,false);
+        tank1=new Tank1(300,55,new Texture("tank1.png"),true,false);
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape2 = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
+        tank_player1 = new Texture("tank1.png");
 
 
 
@@ -149,11 +156,17 @@ public class trialMapScreen implements Screen {
             body.createFixture(fdef);
         }
 
-        player = new Tanktry(world);
+        player = new Tanktry(world,this);
 
 
 
     }
+
+    public Texture getTank_player1(){
+        return tank_player1;
+    }
+
+
     @Override
     public void show() {
 
@@ -182,10 +195,11 @@ public class trialMapScreen implements Screen {
         handleInput(dt);
 
         world.step(1/60f,6,2);
+        player.update(dt);
 
-//        camera.position.x = player.b2body.getPosition().x;
+        camera.position.x = player.b2body.getPosition().x;
 
-        tank1.setPosition(new Vector3((float) (player.b2body.getPosition().x-tank1.getTank().getWidth()/2), (float) (player.b2body.getPosition().y-1.5*tank1.getTank().getHeight()),0));
+//        tank1.setPosition(new Vector3((float) (player.b2body.getPosition().x-tank1.getTank().getWidth()/2), (float) (player.b2body.getPosition().y-1.5*tank1.getTank().getHeight()),0));
 
         camera.update();
 
@@ -197,11 +211,15 @@ public class trialMapScreen implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        renderer.render();
-        game.sprite.begin();
-        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
-        game.sprite.end();
 
+        renderer.render();
+        game.sprite.setProjectionMatrix(camera.combined);
+        game.sprite.begin();
+//        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
+        player.draw(game.sprite);
+        game.sprite.end();
+//        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
+//        hud.showHealth();
         renderer.setView(camera);
         b2dr.render(world,camera.combined);
 
