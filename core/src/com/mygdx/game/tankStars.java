@@ -21,8 +21,8 @@ public class tankStars extends Game {
 	@Override
 	public void create () {
 		sprite = new SpriteBatch();
-		setScreen(new homeScreen(this));
-		//setScreen(new MapScreen(this));
+		//setScreen(new homeScreen(this));
+		setScreen(new MapScreen(this));
 
 
 		//		GameStateManager = new gameStateManager();

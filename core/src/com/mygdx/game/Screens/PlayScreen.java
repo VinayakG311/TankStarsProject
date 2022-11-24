@@ -120,8 +120,6 @@ public class PlayScreen implements Screen {
                 tank2.movef();
             }
 
-
-
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.character.getLinearVelocity().x >=-2){
             player.character.applyLinearImpulse(new Vector2(-0.1f,0),player.character.getWorldCenter(),true);

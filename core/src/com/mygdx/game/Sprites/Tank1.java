@@ -27,13 +27,12 @@ public class Tank1 {
     }
 
     public void update(float dt){
-        System.out.println(fuel);
-        if(fuel>0){
+      //  if(fuel>0){
         velocity.scl(dt);
         position.add(velocity.x,0,0);
         velocity.scl(1/dt);
 //        fuel-=(Math.abs(velocity.x))/50;
-        }
+      //  }
 
 
 
@@ -78,5 +77,9 @@ public class Tank1 {
 
     public void setFuel(int fuel) {
         this.fuel = fuel;
+    }
+
+    public void setPosition(Vector3 position) {
+        this.position = position;
     }
 }

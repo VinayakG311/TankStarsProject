@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -28,7 +29,7 @@ public class Tank extends Sprite {
     private Vector3 velocity;
     private Sprite sprite;
 
-    public Tank(World world, float pos, PlayScreen screen,int x,int y,Texture tankSkin){
+    public Tank(World world, float pos, Screen screen, int x, int y, Texture tankSkin){
         Box2D.init();
         this.world=world;
         this.pos=pos;
