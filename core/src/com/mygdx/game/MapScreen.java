@@ -99,12 +99,17 @@ public class MapScreen implements Screen {
 
     public void handleInput(float dt){
 
+        if(Gdx.input.isTouched()){
+            camera.position.x+=100*dt;
+        }
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.D)){
-            //camera.position.x+=100*dt;
+            camera.position.x+=100*dt;
             body.applyLinearImpulse(new Vector2(10000f,0),body.getWorldCenter(),true);
            // tank1.movef();
 
          //   camera.update();
+            camera.update();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             camera.position.x-=100*dt;
