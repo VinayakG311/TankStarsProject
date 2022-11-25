@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MapScreen;
 import com.mygdx.game.tankStars;
+import com.mygdx.game.trialMapScreen;
 
 public class mainMenu extends ScreenAdapter implements Screen {
     private tankStars game;
@@ -40,6 +41,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
     private Label outputLabel;
     private Texture revTank;
 
+    private Texture tank1;
 
 
 
@@ -59,6 +61,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font= new BitmapFont();
         revTank = new Texture("reverseTank1.png");
+        tank1 = new Texture("tank1.png");
 
     }
 
@@ -107,11 +110,11 @@ public class mainMenu extends ScreenAdapter implements Screen {
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new MapScreen(game));
+                game.setScreen(new trialMapScreen(game,tank1,revTank));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new MapScreen(game));
+                game.setScreen(new trialMapScreen(game,tank1,revTank));
                 return true;
             }
         });

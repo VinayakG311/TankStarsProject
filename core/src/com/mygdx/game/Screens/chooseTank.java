@@ -55,7 +55,7 @@ public class chooseTank implements Screen {
         Gdx.input.setInputProcessor(stage);
         tank1button = new ImageButton(drawable);
         tank1button.setSize(100,100);
-        tank1button.setPosition(140,220);
+        tank1button.setPosition(450,300);
         tank1button.addListener(new ClickListener(){
 
             @Override
@@ -79,7 +79,7 @@ public class chooseTank implements Screen {
         Gdx.input.setInputProcessor(stage);
         tank2button = new ImageButton(drawable2);
         tank2button.setSize(100,100);
-        tank2button.setPosition(400,220);
+        tank2button.setPosition(650,300);
         tank2button.addListener(new ClickListener(){
 
             @Override
@@ -102,7 +102,7 @@ public class chooseTank implements Screen {
         Gdx.input.setInputProcessor(stage);
         tank3button = new ImageButton(drawable3);
         tank3button.setSize(100,100);
-        tank3button.setPosition(270,120);
+        tank3button.setPosition(550,200);
         tank3button.addListener(new ClickListener(){
 
             @Override
@@ -130,7 +130,7 @@ public class chooseTank implements Screen {
 
         stage.act();
         stage.getBatch().begin();
-        stage.getBatch().draw(img,0,0,850,500);
+        stage.getBatch().draw(img,0,0,1600,620);
         stage.getBatch().end();
         stage.draw();
     }

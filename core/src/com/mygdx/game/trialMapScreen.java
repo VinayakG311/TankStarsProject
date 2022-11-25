@@ -16,10 +16,17 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Scenes.hud;
+import com.mygdx.game.Screens.pauseScreen;
 import com.mygdx.game.Sprites.Tank1;
 import com.mygdx.game.Sprites.Tanktry;
 
@@ -44,6 +51,9 @@ public class trialMapScreen implements Screen {
     private hud hud;
     private Texture tank_player1;
     private Texture tank_player2;
+    private Stage stage;
+    private Texture pausebutton;
+    private ImageButton pauseButton;
 
     private int count = 1;
     int turn=0;
@@ -107,6 +117,8 @@ public class trialMapScreen implements Screen {
         tank_player1=tank;
         tank_player2=rivtank;
         this.game=game;
+        stage = new Stage(new ScreenViewport());
+        pausebutton = new Texture("pause.jpg");
 
         hud = new hud(game.sprite);
 
@@ -151,7 +163,7 @@ public class trialMapScreen implements Screen {
         }
 
         player = new Tanktry(world,this,600,320,tank_player1);
-        player2=new Tanktry(world,this,1800,350,tank_player2);
+        player2=new Tanktry(world,this,950,310,tank_player2);
 
 
 
@@ -165,15 +177,42 @@ public class trialMapScreen implements Screen {
 
     @Override
     public void show() {
+        Drawable drawable = new TextureRegionDrawable(pausebutton);
+        Gdx.input.setInputProcessor(stage);
+        pauseButton = new ImageButton(drawable);
+        pauseButton.setSize(45,45);
+        pauseButton.setPosition(45,550);
+        pauseButton.addListener(new ClickListener(){
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new pauseScreen(game));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new pauseScreen(game));
+                return true;
+            }
+        });
+
+
+        stage.addActor(pauseButton);
 
     }
 
 
     public void handleInput(float dt){
 
-        if(Gdx.input.isTouched()){
-            camera.position.x+=100*dt;
-            camera.update();
+        if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
+            if(turn==0){
+//                player.b2body.applyLinearImpulse(new Vector2(0,0),player.b2body.getWorldCenter(),true);
+                player.b2body.setLinearVelocity(0,0);
+                turn = 1;
+            }
+            else{
+                player2.b2body.setLinearVelocity(0,0);
+                turn = 0;
+            }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <=4){
             if(turn==0){
@@ -183,6 +222,8 @@ public class trialMapScreen implements Screen {
                 player2.b2body.applyLinearImpulse(new Vector2(-100f,20f),player.b2body.getWorldCenter(),true);
             }
         }
+
+
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >=-4){
             if(turn==0) {
@@ -205,12 +246,13 @@ public class trialMapScreen implements Screen {
         world.step(1/60f,6,2);
         player.update(dt);
         player2.update(dt);
-        if(turn==0) {
-            camera.position.x = player.b2body.getPosition().x;
-        }
-        else{
-            camera.position.x=player2.b2body.getPosition().x;
-        }
+//        if(turn==0) {
+//            camera.position.x = player.b2body.getPosition().x;
+//        }
+//        else{
+//            camera.position.x=player2.b2body.getPosition().x;
+//        }
+        camera.position.x = (player.b2body.getPosition().x+player2.b2body.getPosition().x)/2;
 
 //        tank1.setPosition(new Vector3((float) (player.b2body.getPosition().x-tank1.getTank().getWidth()/2), (float) (player.b2body.getPosition().y-1.5*tank1.getTank().getHeight()),0));
 
@@ -221,19 +263,25 @@ public class trialMapScreen implements Screen {
     public void render(float delta) {
         this.update(delta);
 
-        Gdx.gl.glClearColor(0.349f, 0.188f, 0, 1);
-      //  Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+
+        Gdx.gl.glClearColor(38/255.0f, 45/255.0f, 107/255.0f, 1);
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glEnable(GL20.GL_BLEND);
 
         renderer.render();
         game.sprite.setProjectionMatrix(camera.combined);
         game.sprite.begin();
+
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
         player2.draw(game.sprite);
+
         game.sprite.end();
+        stage.act();
+        stage.draw();
 //        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
-//        hud.showHealth();
+        hud.showHealth();
         renderer.setView(camera);
         b2dr.render(world,camera.combined);
 
