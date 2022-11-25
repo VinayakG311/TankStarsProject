@@ -12,7 +12,7 @@ import com.mygdx.game.states.gameStateManager;
 
 public class tankStars extends Game {
 
-	
+	Texture img;
 	public SpriteBatch sprite;
 	public int ppm = 100;
 	private gameStateManager GameStateManager;
