@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -30,23 +30,25 @@ import com.mygdx.game.Scenes.hud;
 import com.mygdx.game.Screens.pauseScreen;
 import com.mygdx.game.Sprites.Tank1;
 import com.mygdx.game.Sprites.Tanktry;
+import com.mygdx.game.Tank;
+import com.mygdx.game.tankStars;
 
 public class trialMapScreen implements Screen {
-    tankStars game;
-    World world;
-    Body body;
+    private tankStars game;
+    private World world;
+    private Body body;
 
 
-    Box2DDebugRenderer box2DDebugRenderer;
+    private Box2DDebugRenderer box2DDebugRenderer;
     private Viewport camPort;
 
-    TiledMap tiledMap;
-    OrthogonalTiledMapRenderer renderer;
-    OrthographicCamera camera;
+    private TiledMap tiledMap;
+    private OrthogonalTiledMapRenderer renderer;
+    private OrthographicCamera camera;
 
-    Tank1 tank1;
-    Tank1 tank2;
-    Tank tank;
+    private Tank1 tank1;
+    private Tank1 tank2;
+
     private Tanktry player;
     private Tanktry player2;
     private hud hud;
@@ -56,7 +58,7 @@ public class trialMapScreen implements Screen {
     private Texture pausebutton;
     private ImageButton pauseButton;
 
-    int turn=0;
+    private int turn=0;
 
 
     private static PolygonShape findPolygoninMap(PolygonMapObject polygonMapObject) {

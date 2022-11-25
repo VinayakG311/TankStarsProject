@@ -3,8 +3,7 @@ package com.mygdx.game.Sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.trialMapScreen;
+import com.mygdx.game.Screens.trialMapScreen;
 
 public class Tanktry extends Sprite {
     public World world;
