@@ -8,33 +8,33 @@ import com.mygdx.game.trialMapScreen;
 
 public class Tanktry extends Sprite {
     public World world;
-    public Body b2body;
+    public Body body;
     private Texture player1;
 
     public Tanktry(World world, trialMapScreen screen,int posx,int posy,Texture tank){
 
         this.world = world;
-        defTank(posx,posy);
+        createTank(posx,posy);
         player1 = tank;
         setBounds(50,320,player1.getWidth(), player1.getHeight());
         setRegion(player1);
     }
 
     public void update(float dt){
-        setPosition(b2body.getPosition().x-getWidth() /2, b2body.getPosition().y-getHeight() / 2);
+        setPosition(body.getPosition().x-getWidth() /2, body.getPosition().y-getHeight() / 2);
     }
 
-    public void defTank(int x,int y){
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(x ,y );
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
+    public void createTank(int x,int y){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(x ,y );
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        body = world.createBody(bodyDef);
 
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef fixtureDef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(15);
 
-        fdef.shape = shape;
-        b2body.createFixture(fdef);
+        fixtureDef.shape = shape;
+        body.createFixture(fixtureDef);
     }
 }

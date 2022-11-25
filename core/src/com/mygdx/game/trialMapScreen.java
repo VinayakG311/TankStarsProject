@@ -35,15 +35,15 @@ public class trialMapScreen implements Screen {
     tankStars game;
     World world;
     Body body;
-    Body b2body;
-    Body b2bodyriv;
-    Box2DDebugRenderer b2dr;
+
+
+    Box2DDebugRenderer box2DDebugRenderer;
     private Viewport camPort;
 
     TiledMap tiledMap;
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
-    TmxMapLoader loader;
+
     Tank1 tank1;
     Tank1 tank2;
     Tank tank;
@@ -56,35 +56,12 @@ public class trialMapScreen implements Screen {
     private Texture pausebutton;
     private ImageButton pauseButton;
 
-    private int count = 1;
     int turn=0;
 
 
-    private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
-        Rectangle rectangle = rectangleObject.getRectangle();
+    private static PolygonShape findPolygoninMap(PolygonMapObject polygonMapObject) {
         PolygonShape polygon = new PolygonShape();
-        Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f) / 100,
-                (rectangle.y + rectangle.height * 0.5f ) / 100);
-        polygon.setAsBox(rectangle.width * 0.5f /100,
-                rectangle.height * 0.5f / 100,
-                size,
-                0.0f);
-        return polygon;
-
-
-    }
-
-    private static CircleShape getCircle(CircleMapObject circleObject) {
-        Circle circle = circleObject.getCircle();
-        CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(circle.radius);
-        circleShape.setPosition(new Vector2(circle.x, circle.y));
-        return circleShape;
-    }
-
-    private static PolygonShape getPolygon(PolygonMapObject polygonObject) {
-        PolygonShape polygon = new PolygonShape();
-        float[] vertices = polygonObject.getPolygon().getTransformedVertices();
+        float[] vertices = polygonMapObject.getPolygon().getTransformedVertices();
 
         float[] worldVertices = new float[vertices.length];
 
@@ -98,8 +75,8 @@ public class trialMapScreen implements Screen {
     }
 
 
-    private static ChainShape getPolyline(PolylineMapObject polylineObject) {
-        float[] vertices = polylineObject.getPolyline().getTransformedVertices();
+    private static ChainShape findPolylineinMap(PolylineMapObject polylineMapObject) {
+        float[] vertices = polylineMapObject.getPolyline().getTransformedVertices();
         Vector2[] worldVertices = new Vector2[vertices.length / 2];
 
         for (int i = 0; i < vertices.length / 2; ++i) {
@@ -131,13 +108,13 @@ public class trialMapScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         world = new World(new Vector2(0,-100),true);
-        b2dr = new Box2DDebugRenderer();
+        box2DDebugRenderer = new Box2DDebugRenderer();
         tank1=new Tank1(300,55,tank_player1,true,false);
         tank2=new Tank1(800,55,tank_player2,false,true);
 
-        BodyDef bdef = new BodyDef();
+        BodyDef bodyDef = new BodyDef();
         PolygonShape shape2 = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef fixtureDef = new FixtureDef();
         Body body;
 
         this.Wall(15,-170,15,1700);
@@ -146,21 +123,20 @@ public class trialMapScreen implements Screen {
         for(MapObject object : tiledMap.getLayers().get(2).getObjects()){
 
             Shape shape;
-            if (object instanceof RectangleMapObject) {
-                shape = getRectangle((RectangleMapObject) object);
-            } else if (object instanceof PolygonMapObject) {
-                shape = getPolygon((PolygonMapObject) object);
+
+             if (object instanceof PolygonMapObject) {
+                shape = findPolygoninMap((PolygonMapObject) object);
             } else if (object instanceof PolylineMapObject) {
-                shape = getPolyline((PolylineMapObject) object);
-            } else if (object instanceof CircleMapObject) {
-                shape = getCircle((CircleMapObject) object);
-            } else {
+                 shape = findPolylineinMap((PolylineMapObject) object);
+             }
+
+             else {
                 continue;
             }
-            bdef.type = BodyDef.BodyType.StaticBody;
-            body = world.createBody(bdef);
-            fdef.shape = shape;
-            body.createFixture(fdef);
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+            body = world.createBody(bodyDef);
+            fixtureDef.shape = shape;
+            body.createFixture(fixtureDef);
         }
 
         player = new Tanktry(world,this,600,320,tank_player1);
@@ -207,32 +183,32 @@ public class trialMapScreen implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
             if(turn==0){
-//                player.b2body.applyLinearImpulse(new Vector2(0,0),player.b2body.getWorldCenter(),true);
-                player.b2body.setLinearVelocity(0,0);
+
+                player.body.setLinearVelocity(0,0);
                 turn = 1;
             }
             else{
-                player2.b2body.setLinearVelocity(0,0);
+                player2.body.setLinearVelocity(0,0);
                 turn = 0;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <=4){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.body.getLinearVelocity().x <=4){
             if(turn==0){
-                player.b2body.applyLinearImpulse(new Vector2(100f,20f),player.b2body.getWorldCenter(),true);
+                player.body.applyLinearImpulse(new Vector2(100f,20f),player.body.getWorldCenter(),true);
             }
             else{
-                player2.b2body.applyLinearImpulse(new Vector2(-100f,20f),player.b2body.getWorldCenter(),true);
+                player2.body.applyLinearImpulse(new Vector2(-100f,20f),player.body.getWorldCenter(),true);
             }
         }
 
 
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >=-4){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.body.getLinearVelocity().x >=-4){
             if(turn==0) {
-                player.b2body.applyLinearImpulse(new Vector2(-100f, 20f), player.b2body.getWorldCenter(), true);
+                player.body.applyLinearImpulse(new Vector2(-100f, 20f), player.body.getWorldCenter(), true);
             }
             else{
-                player2.b2body.applyLinearImpulse(new Vector2(100f,20f),player.b2body.getWorldCenter(),true);
+                player2.body.applyLinearImpulse(new Vector2(100f,20f),player.body.getWorldCenter(),true);
 
             }
         }
@@ -249,14 +225,14 @@ public class trialMapScreen implements Screen {
         player.update(dt);
         player2.update(dt);
 //        if(turn==0) {
-//            camera.position.x = player.b2body.getPosition().x;
+//            camera.position.x = player.body.getPosition().x;
 //        }
 //        else{
-//            camera.position.x=player2.b2body.getPosition().x;
+//            camera.position.x=player2.body.getPosition().x;
 //        }
-        camera.position.x = (player.b2body.getPosition().x+player2.b2body.getPosition().x)/2;
+        camera.position.x = (player.body.getPosition().x+player2.body.getPosition().x)/2;
 
-//        tank1.setPosition(new Vector3((float) (player.b2body.getPosition().x-tank1.getTank().getWidth()/2), (float) (player.b2body.getPosition().y-1.5*tank1.getTank().getHeight()),0));
+//        tank1.setPosition(new Vector3((float) (player.body.getPosition().x-tank1.getTank().getWidth()/2), (float) (player.body.getPosition().y-1.5*tank1.getTank().getHeight()),0));
 
         camera.update();
 
@@ -290,25 +266,25 @@ public class trialMapScreen implements Screen {
 //        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.showHealth();
         renderer.setView(camera);
-        b2dr.render(world,camera.combined);
+        box2DDebugRenderer.render(world,camera.combined);
 
     }
     public void Wall(int a,int b,int c,int d){
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(0,100);
-        bdef.type=BodyDef.BodyType.StaticBody;
-        b2body=world.createBody(bdef);
-        FixtureDef fdef = new FixtureDef();
-        fdef.density=2.5f;
-        fdef.friction = 0.5f;
-        fdef.restitution=0;
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(0,100);
+        bodyDef.type=BodyDef.BodyType.StaticBody;
+        body=world.createBody(bodyDef);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density=2.5f;
+        fixtureDef.friction = 0.5f;
+        fixtureDef.restitution=0;
 
         ChainShape shape = new ChainShape();
 
         shape.createChain(new Vector2[]{new Vector2(a,b),new Vector2(c,d)});
         shape.setRadius(0.1f);
-        fdef.shape=shape;
-        b2body.createFixture(fdef);
+        fixtureDef.shape=shape;
+        body.createFixture(fixtureDef);
 
     }
 
