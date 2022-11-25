@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.tankStars;
+import com.mygdx.game.trialMapScreen;
 
 public class pauseScreen extends ScreenAdapter implements Screen {
     private tankStars game;
@@ -83,7 +84,7 @@ public class pauseScreen extends ScreenAdapter implements Screen {
         // Button
         Button button1 = new TextButton("EXIT",mySkin);
         button1.setSize((float) (col_width*8), (float) (row_height*1.5));
-        button1.setPosition(100,250);
+        button1.setPosition(200,250);
         button1.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -100,15 +101,15 @@ public class pauseScreen extends ScreenAdapter implements Screen {
         // Text Button
         Button button2 = new TextButton("RESUME",mySkin);
         button2.setSize((float) (col_width*8), (float) (row_height*1.5));
-        button2.setPosition(100,150);
+        button2.setPosition(200,150);
         button2.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f,game.tank,revTank));
+                game.setScreen(new trialMapScreen(game,game.tank,revTank));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,0f,game.tank,revTank));
+                game.setScreen(new trialMapScreen(game,game.tank,revTank));
                 return true;
             }
         });
@@ -116,7 +117,7 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
         Button button3 = new TextButton("SAVE",mySkin);
         button3.setSize((float) (col_width*8), (float) (row_height*1.5));
-        button3.setPosition(100,60);
+        button3.setPosition(200,60);
         button3.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -189,7 +190,7 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
         stage.act();
         stage.getBatch().begin();
-        stage.getBatch().draw(img,0,0,850,500);
+        stage.getBatch().draw(img,0,0,1600,620);
         stage.getBatch().end();
         stage.draw();
     }

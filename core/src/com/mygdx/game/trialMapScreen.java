@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -182,6 +183,7 @@ public class trialMapScreen implements Screen {
         pauseButton = new ImageButton(drawable);
         pauseButton.setSize(45,45);
         pauseButton.setPosition(45,550);
+
         pauseButton.addListener(new ClickListener(){
 
             @Override
@@ -269,16 +271,21 @@ public class trialMapScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glEnable(GL20.GL_BLEND);
 
+
         renderer.render();
         game.sprite.setProjectionMatrix(camera.combined);
         game.sprite.begin();
+        stage.act();
 
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
+
         player2.draw(game.sprite);
 
+
+
         game.sprite.end();
-        stage.act();
+
         stage.draw();
 //        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.showHealth();
@@ -310,6 +317,7 @@ public class trialMapScreen implements Screen {
     public void resize(int width, int height) {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
+        stage.getViewport().update(width,height);
         camera.update();
     }
 
