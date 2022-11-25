@@ -11,11 +11,11 @@ public class Tanktry extends Sprite {
     public Body b2body;
     private Texture player1;
 
-    public Tanktry(World world, trialMapScreen screen){
+    public Tanktry(World world, trialMapScreen screen,int posx,int posy,Texture tank){
 
         this.world = world;
-        defTank();
-        player1 = screen.getTank_player1();
+        defTank(posx,posy);
+        player1 = tank;
         setBounds(50,320,player1.getWidth(), player1.getHeight());
         setRegion(player1);
     }
@@ -24,9 +24,9 @@ public class Tanktry extends Sprite {
         setPosition(b2body.getPosition().x-getWidth() /2, b2body.getPosition().y-getHeight() / 2);
     }
 
-    public void defTank(){
+    public void defTank(int x,int y){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(600 ,320 );
+        bdef.position.set(x ,y );
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

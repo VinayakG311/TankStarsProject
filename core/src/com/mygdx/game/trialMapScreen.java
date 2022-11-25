@@ -28,6 +28,7 @@ public class trialMapScreen implements Screen {
     World world;
     Body body;
     Body b2body;
+    Body b2bodyriv;
     Box2DDebugRenderer b2dr;
     private Viewport camPort;
 
@@ -36,11 +37,16 @@ public class trialMapScreen implements Screen {
     OrthographicCamera camera;
     TmxMapLoader loader;
     Tank1 tank1;
+    Tank1 tank2;
     Tank tank;
     private Tanktry player;
+    private Tanktry player2;
     private hud hud;
     private Texture tank_player1;
+    private Texture tank_player2;
+
     private int count = 1;
+    int turn=0;
 
 
     private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
@@ -97,7 +103,9 @@ public class trialMapScreen implements Screen {
     }
 
 
-    public trialMapScreen(tankStars game){
+    public trialMapScreen(tankStars game,Texture tank,Texture rivtank){
+        tank_player1=tank;
+        tank_player2=rivtank;
         this.game=game;
 
         hud = new hud(game.sprite);
@@ -111,32 +119,16 @@ public class trialMapScreen implements Screen {
 
         world = new World(new Vector2(0,-100),true);
         b2dr = new Box2DDebugRenderer();
-        tank1=new Tank1(300,55,new Texture("tank1.png"),true,false);
+        tank1=new Tank1(300,55,tank_player1,true,false);
+        tank2=new Tank1(800,55,tank_player2,false,true);
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape2 = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
-        tank_player1 = new Texture("tank1.png");
+
         this.Wall(15,-170,15,1700);
         this.Wall(3625,-170,3625,1700);
-
-
-
-
-//        for(MapObject object : tiledMap.getLayers().get(1).getObjects().getByType(PolygonMapObject.class)){
-//            Polygon poly = ((PolygonMapObject) object).getPolygon();
-//
-//            bdef.type = BodyDef.BodyType.StaticBody;
-//            bdef.position.set(poly.getX()+16,poly.getY()+16);
-//
-//            body = world.createBody(bdef);
-//
-//            shape.setAsBox(16,16);
-//            fdef.shape = shape;
-//            body.createFixture(fdef);
-//        }
-
 
         for(MapObject object : tiledMap.getLayers().get(2).getObjects()){
 
@@ -158,7 +150,9 @@ public class trialMapScreen implements Screen {
             body.createFixture(fdef);
         }
 
-        player = new Tanktry(world,this);
+        player = new Tanktry(world,this,600,320,tank_player1);
+        player2=new Tanktry(world,this,1800,350,tank_player2);
+
 
 
 
@@ -182,12 +176,24 @@ public class trialMapScreen implements Screen {
             camera.update();
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <=4){
-            player.b2body.applyLinearImpulse(new Vector2(100f,-0.1f),player.b2body.getWorldCenter(),true);
+            if(turn==0){
+                player.b2body.applyLinearImpulse(new Vector2(100f,20f),player.b2body.getWorldCenter(),true);
+            }
+            else{
+                player2.b2body.applyLinearImpulse(new Vector2(-100f,20f),player.b2body.getWorldCenter(),true);
+            }
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >=-4){
-            player.b2body.applyLinearImpulse(new Vector2(-100f,0),player.b2body.getWorldCenter(),true);
+            if(turn==0) {
+                player.b2body.applyLinearImpulse(new Vector2(-100f, 20f), player.b2body.getWorldCenter(), true);
+            }
+            else{
+                player2.b2body.applyLinearImpulse(new Vector2(100f,20f),player.b2body.getWorldCenter(),true);
+
+            }
         }
+
 
 
 
@@ -198,8 +204,13 @@ public class trialMapScreen implements Screen {
 
         world.step(1/60f,6,2);
         player.update(dt);
-
-        camera.position.x = player.b2body.getPosition().x;
+        player2.update(dt);
+        if(turn==0) {
+            camera.position.x = player.b2body.getPosition().x;
+        }
+        else{
+            camera.position.x=player2.b2body.getPosition().x;
+        }
 
 //        tank1.setPosition(new Vector3((float) (player.b2body.getPosition().x-tank1.getTank().getWidth()/2), (float) (player.b2body.getPosition().y-1.5*tank1.getTank().getHeight()),0));
 
@@ -219,6 +230,7 @@ public class trialMapScreen implements Screen {
         game.sprite.begin();
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
+        player2.draw(game.sprite);
         game.sprite.end();
 //        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
 //        hud.showHealth();

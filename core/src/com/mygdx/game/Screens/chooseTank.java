@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.tankStars;
+import com.mygdx.game.trialMapScreen;
 
 public class chooseTank implements Screen {
     private Stage stage;
@@ -60,13 +61,13 @@ public class chooseTank implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank1;
-                game.setScreen(new PlayScreen(game,0.1f,tank1,revTank));
+                game.setScreen(new trialMapScreen(game,tank1,revTank));
 
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank1;
-                game.setScreen(new PlayScreen(game,0.1f,tank1,revTank));
+                game.setScreen(new trialMapScreen(game,tank1,revTank));
                 return true;
             }
         });
@@ -84,12 +85,12 @@ public class chooseTank implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank2;
-                game.setScreen(new PlayScreen(game,0.1f,tank2,revTank));
+                game.setScreen(new trialMapScreen(game,tank2,revTank));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank2;
-                game.setScreen(new PlayScreen(game,0.1f,tank2,revTank));
+                game.setScreen(new trialMapScreen(game,tank2,revTank));
                 return true;
             }
         });
@@ -107,12 +108,12 @@ public class chooseTank implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank3;
-                game.setScreen(new PlayScreen(game,0.1f,tank3,revTank));
+                game.setScreen(new trialMapScreen(game,tank3,revTank));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank3;
-                game.setScreen(new PlayScreen(game,0.1f,tank3,revTank));
+                game.setScreen(new trialMapScreen(game,tank3,revTank));
                 return true;
             }
         });
