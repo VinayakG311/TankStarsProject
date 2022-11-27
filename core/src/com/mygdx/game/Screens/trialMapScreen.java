@@ -35,6 +35,7 @@ import com.mygdx.game.Screens.pauseScreen;
 import com.mygdx.game.Sprites.Tank1;
 import com.mygdx.game.Sprites.Tanktry;
 import com.mygdx.game.Tank;
+import com.mygdx.game.missiles;
 import com.mygdx.game.tankStars;
 
 public class trialMapScreen implements Screen {
@@ -44,6 +45,7 @@ public class trialMapScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private Sprite sprite;
     private Sprite sprite2;
+    private com.mygdx.game.missiles missile;
 
 
     private Box2DDebugRenderer box2DDebugRenderer;
@@ -125,6 +127,7 @@ public class trialMapScreen implements Screen {
         shapeRenderer=new ShapeRenderer();
         world = new World(new Vector2(0,-100),true);
         box2DDebugRenderer = new Box2DDebugRenderer();
+        missile=new missiles(new Texture("bullet.png"),world,100,100);
         tank1=new Tank1(300,55,tank_player1,true,false);
         tank2=new Tank1(800,55,tank_player2,false,true);
 
@@ -280,6 +283,12 @@ public class trialMapScreen implements Screen {
                 player.setAngle(player.getAngle()-1);
             }
             font.draw(game.sprite, String.valueOf((int)(player.getAngle())), player.getX(), player.getY() + 50);
+            if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+                Vector2 x= new Vector2(100,500);
+                x.rotateDeg((float) (player.getAngle()-90));
+                missile.body.setLinearVelocity(x);
+
+            }
         }
         else {
             //  System.out.println(unproject.y+" "+player.body.getPosition().y+" "+unproject.x+" "+player.body.getPosition().x);
