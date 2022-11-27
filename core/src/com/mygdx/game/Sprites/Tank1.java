@@ -17,6 +17,7 @@ public class Tank1 {
         return fuel;
     }
 
+
     public Tank1(int x, int y, Texture tank, Boolean player1, Boolean player2){
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);

@@ -3,9 +3,13 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.CircleMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
@@ -37,6 +41,9 @@ public class trialMapScreen implements Screen {
     private tankStars game;
     private World world;
     private Body body;
+    private ShapeRenderer shapeRenderer;
+    private Sprite sprite;
+    private Sprite sprite2;
 
 
     private Box2DDebugRenderer box2DDebugRenderer;
@@ -59,6 +66,8 @@ public class trialMapScreen implements Screen {
     private ImageButton pauseButton;
 
     private int turn=0;
+    private BitmapFont font;
+    private Vector3 unproject;
 
 
     private static PolygonShape findPolygoninMap(PolygonMapObject polygonMapObject) {
@@ -96,19 +105,24 @@ public class trialMapScreen implements Screen {
     public trialMapScreen(tankStars game,Texture tank,Texture rivtank){
         tank_player1=tank;
         tank_player2=rivtank;
+        font=new BitmapFont();
+        font.setColor(Color.WHITE);
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
 
         hud = new hud(game.sprite);
+        unproject=new Vector3();
 
+        sprite=new Sprite(new Texture("arrow.png"));
+        sprite2=new Sprite(new Texture("arrow.png"));
         camera=new OrthographicCamera();
         camPort = new FitViewport(400,200,camera);
 
         tiledMap= new TmxMapLoader().load("GameMap.tmx");
         camera.position.set(600,350,0);
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
-
+        shapeRenderer=new ShapeRenderer();
         world = new World(new Vector2(0,-100),true);
         box2DDebugRenderer = new Box2DDebugRenderer();
         tank1=new Tank1(300,55,tank_player1,true,false);
@@ -248,22 +262,86 @@ public class trialMapScreen implements Screen {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glEnable(GL20.GL_BLEND);
-
+        unproject.set(Gdx.input.getX(),Gdx.input.getY(),0);
+        camera.unproject(unproject);
+       // System.out.println(unproject);
+       // System.out.println(Gdx.input.getX()+" "+Gdx.input.getY());
 
         renderer.render();
         game.sprite.setProjectionMatrix(camera.combined);
         game.sprite.begin();
         stage.act();
+        if(turn==0) {
+            //  System.out.println(unproject.y+" "+player.body.getPosition().y+" "+unproject.x+" "+player.body.getPosition().x);
+            if(Gdx.input.isKeyJustPressed(Input.Keys.DPAD_UP)){
+                player.setAngle(player.getAngle()+1);
+            }
+            if(Gdx.input.isKeyJustPressed(Input.Keys.DPAD_DOWN)){
+                player.setAngle(player.getAngle()-1);
+            }
+            font.draw(game.sprite, String.valueOf((int)(player.getAngle())), player.getX(), player.getY() + 50);
+        }
+        else {
+            //  System.out.println(unproject.y+" "+player.body.getPosition().y+" "+unproject.x+" "+player.body.getPosition().x);
+            if(Gdx.input.isKeyJustPressed(Input.Keys.DPAD_UP)){
+                player2.setAngle(player2.getAngle()+1);
+            }
+            if(Gdx.input.isKeyJustPressed(Input.Keys.DPAD_DOWN)){
+                player2.setAngle(player2.getAngle()-1);
+            }
+            font.draw(game.sprite, String.valueOf((int)(player2.getAngle())), player2.getX(), player2.getY() + 50);
+        }
 
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
-
         player2.draw(game.sprite);
+        if(turn==0) {
+            sprite.setRotation((float) (player.getAngle() - 90));
+            sprite.setSize(50, 50);
+            sprite.setPosition(player.getX(), player.getY());
+            sprite.draw(game.sprite);
+        }
+        else{
+
+
+            sprite2.setRotation((float) (90-player2.getAngle()));
+            sprite2.setSize(50, 50);
+            sprite2.setPosition(player2.getX(), player2.getY());
+            sprite2.draw(game.sprite);
+
+        }
+     //   game.sprite.draw(new Texture("arrow.png"),player.getX(),player.getY(),50,50);
+
+
 
 
 
         game.sprite.end();
+//        shapeRenderer.setProjectionMatrix(camera.combined);
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(1, 0, 0, 1);
 
+  //      if(turn==0) {
+  //          if (player.getAngle() <= 80) {
+  //              shapeRenderer.line(player.getX() + 30, player.getY() + 30, player.getX() + 100, (float) (player.getY() + 100 / Math.cos(Math.toRadians(player.getAngle()))));
+//            } else {
+//                shapeRenderer.line(player.getX() + 30, player.getY() + 30, player.getX() + 100, (float) (player.getY() + 20 / Math.cos(Math.toRadians(80))));
+//            }
+//
+//        }
+//        else{
+//            if (player2.getAngle() <= 80) {
+//                shapeRenderer.line(player2.getX() - 30, player2.getY() + 30, player2.getX() - 100, (float) (player2.getY() + 20 / Math.cos(Math.toRadians(player2.getAngle()))));
+//            } else {
+//                shapeRenderer.line(player2.getX() - 30, player2.getY() + 30, player2.getX() - 100, (float) (player2.getY() + 20 / Math.cos(Math.toRadians(80))));
+//            }
+//
+//        }
+
+
+
+        //  System.out.println(player.getX()+" "+unproject.x);
+        shapeRenderer.end();
         stage.draw();
 //        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.showHealth();
