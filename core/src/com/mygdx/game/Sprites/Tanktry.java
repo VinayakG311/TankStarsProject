@@ -39,6 +39,7 @@ public class Tanktry extends Sprite {
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
+        body.setUserData(this);
     }
 
     public void setAngle(double angle) {

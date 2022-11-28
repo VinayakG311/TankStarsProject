@@ -22,6 +22,7 @@ public class missiles extends Sprite {
         this.makebox(x,y);
         setBounds(500,320,25, 25);
         setRegion(texture);
+
     }
     public void update(float dt){
 
@@ -41,6 +42,7 @@ public class missiles extends Sprite {
 
             fixtureDef.shape = shape;
             body.createFixture(fixtureDef);
+            body.setUserData(this);
 
     }
 

@@ -372,15 +372,21 @@ public class trialMapScreen implements Screen {
 //
 //        }
 
-
-
-        //  System.out.println(player.getX()+" "+unproject.x);
         shapeRenderer.end();
         stage.draw();
 //        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.showHealth();
         renderer.setView(camera);
-        box2DDebugRenderer.render(world,camera.combined);
+       for(Contact contact: world.getContactList()){
+           Body a=contact.getFixtureA().getBody();
+           Body b=contact.getFixtureB().getBody();
+           if(a.getUserData() instanceof missiles && b.getUserData() instanceof missiles){
+                 System.out.println("hi");
+           }
+       }
+        //box2DDebugRenderer.render(world,camera.combined);
+      //  System.out.println(world.);
+
 
     }
     public void Wall(int a,int b,int c,int d){
