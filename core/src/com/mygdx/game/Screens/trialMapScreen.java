@@ -74,7 +74,7 @@ public class trialMapScreen implements Screen {
     private int turn=0;
     private BitmapFont font;
     private Vector3 unproject;
-
+    private Texture healthBar;
 
     private static PolygonShape findPolygoninMap(PolygonMapObject polygonMapObject) {
         PolygonShape polygon = new PolygonShape();
@@ -116,6 +116,7 @@ public class trialMapScreen implements Screen {
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
+        healthBar = new Texture("healthBar1.png");
 
         hud = new hud(game.sprite);
         unproject=new Vector3();
@@ -282,6 +283,8 @@ public class trialMapScreen implements Screen {
         renderer.render();
         game.sprite.setProjectionMatrix(camera.combined);
         game.sprite.begin();
+        game.sprite.draw(healthBar,850,560,340,70);
+        game.sprite.draw(healthBar,370,560,340,70);
         stage.act();
         if(turn==0) {
             //  System.out.println(unproject.y+" "+player.body.getPosition().y+" "+unproject.x+" "+player.body.getPosition().x);

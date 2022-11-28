@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.tankStars;
@@ -36,7 +38,10 @@ public class mainMenu extends ScreenAdapter implements Screen {
 
     private Texture tank1;
 
-
+    private Texture contiue;
+    private ImageButton newgameb;
+    private ImageButton continuegameb;
+    private Texture logo;
 
 
 
@@ -44,11 +49,12 @@ public class mainMenu extends ScreenAdapter implements Screen {
         super();
 
         this.game = game;
-
+        logo =  new Texture("logo1.png");
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         img = new Texture("background.png");
-        newGame = new Texture("newGame.png");
+        newGame = new Texture("buttonnewGame.png");
+        contiue = new Texture("buttonContinue.png");
         skin= new Skin();
         skin.add("white","newGame.png");
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -77,41 +83,82 @@ public class mainMenu extends ScreenAdapter implements Screen {
         title.setSize(Gdx.graphics.getWidth(),row_height*2);
         title.setPosition(0,Gdx.graphics.getHeight()-row_height*2);
         title.setAlignment(Align.center);
-        stage.addActor(title);
+//        stage.addActor(title);
 
         // Button
-        Button button1 = new TextButton("NEW GAME",mySkin);
-        button1.setSize(col_width*8,row_height*2);
-        button1.setPosition(200,250);
-        button1.addListener(new ClickListener(){
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new chooseTank(game));
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new chooseTank(game));
-                return true;
-            }
-        });
-        stage.addActor(button1);
+//        Button button1 = new TextButton("NEW GAME",mySkin);
+//        button1.setSize(col_width*8,row_height*2);
+//        button1.setPosition(200,250);
+//        button1.addListener(new ClickListener(){
+//            @Override
+//            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new chooseTank(game));
+//            }
+//            @Override
+//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new chooseTank(game));
+//                return true;
+//            }
+//        });
+//        stage.addActor(button1);
+//
+//        // Text Button
+//        Button button2 = new TextButton("CONTINUE",mySkin);
+//        button2.setSize(col_width*8,row_height*2);
+//        button2.setPosition(200,125);
+//        button2.addListener(new ClickListener(){
+//            @Override
+//            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new trialMapScreen(game,tank1,revTank));
+//            }
+//            @Override
+//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                game.setScreen(new trialMapScreen(game,tank1,revTank));
+//                return true;
+//            }
+//        });
+//        stage.addActor(button2);
 
-        // Text Button
-        Button button2 = new TextButton("CONTINUE",mySkin);
-        button2.setSize(col_width*8,row_height*2);
-        button2.setPosition(200,125);
-        button2.addListener(new ClickListener(){
+        Drawable newGameButton = new TextureRegionDrawable(newGame);
+        Drawable continueGameButton = new TextureRegionDrawable(contiue);
+
+        newgameb = new ImageButton(newGameButton);
+        newgameb.setSize((float) (col_width*8), (float) (row_height*1.5));
+        newgameb.setPosition(200,220);
+        newgameb.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,tank1,revTank));
+                game.setScreen(new chooseTank(game));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,tank1,revTank));
+                game.setScreen(new chooseTank(game));
                 return true;
             }
         });
-        stage.addActor(button2);
+
+
+        stage.addActor(newgameb);
+
+        continuegameb = new ImageButton(continueGameButton);
+        continuegameb.setSize((float) (col_width*8), (float) (row_height*1.5));
+        continuegameb.setPosition(200,50);
+       continuegameb.addListener(new ClickListener(){
+
+           @Override
+           public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+               game.setScreen(new trialMapScreen(game,tank1,revTank));
+           }
+           @Override
+           public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+               game.setScreen(new trialMapScreen(game,tank1,revTank));
+               return true;
+           }
+        });
+
+
+        stage.addActor(continuegameb);
+
 
     }
 
@@ -173,6 +220,7 @@ public class mainMenu extends ScreenAdapter implements Screen {
         stage.act();
         stage.getBatch().begin();
         stage.getBatch().draw(img,0,0,1600,620);
+        stage.getBatch().draw(logo,440,400,300,200);
         stage.getBatch().end();
         stage.draw();
     }

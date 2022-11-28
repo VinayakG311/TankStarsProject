@@ -18,7 +18,8 @@ public class homeScreen extends ScreenAdapter {
 
     public homeScreen(tankStars game) {
        this.game = game;
-       font = new BitmapFont();
+
+        font = new BitmapFont();
        font.setColor(Color.NAVY);
        font.getData().setScale(2.5f,2.5f);
     }

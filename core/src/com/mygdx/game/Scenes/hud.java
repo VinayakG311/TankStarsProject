@@ -29,17 +29,16 @@ public class hud {
         stage = new Stage(viewport,spriteBatch);
         shapeRenderer=new ShapeRenderer();
 
-
     }
     public void showHealth(){
 
-        float health = 175;
+        float health = 200;
 
         shapeRenderer.setProjectionMatrix(stage.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.GREEN);
-        shapeRenderer.rect(460, 425, health, 30);
-        shapeRenderer.rect(150, 425, health, 30);
+        shapeRenderer.rect(465, 418, health, 30);
+        shapeRenderer.rect(145, 418, health, 30);
         shapeRenderer.end();
 
     }

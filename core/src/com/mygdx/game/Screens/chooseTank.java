@@ -25,11 +25,13 @@ public class chooseTank implements Screen {
     private ImageButton tank1button,tank2button,tank3button,tank4button;
     private tankStars game;
     private Texture revTank;
+    private Texture logo;
 
     public chooseTank(tankStars game){
         this.game = game;
         img = new Texture("background.png");
         stage = new Stage(new ScreenViewport());
+        logo = new Texture("logo1.png");
         tank1 = new Texture("tank1.png");
         tank2 = new Texture("tank2.png");
         tank3 = new Texture("tank3.png");
@@ -46,7 +48,7 @@ public class chooseTank implements Screen {
 
         Label title = new Label("CHOOSE YOUR TANK",mySkin);
         title.setSize(Gdx.graphics.getWidth(),row_height*2);
-        title.setPosition(0,Gdx.graphics.getHeight()-row_height*2);
+        title.setPosition((float) 0, (float) (Gdx.graphics.getHeight()-row_height*3.5));
         title.setAlignment(Align.center);
         stage.addActor(title);
 
@@ -54,7 +56,7 @@ public class chooseTank implements Screen {
         Gdx.input.setInputProcessor(stage);
         tank1button = new ImageButton(drawable);
         tank1button.setSize(100,100);
-        tank1button.setPosition(450,300);
+        tank1button.setPosition(450,200);
         tank1button.addListener(new ClickListener(){
 
             @Override
@@ -78,7 +80,7 @@ public class chooseTank implements Screen {
         Gdx.input.setInputProcessor(stage);
         tank2button = new ImageButton(drawable2);
         tank2button.setSize(100,100);
-        tank2button.setPosition(650,300);
+        tank2button.setPosition(650,200);
         tank2button.addListener(new ClickListener(){
 
             @Override
@@ -101,7 +103,7 @@ public class chooseTank implements Screen {
         Gdx.input.setInputProcessor(stage);
         tank3button = new ImageButton(drawable3);
         tank3button.setSize(100,100);
-        tank3button.setPosition(550,200);
+        tank3button.setPosition(550,120);
         tank3button.addListener(new ClickListener(){
 
             @Override
@@ -130,6 +132,7 @@ public class chooseTank implements Screen {
         stage.act();
         stage.getBatch().begin();
         stage.getBatch().draw(img,0,0,1600,620);
+        stage.getBatch().draw(logo,500,440,200,100);
         stage.getBatch().end();
         stage.draw();
     }
