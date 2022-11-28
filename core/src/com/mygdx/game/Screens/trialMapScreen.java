@@ -212,11 +212,11 @@ public class trialMapScreen implements Screen {
             if(turn==0){
 
                 player.body.setLinearVelocity(0,0);
-                turn = 1;
+//                turn = 1;
             }
             else{
                 player2.body.setLinearVelocity(0,0);
-                turn = 0;
+//                turn = 0;
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.D) && player.body.getLinearVelocity().x <=4){
@@ -304,6 +304,7 @@ public class trialMapScreen implements Screen {
                 x.rotateDeg((float) (player.getAngle()-90));
                 missile.body.setLinearVelocity(x);
                 missilerenderplayer1 = 1;
+                turn = 1;
 
             }
         }
@@ -323,6 +324,8 @@ public class trialMapScreen implements Screen {
                 x.rotateDeg((float) (90-player2.getAngle()));
                 missile2.body.setLinearVelocity(x);
                 missilerenderplayer2 = 1;
+
+                turn = 0;
 
             }
         }
@@ -358,6 +361,7 @@ public class trialMapScreen implements Screen {
 
 
         game.sprite.end();
+
 //        shapeRenderer.setProjectionMatrix(camera.combined);
 //        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 //        shapeRenderer.setColor(1, 0, 0, 1);
