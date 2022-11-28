@@ -286,8 +286,8 @@ public class trialMapScreen implements Screen {
         renderer.render();
         game.sprite.setProjectionMatrix(camera.combined);
         game.sprite.begin();
-        game.sprite.draw(healthBar,850,560,340,70);
-        game.sprite.draw(healthBar,370,560,340,70);
+      //  game.sprite.draw(healthBar,850,560,340,70);
+      //  game.sprite.draw(healthBar,370,560,340,70);
         stage.act();
         if(turn==0) {
             //  System.out.println(unproject.y+" "+player.body.getPosition().y+" "+unproject.x+" "+player.body.getPosition().x);
@@ -381,7 +381,8 @@ public class trialMapScreen implements Screen {
 
         shapeRenderer.end();
         stage.draw();
-//        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
+        game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.showHealth();
         renderer.setView(camera);
        for(Contact contact: world.getContactList()){
