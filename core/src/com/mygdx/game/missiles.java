@@ -20,7 +20,7 @@ public class missiles extends Sprite {
         this.area = area;
         this.world=world;
         this.makebox(x,y);
-        setBounds(500,320,25, 25);
+        setBounds(x,y,25, 25);
         setRegion(texture);
 
     }
@@ -42,7 +42,7 @@ public class missiles extends Sprite {
 
             fixtureDef.shape = shape;
             body.createFixture(fixtureDef);
-            body.setUserData(this);
+            body.setUserData("missile");
 
     }
 

@@ -30,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.ContactListen;
 import com.mygdx.game.Scenes.hud;
 import com.mygdx.game.Screens.pauseScreen;
 import com.mygdx.game.Sprites.Tank1;
@@ -165,12 +166,8 @@ public class trialMapScreen implements Screen {
 
         player = new Tanktry(world,this,600,320,tank_player1);
         player2=new Tanktry(world,this,950,310,tank_player2);
-        missile=new missiles(new Texture("bullet.png"),world,100,100,600,320);
-        missile2=new missiles(new Texture("bullet.png"),world,100,100,950,310);
 
-
-
-
+        world.setContactListener(new ContactListen());
     }
 
     public Texture getTank_player1(){
@@ -246,12 +243,15 @@ public class trialMapScreen implements Screen {
 
     public void update(float dt){
         handleInput(dt);
-
         world.step(1/60f,6,2);
         player.update(dt);
         player2.update(dt);
-        missile.update(dt);
-        missile2.update(dt);
+        if(missile!=null){
+
+        missile.update(dt);}
+        if(missile2!=null) {
+            missile2.update(dt);
+        }
 //        if(turn==0) {
 //            camera.position.x = player.body.getPosition().x;
 //        }
@@ -293,7 +293,7 @@ public class trialMapScreen implements Screen {
             }
             font.draw(game.sprite, String.valueOf((int)(player.getAngle())), player.getX(), player.getY() + 50);
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-
+                missile=new missiles(new Texture("bullet.png"),world,100,100, (int) player.getX()+30, (int) player.getY()+50);
                 Vector2 x= new Vector2(100,500);
                 x.rotateDeg((float) (player.getAngle()-90));
                 missile.body.setLinearVelocity(x);
@@ -311,6 +311,7 @@ public class trialMapScreen implements Screen {
             }
             font.draw(game.sprite, String.valueOf((int)(player2.getAngle())), player2.getX(), player2.getY() + 50);
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+                missile2=new missiles(new Texture("bullet.png"),world,100,100, (int) (player2.getX()-30), (int) (player2.getY()+50));
 
                 Vector2 x= new Vector2(-100,500);
                 x.rotateDeg((float) (90-player2.getAngle()));
@@ -384,7 +385,7 @@ public class trialMapScreen implements Screen {
                  System.out.println("hi");
            }
        }
-        //box2DDebugRenderer.render(world,camera.combined);
+        box2DDebugRenderer.render(world,camera.combined);
       //  System.out.println(world.);
 
 
