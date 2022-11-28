@@ -46,12 +46,27 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                         @Override
                         public void run() {
                             if(Math.abs(a.getPosition().x-p2.getX())<=100){
-                                p2.setHealth(p2.getHealth()-30);
-                                p2.body.setLinearVelocity(new Vector2(100,0));
+                                if((a.getPosition().x-p2.getX()<=100)&& (a.getPosition().x-p2.getX()>=0) ){
+                                    p2.setHealth(p2.getHealth()-30);
+                                    p2.body.setLinearVelocity(new Vector2(-100,0));
+                                }
+                                else{
+                                    p2.setHealth(p2.getHealth()-30);
+                                    p2.body.setLinearVelocity(new Vector2(100,0));
+
+                                }
                             }
                             if(Math.abs(a.getPosition().x-p1.getX())<=100){
-                                p1.setHealth(p1.getHealth()-30);
-                                p1.body.setLinearVelocity(new Vector2(-100,0));
+
+                                if((a.getPosition().x-p1.getX()<=100)&& (a.getPosition().x-p1.getX()>=0) ){
+                                    p1.setHealth(p1.getHealth()-30);
+                                    p1.body.setLinearVelocity(new Vector2(-100,0));
+                                }
+                                else{
+                                    p1.setHealth(p1.getHealth()-30);
+                                    p1.body.setLinearVelocity(new Vector2(100,0));
+
+                                }
                             }
                             a.setTransform(0,0,0);
                         }
@@ -70,12 +85,27 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                         public void run() {
                             //    System.out.println(b.getPosition()+" "+p2.getX()+" "+p2.getY());
                             if(Math.abs(b.getPosition().x-p2.getX())<=100){
-                                p2.setHealth(p2.getHealth()-30);
-                                p2.body.setLinearVelocity(new Vector2(100,0));
+
+                                if(b.getPosition().x-p2.getX()<=100 && (b.getPosition().x-p2.getX()>=0)){
+                                    p2.setHealth(p2.getHealth()-30);
+                                    p2.body.setLinearVelocity(new Vector2(-100,0));
+                                }
+                                else{
+                                    p2.setHealth(p2.getHealth()-30);
+                                    p2.body.setLinearVelocity(new Vector2(100,0));
+
+                                }
                             }
                             if(Math.abs(b.getPosition().x-p1.getX())<=100){
-                                p1.setHealth(p1.getHealth()-30);
-                                p1.body.setLinearVelocity(new Vector2(-100,0));
+                                if((b.getPosition().x-p1.getX()<=100)&& (b.getPosition().x-p1.getX()>=0) ){
+                                    p1.setHealth(p1.getHealth()-30);
+                                    p1.body.setLinearVelocity(new Vector2(-100,0));
+                                }
+                                else{
+                                    p1.setHealth(p1.getHealth()-30);
+                                    p1.body.setLinearVelocity(new Vector2(100,0));
+
+                                }
                             }
                             b.setTransform(0,0,0);
 
