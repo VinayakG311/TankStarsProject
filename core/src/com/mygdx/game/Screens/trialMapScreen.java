@@ -243,6 +243,7 @@ public class trialMapScreen implements Screen {
         world.step(1/60f,6,2);
         player.update(dt);
         player2.update(dt);
+        missile.update(dt);
 //        if(turn==0) {
 //            camera.position.x = player.body.getPosition().x;
 //        }
@@ -304,6 +305,7 @@ public class trialMapScreen implements Screen {
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
         player2.draw(game.sprite);
+        missile.draw(game.sprite);
         if(turn==0) {
             sprite.setRotation((float) (player.getAngle() - 90));
             sprite.setSize(50, 50);

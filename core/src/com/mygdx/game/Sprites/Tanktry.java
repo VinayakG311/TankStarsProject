@@ -17,7 +17,7 @@ public class Tanktry extends Sprite {
         this.world = world;
         createTank(posx,posy);
         player1 = tank;
-        setBounds(50,320,player1.getWidth(), player1.getHeight());
+        setBounds(300,320,player1.getWidth(), player1.getHeight());
         setRegion(player1);
         angle=45;
     }

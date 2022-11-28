@@ -1,9 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class missiles {
+public class missiles extends Sprite {
 
     private Texture texture;
 
@@ -19,6 +20,12 @@ public class missiles {
         this.area = area;
         this.world=world;
         this.makebox();
+        setBounds(500,320,25, 25);
+        setRegion(texture);
+    }
+    public void update(float dt){
+
+        setPosition(body.getPosition().x-12, body.getPosition().y-12);
     }
     private void makebox(){
 
