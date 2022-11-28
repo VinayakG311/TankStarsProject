@@ -46,6 +46,7 @@ public class trialMapScreen implements Screen {
     private Sprite sprite;
     private Sprite sprite2;
     private com.mygdx.game.missiles missile;
+    private int missilerender;
 
 
     private Box2DDebugRenderer box2DDebugRenderer;
@@ -120,6 +121,7 @@ public class trialMapScreen implements Screen {
         sprite2=new Sprite(new Texture("arrow.png"));
         camera=new OrthographicCamera();
         camPort = new FitViewport(400,200,camera);
+        missilerender=0;
 
         tiledMap= new TmxMapLoader().load("GameMap.tmx");
         camera.position.set(600,350,0);
@@ -127,7 +129,7 @@ public class trialMapScreen implements Screen {
         shapeRenderer=new ShapeRenderer();
         world = new World(new Vector2(0,-100),true);
         box2DDebugRenderer = new Box2DDebugRenderer();
-        missile=new missiles(new Texture("bullet.png"),world,100,100);
+
         tank1=new Tank1(300,55,tank_player1,true,false);
         tank2=new Tank1(800,55,tank_player2,false,true);
 
@@ -160,6 +162,7 @@ public class trialMapScreen implements Screen {
 
         player = new Tanktry(world,this,600,320,tank_player1);
         player2=new Tanktry(world,this,950,310,tank_player2);
+        missile=new missiles(new Texture("bullet.png"),world,100,100,600,320);
 
 
 
@@ -285,9 +288,13 @@ public class trialMapScreen implements Screen {
             }
             font.draw(game.sprite, String.valueOf((int)(player.getAngle())), player.getX(), player.getY() + 50);
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+
                 Vector2 x= new Vector2(100,500);
                 x.rotateDeg((float) (player.getAngle()-90));
                 missile.body.setLinearVelocity(x);
+                missilerender = 1;
+
+
 
             }
         }
@@ -305,7 +312,11 @@ public class trialMapScreen implements Screen {
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
         player2.draw(game.sprite);
-        missile.draw(game.sprite);
+        if(missilerender==1){
+            missile.draw(game.sprite);
+
+        }
+
         if(turn==0) {
             sprite.setRotation((float) (player.getAngle() - 90));
             sprite.setSize(50, 50);

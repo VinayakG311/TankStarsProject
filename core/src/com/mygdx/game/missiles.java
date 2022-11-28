@@ -14,12 +14,12 @@ public class missiles extends Sprite {
     private int area;
 
 
-    public missiles(Texture texture,World world, int damage, int area) {
+    public missiles(Texture texture,World world, int damage, int area,int x,int y) {
         this.texture = texture;
         this.damage = damage;
         this.area = area;
         this.world=world;
-        this.makebox();
+        this.makebox(x,y);
         setBounds(500,320,25, 25);
         setRegion(texture);
     }
@@ -27,10 +27,10 @@ public class missiles extends Sprite {
 
         setPosition(body.getPosition().x-12, body.getPosition().y-12);
     }
-    private void makebox(){
+    private void makebox(int x,int y){
 
             BodyDef bodyDef = new BodyDef();
-            bodyDef.position.set(650 ,400 );
+            bodyDef.position.set(x ,y);
             bodyDef.type = BodyDef.BodyType.DynamicBody;
 
             body = world.createBody(bodyDef);
