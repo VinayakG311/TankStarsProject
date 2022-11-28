@@ -46,7 +46,9 @@ public class trialMapScreen implements Screen {
     private Sprite sprite;
     private Sprite sprite2;
     private com.mygdx.game.missiles missile;
-    private int missilerender;
+    private com.mygdx.game.missiles missile2;
+    private int missilerenderplayer1;
+    private int missilerenderplayer2;
 
 
     private Box2DDebugRenderer box2DDebugRenderer;
@@ -121,7 +123,8 @@ public class trialMapScreen implements Screen {
         sprite2=new Sprite(new Texture("arrow.png"));
         camera=new OrthographicCamera();
         camPort = new FitViewport(400,200,camera);
-        missilerender=0;
+        missilerenderplayer1=0;
+        missilerenderplayer2=0;
 
         tiledMap= new TmxMapLoader().load("GameMap.tmx");
         camera.position.set(600,350,0);
@@ -163,6 +166,7 @@ public class trialMapScreen implements Screen {
         player = new Tanktry(world,this,600,320,tank_player1);
         player2=new Tanktry(world,this,950,310,tank_player2);
         missile=new missiles(new Texture("bullet.png"),world,100,100,600,320);
+        missile2=new missiles(new Texture("bullet.png"),world,100,100,950,310);
 
 
 
@@ -247,6 +251,7 @@ public class trialMapScreen implements Screen {
         player.update(dt);
         player2.update(dt);
         missile.update(dt);
+        missile2.update(dt);
 //        if(turn==0) {
 //            camera.position.x = player.body.getPosition().x;
 //        }
@@ -292,9 +297,7 @@ public class trialMapScreen implements Screen {
                 Vector2 x= new Vector2(100,500);
                 x.rotateDeg((float) (player.getAngle()-90));
                 missile.body.setLinearVelocity(x);
-                missilerender = 1;
-
-
+                missilerenderplayer1 = 1;
 
             }
         }
@@ -307,14 +310,24 @@ public class trialMapScreen implements Screen {
                 player2.setAngle(player2.getAngle()-1);
             }
             font.draw(game.sprite, String.valueOf((int)(player2.getAngle())), player2.getX(), player2.getY() + 50);
+            if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+
+                Vector2 x= new Vector2(-100,500);
+                x.rotateDeg((float) (90-player2.getAngle()));
+                missile2.body.setLinearVelocity(x);
+                missilerenderplayer2 = 1;
+
+            }
         }
 
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
         player2.draw(game.sprite);
-        if(missilerender==1){
+        if(missilerenderplayer1==1){
             missile.draw(game.sprite);
-
+        }
+        if(missilerenderplayer2==1){
+            missile2.draw(game.sprite);
         }
 
         if(turn==0) {
@@ -324,7 +337,6 @@ public class trialMapScreen implements Screen {
             sprite.draw(game.sprite);
         }
         else{
-
 
             sprite2.setRotation((float) (90-player2.getAngle()));
             sprite2.setSize(50, 50);
