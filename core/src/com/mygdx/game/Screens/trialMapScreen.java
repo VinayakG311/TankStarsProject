@@ -68,6 +68,7 @@ public class trialMapScreen implements Screen {
     private Texture tank_player1;
     private Texture tank_player2;
     private Stage stage;
+    private ContactListen contactListen;
     private Texture pausebutton;
     private ImageButton pauseButton;
 
@@ -163,12 +164,14 @@ public class trialMapScreen implements Screen {
             body = world.createBody(bodyDef);
             fixtureDef.shape = shape;
             body.createFixture(fixtureDef);
+            body.setUserData("ground");
         }
 
         player = new Tanktry(world,this,600,320,tank_player1);
         player2=new Tanktry(world,this,950,310,tank_player2);
-
-        world.setContactListener(new ContactListen());
+        contactListen=new ContactListen();
+        contactListen.getplayers(player,player2);
+        world.setContactListener(contactListen);
     }
 
     public Texture getTank_player1(){
