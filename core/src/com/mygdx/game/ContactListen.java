@@ -36,10 +36,10 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
         if(a.getUserData()=="missile" || b.getUserData()=="missile"){
             if(a.getUserData()=="missile"){
 
-                if(b.getUserData()=="tank"){
-                    System.out.println("tank hit");
-                }
-                if(b.getUserData()=="ground"){
+//                if(b.getUserData()=="tank"){
+//                    System.out.println("tank hit");
+//                }
+                if(b.getUserData()=="ground" || b.getUserData()=="tank"){
                     System.out.println("ground hit");
                     Gdx.app.postRunnable(new Runnable() {
 
@@ -74,11 +74,11 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                 }
             }
             if(b.getUserData()=="missile"){
-                if(a.getUserData()=="tank"){
-
-                    System.out.println("tank hit");
-                }
-                if(a.getUserData()=="ground"){
+//                if(a.getUserData()=="tank"){
+//
+//                    System.out.println("tank hit");
+//                }
+                if(a.getUserData()=="ground" || a.getUserData()=="tank"){
                     System.out.println("ground hit");
                     Gdx.app.postRunnable(new Runnable() {
                         @Override

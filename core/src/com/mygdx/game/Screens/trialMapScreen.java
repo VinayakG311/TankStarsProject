@@ -300,7 +300,7 @@ public class trialMapScreen implements Screen {
             }
             font.draw(game.sprite, String.valueOf((int)(player.getAngle())), player.getX(), player.getY() + 50);
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-                missile=new missiles(new Texture("bullet.png"),world,100,100, (int) player.getX()+30, (int) player.getY()+50);
+                missile=new missiles(new Texture("bullet.png"),world,100,100, (int) player.getX()+40, (int) player.getY()+60);
                 Vector2 x= new Vector2(100,500);
                 x.rotateDeg((float) (player.getAngle()-90));
                 missile.body.setLinearVelocity(x);
