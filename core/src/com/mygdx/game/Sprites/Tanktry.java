@@ -11,6 +11,7 @@ public class Tanktry extends Sprite {
     public Body body;
     private Texture player1;
     private double angle;
+    private double health;
 
     public Tanktry(World world, trialMapScreen screen,int posx,int posy,Texture tank){
 
@@ -20,6 +21,14 @@ public class Tanktry extends Sprite {
         setBounds(300,320,player1.getWidth(), player1.getHeight());
         setRegion(player1);
         angle=45;
+        health=175;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+    public double getHealth(){
+        return health;
     }
 
     public void update(float dt){

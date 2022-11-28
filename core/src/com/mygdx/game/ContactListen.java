@@ -6,13 +6,14 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.mygdx.game.Scenes.hud;
 import com.mygdx.game.Sprites.Tanktry;
 
 
 public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactListener {
     private Tanktry p1;
     private Tanktry p2;
-
+    private com.mygdx.game.Scenes.hud hud;
     @Override
     public void beginContact(Contact contact) {
         //  System.out.println("Contact");
@@ -45,9 +46,11 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                         @Override
                         public void run() {
                             if(Math.abs(a.getPosition().x-p2.getX())<=100){
+                                p2.setHealth(p2.getHealth()-30);
                                 p2.body.setLinearVelocity(new Vector2(100,0));
                             }
                             if(Math.abs(a.getPosition().x-p1.getX())<=100){
+                                p1.setHealth(p1.getHealth()-30);
                                 p1.body.setLinearVelocity(new Vector2(-100,0));
                             }
                             a.setTransform(0,0,0);
@@ -67,9 +70,11 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                         public void run() {
                             //    System.out.println(b.getPosition()+" "+p2.getX()+" "+p2.getY());
                             if(Math.abs(b.getPosition().x-p2.getX())<=100){
+                                p2.setHealth(p2.getHealth()-30);
                                 p2.body.setLinearVelocity(new Vector2(100,0));
                             }
                             if(Math.abs(b.getPosition().x-p1.getX())<=100){
+                                p1.setHealth(p1.getHealth()-30);
                                 p1.body.setLinearVelocity(new Vector2(-100,0));
                             }
                             b.setTransform(0,0,0);
@@ -98,9 +103,10 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
     }
-    public void getplayers(Tanktry p1,Tanktry p2){
+    public void getplayers(Tanktry p1,Tanktry p2,hud hud){
         this.p1=p1;
         this.p2=p2;
+        this.hud=hud;
 
     }
 

@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Screens.mainMenu;
+import com.mygdx.game.Sprites.Tanktry;
 
 public class hud {
     public Stage stage;
@@ -29,9 +30,14 @@ public class hud {
     private Texture moveright;
     private Texture shoot;
     private ImageButton exitb,resumeb,saveb;
+    public SpriteBatch spriteBatch;
     ShapeRenderer shapeRenderer;
+    private Tanktry pl1,pl2;
 
-    public hud(SpriteBatch spriteBatch){
+    public hud(SpriteBatch spriteBatch, Tanktry p1,Tanktry p2){
+        this.spriteBatch=spriteBatch;
+        pl1=p1;
+        pl2=p2;
         viewport = new FitViewport(800,480,new OrthographicCamera());
         stage = new Stage(viewport,spriteBatch);
         shapeRenderer=new ShapeRenderer();
@@ -51,9 +57,9 @@ public class hud {
 
 
     }
-    public void showHealth(){
+    public void showHealth(float healthp1,float healthp2){
 
-        float health = 172;
+
 //        PolygonSpriteBatch polygonSpriteBatch=new PolygonSpriteBatch();
 //        polygonSpriteBatch.begin();
 //        Pixmap pixmap = new Pixmap(1,1,Pixmap.Format.RGB565);
@@ -72,9 +78,9 @@ public class hud {
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.GREEN);
-        shapeRenderer.rect(437, 427, health, 27);
+        shapeRenderer.rect(437, 427, healthp2, 27);
 
-        shapeRenderer.rect(192, 427, health, 27);
+        shapeRenderer.rect(192, 427, healthp1, 27);
         shapeRenderer.end();
 
     }

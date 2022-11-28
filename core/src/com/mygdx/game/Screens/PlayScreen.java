@@ -89,7 +89,7 @@ public class PlayScreen implements Screen {
         backGround = new Texture("background.jpg");
         ground=new Texture("map.png");
 
-        hud = new hud(game.sprite);
+      //  hud = new hud(game.sprite);
         shapeRenderer = new ShapeRenderer();
         world=new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
@@ -251,7 +251,7 @@ public class PlayScreen implements Screen {
        // gamecam.zoom+=100;
      
 //
-        hud.showHealth();
+    //    hud.showHealth();
 //
 //
 //        b2dr.render(player.world,player.gamecam.combined);

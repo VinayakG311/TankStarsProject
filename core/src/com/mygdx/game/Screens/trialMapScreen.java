@@ -119,7 +119,7 @@ public class trialMapScreen implements Screen {
         pausebutton = new Texture("pause.jpg");
         healthBar = new Texture("healthBar1.png");
 
-        hud = new hud(game.sprite);
+
         unproject=new Vector3();
 
         sprite=new Sprite(new Texture("arrow.png"));
@@ -169,8 +169,9 @@ public class trialMapScreen implements Screen {
 
         player = new Tanktry(world,this,600,320,tank_player1);
         player2=new Tanktry(world,this,950,310,tank_player2);
+        hud = new hud(game.sprite,player,player2);
         contactListen=new ContactListen();
-        contactListen.getplayers(player,player2);
+        contactListen.getplayers(player,player2,hud);
         world.setContactListener(contactListen);
     }
 
@@ -387,7 +388,7 @@ public class trialMapScreen implements Screen {
         stage.draw();
         hud.stage.draw();
         game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.showHealth();
+        hud.showHealth((float) player.getHealth(),(float) player2.getHealth());
         renderer.setView(camera);
        for(Contact contact: world.getContactList()){
            Body a=contact.getFixtureA().getBody();
