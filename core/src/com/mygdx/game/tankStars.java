@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Screens.GameOver;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Screens.homeScreen;
 import com.mygdx.game.states.gameStateManager;
@@ -23,6 +24,7 @@ public class tankStars extends Game {
 	@Override
 	public void create () {
 		sprite = new SpriteBatch();
+		//setScreen(new GameOver(this,1));
 		setScreen(new homeScreen(this));
 		//setScreen(new trialMapScreen(this));
 

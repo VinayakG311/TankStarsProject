@@ -363,32 +363,27 @@ public class trialMapScreen implements Screen {
 
         game.sprite.end();
 
-//        shapeRenderer.setProjectionMatrix(camera.combined);
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//        shapeRenderer.setColor(1, 0, 0, 1);
-
-  //      if(turn==0) {
-  //          if (player.getAngle() <= 80) {
-  //              shapeRenderer.line(player.getX() + 30, player.getY() + 30, player.getX() + 100, (float) (player.getY() + 100 / Math.cos(Math.toRadians(player.getAngle()))));
-//            } else {
-//                shapeRenderer.line(player.getX() + 30, player.getY() + 30, player.getX() + 100, (float) (player.getY() + 20 / Math.cos(Math.toRadians(80))));
-//            }
-//
-//        }
-//        else{
-//            if (player2.getAngle() <= 80) {
-//                shapeRenderer.line(player2.getX() - 30, player2.getY() + 30, player2.getX() - 100, (float) (player2.getY() + 20 / Math.cos(Math.toRadians(player2.getAngle()))));
-//            } else {
-//                shapeRenderer.line(player2.getX() - 30, player2.getY() + 30, player2.getX() - 100, (float) (player2.getY() + 20 / Math.cos(Math.toRadians(80))));
-//            }
-//
-//        }
-
         shapeRenderer.end();
         stage.draw();
         hud.stage.draw();
         game.sprite.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.showHealth((float) player.getHealth(),(float) player2.getHealth());
+        if(player.getHealth()<=0 || player2.getHealth()<=0){
+            if(player.getHealth()<=0){
+                hud.showHealth(0, (float) player2.getHealth());
+
+                this.game.setScreen(new GameOver(this.game,1));
+
+            }
+            else{
+                hud.showHealth((float) player.getHealth(), 0);
+                System.out.println("hi");
+                this.game.setScreen(new GameOver(this.game,0));
+            }
+
+        }
+        else {
+            hud.showHealth((float) player.getHealth(), (float) player2.getHealth());
+        }
         renderer.setView(camera);
        for(Contact contact: world.getContactList()){
            Body a=contact.getFixtureA().getBody();
@@ -398,6 +393,7 @@ public class trialMapScreen implements Screen {
            }
        }
         box2DDebugRenderer.render(world,camera.combined);
+
       //  System.out.println(world.);
 
 
