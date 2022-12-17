@@ -20,32 +20,15 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
         final Body a=contact.getFixtureA().getBody();
         final Body b=contact.getFixtureB().getBody();
 
-//        Body c = null;
-//        Body d = null;
-//        if(a.getUserData()=="tank"){
-//            c=a;
-//            System.out.println("hi1");
-//        }
-//        if(b.getUserData()=="tank"){
-//            d=b;
-//            System.out.println("hi2");
-//        }
-//        if(c!=null && d!=null) {
-//            System.out.println(c.getPosition() + " " + d.getPosition());
-//        }
         if(a.getUserData()=="missile" || b.getUserData()=="missile"){
             if(a.getUserData()=="missile"){
-
-//                if(b.getUserData()=="tank"){
-//                    System.out.println("tank hit");
-//                }
                 if(b.getUserData()=="ground" || b.getUserData()=="tank"){
-                    System.out.println("ground hit");
                     Gdx.app.postRunnable(new Runnable() {
 
                         @Override
                         public void run() {
                             if(Math.abs(a.getPosition().x-p2.getX())<=100){
+                                p2.toggle();
                                 float x=Math.abs(a.getPosition().x-p2.getX());
                                 float healthred= 30*(100-x)/100;
                          //       System.out.println(healthred);
@@ -53,6 +36,8 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                                 if((a.getPosition().x-p2.getX()<=100)&& (a.getPosition().x-p2.getX()>=0) ){
                                     p2.setHealth(p2.getHealth()-healthred);
                                     p2.body.setLinearVelocity(new Vector2(-100,0));
+
+
                                 }
                                 else{
                                     p2.setHealth(p2.getHealth()-healthred);
@@ -61,6 +46,7 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                                 }
                             }
                             if(Math.abs(a.getPosition().x-p1.getX())<=100){
+                                p1.toggle();
                                 float x=Math.abs(a.getPosition().x-p1.getX());
                                 float healthred= 30*(100-x)/100;
                            //     System.out.println(healthred);
@@ -85,12 +71,13 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
 //                    System.out.println("tank hit");
 //                }
                 if(a.getUserData()=="ground" || a.getUserData()=="tank"){
-                    System.out.println("ground hit");
+
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {
                             //    System.out.println(b.getPosition()+" "+p2.getX()+" "+p2.getY());
                             if(Math.abs(b.getPosition().x-p2.getX())<=100){
+                                p2.toggle();
                                 float x=Math.abs(b.getPosition().x-p2.getX());
                                 float healthred= 30*(100-x)/100;
 
@@ -105,6 +92,7 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                                 }
                             }
                             if(Math.abs(b.getPosition().x-p1.getX())<=100){
+                                p1.toggle();
                                 float x=Math.abs(b.getPosition().x-p1.getX());
                                 float healthred= 30*(100-x)/100;
                                 if((b.getPosition().x-p1.getX()<=100)&& (b.getPosition().x-p1.getX()>=0) ){

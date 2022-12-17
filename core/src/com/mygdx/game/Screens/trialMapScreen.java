@@ -10,19 +10,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.CircleMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -33,15 +29,11 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.ContactListen;
 import com.mygdx.game.Scenes.hud;
-import com.mygdx.game.Screens.pauseScreen;
 import com.mygdx.game.Sprites.Tank1;
 import com.mygdx.game.Sprites.Tanktry;
-import com.mygdx.game.Tank;
 import com.mygdx.game.missiles;
 import com.mygdx.game.states.saveload;
 import com.mygdx.game.tankStars;
-
-import java.math.BigInteger;
 
 public class trialMapScreen implements Screen {
     private tankStars game;
@@ -219,7 +211,7 @@ public class trialMapScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("hi");
-                saveload.setstate(trialMapScreen.this);
+                saveload.setstate(getplayer());
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -273,8 +265,8 @@ public class trialMapScreen implements Screen {
 
 
     }
-    public Double getplayer(){
-        return player.getHealth();
+    public Tanktry getplayer(){
+        return player;
     }
 
     public void update(float dt){
@@ -303,9 +295,9 @@ public class trialMapScreen implements Screen {
     }
     @Override
     public void render(float delta) {
-        if(saveload.getstate(1)!=null){
-            System.out.println(saveload.getstate(1));
-        }
+    //    if(saveload.getstate(1)!=null){
+        //    System.out.println(saveload.getstate(1));
+       // }
         this.update(delta);
 
 
@@ -368,24 +360,34 @@ public class trialMapScreen implements Screen {
 //        game.sprite.draw(tank1.getTank(),tank1.getPosition().x,tank1.getPosition().y);
         player.draw(game.sprite);
         player2.draw(game.sprite);
-        if(missilerenderplayer1==1){
+        if(player.fire==1){
+            game.sprite.draw(explosion,player.getX(),player.getY(),70,100);
+            player.toggle();
+        }
+        if(player2.fire==1){
+            game.sprite.draw(explosion,player2.getX(),player2.getY(),70,100);
+            player2.toggle();
+        }
+        if(missilerenderplayer1==1) {
             missile.draw(game.sprite);
-
-            if(Math.abs(missile.getX()-player2.getX())<=8){
-                game.sprite.draw(explosion,missile.getX(),missile.getY(),70,100);
-
-
-            }
         }
-        if(missilerenderplayer2==1){
+//
+//            if(Math.abs(missile.getX()-player2.getX())<=75){
+//
+//                game.sprite.draw(explosion,player2.getX(),player2.getY(),70,100);
+//            }
+//
+//        }
+        if(missilerenderplayer2==1) {
             missile2.draw(game.sprite);
-            System.out.println(Math.abs(missile2.getX()-player.getX()));
-            if(Math.abs(missile2.getX()-player.getX())<=47 || Math.abs(missile.getX()-player2.getX())<=8){
-                game.sprite.draw(explosion,missile2.getX(),missile2.getY(),70,100);
-
-            }
-
         }
+//            if(Math.abs(missile2.getX()-player.getX())<=75){
+//
+//                game.sprite.draw(explosion,player.getX(),player.getY(),70,100);
+//
+//            }
+//
+//        }
 
         if(turn==0) {
             sprite.setRotation((float) (player.getAngle() - 90));

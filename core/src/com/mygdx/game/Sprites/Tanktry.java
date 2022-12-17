@@ -8,6 +8,7 @@ import com.mygdx.game.Screens.trialMapScreen;
 
 public class Tanktry extends Sprite {
     public World world;
+    public int fire;
     public Body body;
     private Texture player1;
     private double angle;
@@ -57,5 +58,13 @@ public class Tanktry extends Sprite {
 
     public double getAngle() {
         return angle;
+    }
+    public void toggle(){
+        if(fire==0){
+            fire=1;
+        }
+        else{
+            fire=0;
+        }
     }
 }

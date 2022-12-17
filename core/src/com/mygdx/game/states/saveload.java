@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Screens.trialMapScreen;
+import com.mygdx.game.Sprites.Tanktry;
 
 import java.io.Serializable;
 
@@ -14,8 +15,8 @@ public class saveload implements Serializable {
     private Preferences preferences= Gdx.app.getPreferences("saveload");
 
 
-    public void setstate(trialMapScreen screen){
-        preferences.putString("save "+noofsaves,new Json().toJson(screen.getplayer()));
+    public void setstate(Tanktry player){
+        preferences.putString("save "+noofsaves,new Json().toJson(player.getHealth()));
         preferences.flush();
     }
     public Double getstate(int savenumber){
