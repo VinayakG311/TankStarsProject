@@ -37,6 +37,7 @@ import com.mygdx.game.Sprites.Tank1;
 import com.mygdx.game.Sprites.Tanktry;
 import com.mygdx.game.Tank;
 import com.mygdx.game.missiles;
+import com.mygdx.game.states.saveload;
 import com.mygdx.game.tankStars;
 
 public class trialMapScreen implements Screen {
@@ -61,6 +62,7 @@ public class trialMapScreen implements Screen {
 
     private Tank1 tank1;
     private Tank1 tank2;
+    private com.mygdx.game.states.saveload saveload;
 
     private Tanktry player;
     private Tanktry player2;
@@ -70,7 +72,9 @@ public class trialMapScreen implements Screen {
     private Stage stage;
     private ContactListen contactListen;
     private Texture pausebutton;
+    private Texture save;
     private ImageButton pauseButton;
+    private ImageButton savegame;
 
     private int turn=0;
     private BitmapFont font;
@@ -117,6 +121,7 @@ public class trialMapScreen implements Screen {
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
+        save=new Texture("bullet.png");
         healthBar = new Texture("healthBar1.png");
 
 
@@ -135,9 +140,10 @@ public class trialMapScreen implements Screen {
         shapeRenderer=new ShapeRenderer();
         world = new World(new Vector2(0,-100),true);
         box2DDebugRenderer = new Box2DDebugRenderer();
-
+        saveload=new saveload();
         tank1=new Tank1(300,55,tank_player1,true,false);
         tank2=new Tank1(800,55,tank_player2,false,true);
+
 
         BodyDef bodyDef = new BodyDef();
         PolygonShape shape2 = new PolygonShape();
@@ -183,8 +189,12 @@ public class trialMapScreen implements Screen {
     @Override
     public void show() {
         Drawable drawable = new TextureRegionDrawable(pausebutton);
+        Drawable drawable1= new TextureRegionDrawable(save);
         Gdx.input.setInputProcessor(stage);
         pauseButton = new ImageButton(drawable);
+        savegame=new ImageButton(drawable1);
+        savegame.setSize(45,45);
+        savegame.setPosition(45,500);
         pauseButton.setSize(45,45);
         pauseButton.setPosition(45,550);
 
@@ -200,8 +210,22 @@ public class trialMapScreen implements Screen {
                 return true;
             }
         });
+        savegame.addListener(new ClickListener(){
 
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("hi");
+                saveload.setstate(trialMapScreen.this);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            //    saveload.setstate(trialMapScreen.this);
+                System.out.println("hi");
+                return true;
+            }
+        });
 
+        stage.addActor(savegame);
         stage.addActor(pauseButton);
 
     }
@@ -245,6 +269,9 @@ public class trialMapScreen implements Screen {
 
 
     }
+    public Double getplayer(){
+        return player.getHealth();
+    }
 
     public void update(float dt){
         handleInput(dt);
@@ -272,6 +299,9 @@ public class trialMapScreen implements Screen {
     }
     @Override
     public void render(float delta) {
+        if(saveload.getstate(1)!=null){
+            System.out.println(saveload.getstate(1));
+        }
         this.update(delta);
 
 
