@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.CircleMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
@@ -40,6 +41,8 @@ import com.mygdx.game.missiles;
 import com.mygdx.game.states.saveload;
 import com.mygdx.game.tankStars;
 
+import java.math.BigInteger;
+
 public class trialMapScreen implements Screen {
     private tankStars game;
     private World world;
@@ -63,6 +66,7 @@ public class trialMapScreen implements Screen {
     private Tank1 tank1;
     private Tank1 tank2;
     private com.mygdx.game.states.saveload saveload;
+    private Texture explosion;
 
     private Tanktry player;
     private Tanktry player2;
@@ -123,7 +127,7 @@ public class trialMapScreen implements Screen {
         pausebutton = new Texture("pause.jpg");
         save=new Texture("bullet.png");
         healthBar = new Texture("healthBar1.png");
-
+        explosion = new Texture("explosion.png");
 
         unproject=new Vector3();
 
@@ -366,9 +370,21 @@ public class trialMapScreen implements Screen {
         player2.draw(game.sprite);
         if(missilerenderplayer1==1){
             missile.draw(game.sprite);
+
+            if(Math.abs(missile.getX()-player2.getX())<=8){
+                game.sprite.draw(explosion,missile.getX(),missile.getY(),70,100);
+
+
+            }
         }
         if(missilerenderplayer2==1){
             missile2.draw(game.sprite);
+            System.out.println(Math.abs(missile2.getX()-player.getX()));
+            if(Math.abs(missile2.getX()-player.getX())<=47 || Math.abs(missile.getX()-player2.getX())<=8){
+                game.sprite.draw(explosion,missile2.getX(),missile2.getY(),70,100);
+
+            }
+
         }
 
         if(turn==0) {

@@ -88,8 +88,8 @@ public class GameOver implements Screen {
         Skin mySkin = new Skin(Gdx.files.internal("skin/star-soldier-ui.json"));
 
         Label title = new Label("GAME OVER",mySkin);
-        title.setSize(Gdx.graphics.getWidth(),row_height*5);
-        title.setPosition(0,Gdx.graphics.getHeight()-row_height*4);
+        title.setSize(400,200);
+        title.setPosition(400,250);
         title.setAlignment(Align.center);
         Drawable newGameButton = new TextureRegionDrawable(newGame);
         Drawable continueGameButton = new TextureRegionDrawable(contiue);
@@ -114,9 +114,27 @@ public class GameOver implements Screen {
 
         stage.addActor(title);
 
+        Label title2 = null;
+
+        if(result==1){
+            title2 = new Label("PLAYER 2 WINS!!!!",mySkin);
+            title2.setSize(400,200);
+            title2.setPosition(400,200);
+            title2.setAlignment(Align.center);
+
+        }
+        else{
+            title2 = new Label("PLAYER 1 WINS!!!!",mySkin);
+            title2.setSize(400,200);
+            title2.setPosition(400,200);
+            title2.setAlignment(Align.center);
+        }
+        stage.addActor(title2);
+
+
         continuegameb = new ImageButton(newGameButton);
-        continuegameb.setSize((float) (col_width*8), (float) (row_height*1.5));
-        continuegameb.setPosition(200,50);
+        continuegameb.setSize((float) (col_width*4), (float) (row_height));
+        continuegameb.setPosition(400,50);
         continuegameb.addListener(new ClickListener(){
 
             @Override
