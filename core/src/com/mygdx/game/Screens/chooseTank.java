@@ -109,12 +109,14 @@ public class chooseTank implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank3;
-                game.setScreen(new trialMapScreen(game,tank3,revTank));
+//                game.setScreen(new trialMapScreen(game,tank3,revTank));
+                game.setScreen(new GameOver(game,1));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank3;
                 game.setScreen(new trialMapScreen(game,tank3,revTank));
+                game.setScreen(new GameOver(game,1));
                 return true;
             }
         });
