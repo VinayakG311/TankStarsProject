@@ -27,7 +27,7 @@ public class Loadgame  implements Screen {
     public Loadgame(tankStars game){
 //        saveload=new saveload();
         preferences= Gdx.app.getPreferences("saveload");
-        cont=new Texture("bullet.png");
+        cont=new Texture("savedopen.png");
         stage=new Stage();
         this.game=game;
         Gdx.input.setInputProcessor(stage);
@@ -44,9 +44,9 @@ public class Loadgame  implements Screen {
             Drawable drawable1= new TextureRegionDrawable(cont);
             Gdx.input.setInputProcessor(stage);
             load=new ImageButton(drawable1);
-            load.setSize(45,45);
-            load.setPosition(45,200+i);
-            i = i+50;
+            load.setSize(280,170);
+            load.setPosition(470,50+i);
+            i = i+90;
             final int finalJ = j;
             load.addListener(new ClickListener(){
 

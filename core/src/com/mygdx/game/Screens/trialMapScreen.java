@@ -122,7 +122,7 @@ public class trialMapScreen implements Screen {
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
-        save=new Texture("bullet.png");
+        save=new Texture("buttonTalbesave.png");
         healthBar = new Texture("healthBar1.png");
         explosion = new Texture("explosion.png");
         unproject=new Vector3();
@@ -191,7 +191,7 @@ public class trialMapScreen implements Screen {
         this.game=game;
         stage = new Stage(new ScreenViewport());
         pausebutton = new Texture("pause.jpg");
-        save=new Texture("bullet.png");
+        save=new Texture("buttonTalbesave.png");
         healthBar = new Texture("healthBar1.png");
         explosion = new Texture("explosion.png");
 
@@ -263,8 +263,8 @@ public class trialMapScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         pauseButton = new ImageButton(drawable);
         savegame=new ImageButton(drawable1);
-        savegame.setSize(45,45);
-        savegame.setPosition(45,500);
+        savegame.setSize(120,140);
+        savegame.setPosition(17,450);
         pauseButton.setSize(45,45);
         pauseButton.setPosition(45,550);
 
