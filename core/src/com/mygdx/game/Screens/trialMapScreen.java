@@ -211,7 +211,8 @@ public class trialMapScreen implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("hi");
-                saveload.setstate(getplayer());
+                saveload.setstate(getplayer(),1);
+                saveload.setstate(getplayer2(),2);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -224,6 +225,10 @@ public class trialMapScreen implements Screen {
         stage.addActor(savegame);
         stage.addActor(pauseButton);
 
+    }
+
+    private Tanktry getplayer2() {
+        return player2;
     }
 
 
@@ -295,9 +300,10 @@ public class trialMapScreen implements Screen {
     }
     @Override
     public void render(float delta) {
-    //    if(saveload.getstate(1)!=null){
-        //    System.out.println(saveload.getstate(1));
-       // }
+        if(saveload.gethealth(1,1)!=null && saveload.gethealth(1,2)!=null){
+            System.out.println("player1 "+saveload.gethealth(1,1)+" "+saveload.getposX(1,1)+" "+saveload.getposY(1,1)+" "+saveload.getAngle(1,1));
+            System.out.println("player2 "+saveload.gethealth(1,2)+" "+saveload.getposX(1,2)+" "+saveload.getposY(1,2)+" "+saveload.getAngle(1,2));
+        }
         this.update(delta);
 
 
