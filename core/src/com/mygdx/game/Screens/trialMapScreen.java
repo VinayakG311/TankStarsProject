@@ -272,10 +272,14 @@ public class trialMapScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                saveload.setpause(getplayer(),1);
+                saveload.setpause(getplayer2(),2);
                 game.setScreen(new pauseScreen(game,t1,t2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                saveload.setpause(getplayer(),1);
+                saveload.setpause(getplayer2(),2);
                 game.setScreen(new pauseScreen(game,t1,t2));
                 return true;
             }

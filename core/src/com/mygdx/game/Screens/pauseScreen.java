@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.states.saveload;
 import com.mygdx.game.tankStars;
 
 public class pauseScreen extends ScreenAdapter implements Screen {
@@ -43,12 +44,14 @@ public class pauseScreen extends ScreenAdapter implements Screen {
     private ImageButton saveb;
     private Texture logo;
     private String t1,t2;
+    private com.mygdx.game.states.saveload saveload;
 
 
     public pauseScreen(final tankStars game,String t1,String t2) {
         super();
         this.t1=t1;
         this.t2=t2;
+        saveload=new saveload();
 
 
         this.game = game;
@@ -112,7 +115,6 @@ public class pauseScreen extends ScreenAdapter implements Screen {
             }
         });
 
-
         stage.addActor(exitb);
         resumeb.setSize((float) (col_width*8), (float) (row_height));
         resumeb.setPosition(200,150);
@@ -120,11 +122,13 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
+                game.setScreen(new trialMapScreen(game,saveload.getpauseAngle(1),saveload.getpausehealth(1),saveload.getpauseposX(1),saveload.getpauseposY(1),saveload.getpauseTexture(1),saveload.getpauseTexture(2),saveload.getpauseAngle(2),saveload.getpausehealth(2),saveload.getpauseposX(2),saveload.getpauseposY(2)));
+
+           //     game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
+                game.setScreen(new trialMapScreen(game,saveload.getpauseAngle(1),saveload.getpausehealth(1),saveload.getpauseposX(1),saveload.getpauseposY(1),saveload.getpauseTexture(1),saveload.getpauseTexture(2),saveload.getpauseAngle(2),saveload.getpausehealth(2),saveload.getpauseposX(2),saveload.getpauseposY(2)));
                 return true;
             }
         });
