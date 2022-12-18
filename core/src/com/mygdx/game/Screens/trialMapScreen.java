@@ -108,8 +108,75 @@ public class trialMapScreen implements Screen {
         chain.createChain(worldVertices);
         return chain;
     }
+    public trialMapScreen(tankStars game,Double a1,Double h1,Float x1,Float y1,String t1,String t2,Double a2,Double h2,Float x2,Float y2){
+        this.t1=t1;
+        this.t2=t2;
+        tank_player1=new Texture(t1);
+        tank_player2=new Texture(t2);
+        font=new BitmapFont();
+        font.setColor(Color.WHITE);
+        this.game=game;
+        stage = new Stage(new ScreenViewport());
+        pausebutton = new Texture("pause.jpg");
+        save=new Texture("bullet.png");
+        healthBar = new Texture("healthBar1.png");
+        explosion = new Texture("explosion.png");
+        unproject=new Vector3();
+        sprite=new Sprite(new Texture("arrow.png"));
+        sprite2=new Sprite(new Texture("arrow.png"));
+        camera=new OrthographicCamera();
+        camPort = new FitViewport(400,200,camera);
+        missilerenderplayer1=0;
+        missilerenderplayer2=0;
+        tiledMap= new TmxMapLoader().load("GameMap.tmx");
+        camera.position.set(600,350,0);
+        renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        shapeRenderer=new ShapeRenderer();
+        world = new World(new Vector2(0,-100),true);
+        box2DDebugRenderer = new Box2DDebugRenderer();
+        saveload=new saveload();
+        tank1=new Tank1(300,55,tank_player1,true,false);
+        tank2=new Tank1(800,55,tank_player2,false,true);
+        BodyDef bodyDef = new BodyDef();
+        PolygonShape shape2 = new PolygonShape();
+        FixtureDef fixtureDef = new FixtureDef();
+        Body body;
+        this.Wall(15,-170,15,1700);
+        this.Wall(3625,-170,3625,1700);
 
+        for(MapObject object : tiledMap.getLayers().get(2).getObjects()){
 
+            Shape shape;
+
+            if (object instanceof PolygonMapObject) {
+                shape = findPolygoninMap((PolygonMapObject) object);
+            } else if (object instanceof PolylineMapObject) {
+                shape = findPolylineinMap((PolylineMapObject) object);
+            }
+
+            else {
+                continue;
+            }
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+            body = world.createBody(bodyDef);
+            fixtureDef.shape = shape;
+            body.createFixture(fixtureDef);
+            body.setUserData("ground");
+        }
+
+        player = new Tanktry(world,this,x1,y1,tank_player1,t1);
+        player.setHealth(h1);
+        player.setAngle(a1);
+
+        player2=new Tanktry(world,this, x2, y2,tank_player2,t2);
+        player2.setHealth(h2);
+        player2.setAngle(a2);
+        hud = new hud(game.sprite,player,player2);
+        contactListen=new ContactListen();
+        contactListen.getplayers(player,player2,hud);
+        world.setContactListener(contactListen);
+
+    }
     public trialMapScreen(tankStars game,Texture tank,Texture rivtank,String t1,String t2){
         this.t1=t1;
         this.t2=t2;
@@ -172,8 +239,8 @@ public class trialMapScreen implements Screen {
             body.setUserData("ground");
         }
 
-        player = new Tanktry(world,this,600,320,tank_player1,t1);
-        player2=new Tanktry(world,this,950,310,tank_player2,t2);
+        player = new Tanktry(world,this, 600F,320F,tank_player1,t1);
+        player2=new Tanktry(world,this,950F,310F,tank_player2,t2);
         hud = new hud(game.sprite,player,player2);
         contactListen=new ContactListen();
         contactListen.getplayers(player,player2,hud);

@@ -15,7 +15,7 @@ public class Tanktry extends Sprite {
     private double health;
     private String t;
 
-    public Tanktry(World world, trialMapScreen screen,int posx,int posy,Texture tank,String t){
+    public Tanktry(World world, trialMapScreen screen,Float posx,Float posy,Texture tank,String t){
         this.t=t;
 
         this.world = world;
@@ -39,7 +39,7 @@ public class Tanktry extends Sprite {
         setPosition(body.getPosition().x-getWidth() /2, body.getPosition().y-getHeight() / 2);
     }
 
-    public void createTank(int x,int y){
+    public void createTank(Float x,Float y){
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(x ,y );
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -71,4 +71,7 @@ public class Tanktry extends Sprite {
             fire=0;
         }
     }
+//    public void setx(Float x){
+//
+//    }
 }

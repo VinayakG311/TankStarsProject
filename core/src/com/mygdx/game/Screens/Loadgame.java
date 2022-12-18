@@ -47,9 +47,7 @@ public class Loadgame  implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("player1 "+saveload.getTexture(1,1)+" "+saveload.gethealth(1,1)+" "+saveload.getposX(1,1)+" "+saveload.getposY(1,1)+" "+saveload.getAngle(1,1));
                 System.out.println("player2 "+saveload.getTexture(1,2)+" "+saveload.gethealth(1,2)+" "+saveload.getposX(1,2)+" "+saveload.getposY(1,2)+" "+saveload.getAngle(1,2));
-
-//                saveload.setstate(getplayer(),1);
-//                saveload.setstate(getplayer2(),2);
+                game.setScreen(new trialMapScreen(game,saveload.getAngle(1,1),saveload.gethealth(1,1),saveload.getposX(1,1),saveload.getposY(1,1),saveload.getTexture(1,1),saveload.getTexture(1,2),saveload.getAngle(1,2),saveload.gethealth(1,2),saveload.getposX(1,2),saveload.getposY(1,2)));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
