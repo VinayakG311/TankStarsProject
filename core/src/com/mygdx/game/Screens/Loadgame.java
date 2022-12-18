@@ -11,17 +11,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.states.saveload;
 import com.mygdx.game.tankStars;
 
 public class Loadgame  implements Screen {
 
     private Preferences preferences;
+    private com.mygdx.game.states.saveload saveload;
     private tankStars game;
     private Stage stage;
     private ImageButton load;
     private Texture cont;
     private Texture img;
     public Loadgame(tankStars game){
+        saveload=new saveload();
         preferences= Gdx.app.getPreferences("saveload");
         cont=new Texture("bullet.png");
         stage=new Stage();
@@ -42,7 +45,9 @@ public class Loadgame  implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("hi");
+                System.out.println("player1 "+saveload.getTexture(1,1)+" "+saveload.gethealth(1,1)+" "+saveload.getposX(1,1)+" "+saveload.getposY(1,1)+" "+saveload.getAngle(1,1));
+                System.out.println("player2 "+saveload.getTexture(1,2)+" "+saveload.gethealth(1,2)+" "+saveload.getposX(1,2)+" "+saveload.getposY(1,2)+" "+saveload.getAngle(1,2));
+
 //                saveload.setstate(getplayer(),1);
 //                saveload.setstate(getplayer2(),2);
             }
@@ -55,8 +60,6 @@ public class Loadgame  implements Screen {
         });
 
         stage.addActor(load);
-
-
     }
 
     @Override

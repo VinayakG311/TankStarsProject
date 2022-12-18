@@ -47,12 +47,13 @@ public class GameOver implements Screen {
     private ImageButton newgameb;
     private ImageButton continuegameb;
     private Texture logo;
+    private String t1,t2;
 
     private BitmapFont font;
 
     private Texture GameOverImage1;
     private int result;
-    public GameOver(tankStars game, int result){
+    public GameOver(tankStars game, int result,String t1,String t2){
         this.game=game;
         this.result=result;
         font=new BitmapFont();
@@ -95,22 +96,6 @@ public class GameOver implements Screen {
         Drawable continueGameButton = new TextureRegionDrawable(contiue);
 
         newgameb = new ImageButton(newGameButton);
-//        newgameb.setSize((float) (col_width*8), (float) (row_height*1.5));
-//        newgameb.setPosition(200,220);
-//        newgameb.addListener(new ClickListener(){
-//            @Override
-//            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new chooseTank(game));
-//            }
-//            @Override
-//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new chooseTank(game));
-//                return true;
-//            }
-//        });
-//
-//
-//        stage.addActor(newgameb);
 
         stage.addActor(title);
 
@@ -139,11 +124,11 @@ public class GameOver implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,tank1,revTank));
+                game.setScreen(new trialMapScreen(game,tank1,revTank,t1,t2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,tank1,revTank));
+                game.setScreen(new trialMapScreen(game,tank1,revTank,t1,t2));
                 return true;
             }
         });

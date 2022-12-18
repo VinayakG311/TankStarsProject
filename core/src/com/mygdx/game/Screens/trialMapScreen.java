@@ -39,6 +39,7 @@ public class trialMapScreen implements Screen {
     private tankStars game;
     private World world;
     private Body body;
+    private String t1,t2;
     private ShapeRenderer shapeRenderer;
     private Sprite sprite;
     private Sprite sprite2;
@@ -109,7 +110,9 @@ public class trialMapScreen implements Screen {
     }
 
 
-    public trialMapScreen(tankStars game,Texture tank,Texture rivtank){
+    public trialMapScreen(tankStars game,Texture tank,Texture rivtank,String t1,String t2){
+        this.t1=t1;
+        this.t2=t2;
         tank_player1=tank;
         tank_player2=rivtank;
         font=new BitmapFont();
@@ -169,8 +172,8 @@ public class trialMapScreen implements Screen {
             body.setUserData("ground");
         }
 
-        player = new Tanktry(world,this,600,320,tank_player1);
-        player2=new Tanktry(world,this,950,310,tank_player2);
+        player = new Tanktry(world,this,600,320,tank_player1,t1);
+        player2=new Tanktry(world,this,950,310,tank_player2,t2);
         hud = new hud(game.sprite,player,player2);
         contactListen=new ContactListen();
         contactListen.getplayers(player,player2,hud);
@@ -198,11 +201,11 @@ public class trialMapScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new pauseScreen(game));
+                game.setScreen(new pauseScreen(game,t1,t2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new pauseScreen(game));
+                game.setScreen(new pauseScreen(game,t1,t2));
                 return true;
             }
         });
@@ -300,10 +303,12 @@ public class trialMapScreen implements Screen {
     }
     @Override
     public void render(float delta) {
-        if(saveload.gethealth(1,1)!=null && saveload.gethealth(1,2)!=null){
-            System.out.println("player1 "+saveload.gethealth(1,1)+" "+saveload.getposX(1,1)+" "+saveload.getposY(1,1)+" "+saveload.getAngle(1,1));
-            System.out.println("player2 "+saveload.gethealth(1,2)+" "+saveload.getposX(1,2)+" "+saveload.getposY(1,2)+" "+saveload.getAngle(1,2));
-        }
+      //  if(saveload.gethealth(1,1)!=null && saveload.gethealth(1,2)!=null){
+         //   System.out.println(player.getT());
+        //    System.out.println(saveload.getTexture(1,1));
+        //    System.out.println("player1 hi"+saveload.getTexture(1,1)+"hi "+saveload.gethealth(1,1)+" "+saveload.getposX(1,1)+" "+saveload.getposY(1,1)+" "+saveload.getAngle(1,1));
+            //     System.out.println("player2 hi"+saveload.getTexture(1,2)+"hi "+saveload.gethealth(1,2)+" "+saveload.getposX(1,2)+" "+saveload.getposY(1,2)+" "+saveload.getAngle(1,2));
+    //    }
         this.update(delta);
 
 
@@ -425,13 +430,13 @@ public class trialMapScreen implements Screen {
             if(player.getHealth()<=0){
                 hud.showHealth(0, (float) player2.getHealth());
 
-                this.game.setScreen(new GameOver(this.game,1));
+                this.game.setScreen(new GameOver(this.game,1,t1,t2));
 
             }
             else{
                 hud.showHealth((float) player.getHealth(), 0);
                 System.out.println("hi");
-                this.game.setScreen(new GameOver(this.game,0));
+                this.game.setScreen(new GameOver(this.game,0,t1,t2));
             }
 
         }

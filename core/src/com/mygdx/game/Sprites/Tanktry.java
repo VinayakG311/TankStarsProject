@@ -13,8 +13,10 @@ public class Tanktry extends Sprite {
     private Texture player1;
     private double angle;
     private double health;
+    private String t;
 
-    public Tanktry(World world, trialMapScreen screen,int posx,int posy,Texture tank){
+    public Tanktry(World world, trialMapScreen screen,int posx,int posy,Texture tank,String t){
+        this.t=t;
 
         this.world = world;
         createTank(posx,posy);
@@ -51,7 +53,9 @@ public class Tanktry extends Sprite {
         body.createFixture(fixtureDef);
         body.setUserData("tank");
     }
-
+    public String getT(){
+        return t;
+    }
     public void setAngle(double angle) {
         this.angle = angle;
     }

@@ -42,10 +42,14 @@ public class pauseScreen extends ScreenAdapter implements Screen {
     private ImageButton resumeb;
     private ImageButton saveb;
     private Texture logo;
+    private String t1,t2;
 
 
-    public pauseScreen(final tankStars game) {
+    public pauseScreen(final tankStars game,String t1,String t2) {
         super();
+        this.t1=t1;
+        this.t2=t2;
+
 
         this.game = game;
 
@@ -73,7 +77,6 @@ public class pauseScreen extends ScreenAdapter implements Screen {
         Texture img = new Texture("background.png");
 
 
-
         int Help_Guides = 12;
         int row_height = Gdx.graphics.getWidth() / 12;
         int col_width = Gdx.graphics.getWidth() / 12;
@@ -85,67 +88,6 @@ public class pauseScreen extends ScreenAdapter implements Screen {
         title.setPosition(0,Gdx.graphics.getHeight()-row_height*2);
         title.setAlignment(Align.center);
         stage.addActor(title);
-
-
-
-
-//        // Button
-//        Button button1 = new TextButton("EXIT",mySkin);
-//        button1.setSize((float) (col_width*8), (float) (row_height*1.5));
-//        button1.setPosition(200,250);
-//        button1.addListener(new ClickListener(){
-//            @Override
-//            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new mainMenu(game));
-//            }
-//            @Override
-//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new mainMenu(game));
-//                return true;
-//            }
-//        });
-//        stage.addActor(button1);
-//
-//        // Text Button
-//        Button button2 = new TextButton("RESUME",mySkin);
-//        button2.setSize((float) (col_width*8), (float) (row_height*1.5));
-//        button2.setPosition(200,150);
-//        button2.addListener(new ClickListener(){
-//            @Override
-//            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new trialMapScreen(game,game.tank,revTank));
-//            }
-//            @Override
-//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new trialMapScreen(game,game.tank,revTank));
-//                return true;
-//            }
-//        });
-//        stage.addActor(button2);
-//
-//        Button button3 = new TextButton("SAVE",mySkin);
-//        button3.setSize((float) (col_width*8), (float) (row_height*1.5));
-//        button3.setPosition(200,60);
-//        button3.addListener(new ClickListener(){
-//            @Override
-//            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new mainMenu(game));
-//            }
-//            @Override
-//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                game.setScreen(new mainMenu(game));
-//                return true;
-//            }
-//        });
-//        stage.addActor(button3);
-//
-
-
-
-
-
-
-
 
         Drawable exitbutton = new TextureRegionDrawable(exit);
         Drawable resumebutton = new TextureRegionDrawable(resume);
@@ -178,11 +120,11 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank));
+                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank));
+                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
                 return true;
             }
         });
@@ -196,11 +138,11 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank));
+                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank));
+                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
                 return true;
             }
         });
@@ -214,58 +156,11 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
 
 
-
-
-//    @Override
-//    public void show() {
-//        sb = new SpriteBatch();
-//        Texture img = new Texture("background.png");
-//        sprite = new Sprite(img);
-//        Texture newGame = new Texture("newGame.png");
-//        sprite2 = new Sprite(newGame);
-//        sprite.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-//
-//
-//        sprite2.setBounds(Gdx.graphics.getWidth()/2-125,Gdx.graphics.getHeight()/2,250,40 );
-//
-////        newGame = new Texture("newGame.png");
-////        ImageButton button1 = new ImageButton((Drawable) newGame);
-////        button1.setBounds(Gdx.graphics.getWidth()/2-125,Gdx.graphics.getHeight()/2,250,40);
-////        button1.addListener(new InputListener(){
-////            @Override
-////            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-////                game.setScreen(new PlayScreen(game));
-////            }
-////            @Override
-////            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-////                game.setScreen(new PlayScreen(game));
-////                return true;
-////            }
-////        });
-////        stage.addActor(button1);
-////        Gdx.input.setInputProcessor(new InputAdapter() {
-////            @Override
-////            public boolean keyDown(int keyCode) {
-////                if (keyCode == Input.Keys.SPACE) {
-////                    game.setScreen(new PlayScreen(game));
-////                }
-////                return true;
-////            }
-////        });
-//    }
-
-
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-//        sb.begin();
-//        sprite.draw(sb);
-//        //sprite2.draw(sb);
-//        sb.end();
-//        stage.draw();
 
         stage.act();
         stage.getBatch().begin();

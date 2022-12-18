@@ -26,6 +26,8 @@ public class chooseTank implements Screen {
     private tankStars game;
     private Texture revTank;
     private Texture logo;
+    private String t1,t2,t3,rt1;
+
 
     public chooseTank(tankStars game){
         this.game = game;
@@ -36,6 +38,10 @@ public class chooseTank implements Screen {
         tank2 = new Texture("tank2.png");
         tank3 = new Texture("tank3.png");
         revTank = new Texture("reverseTank1.png");
+        t1="tank1.png";
+        t2="tank2.png";
+        t3="tank3.png";
+        rt1="reverseTank1.png";
     }
 
     @Override
@@ -62,13 +68,13 @@ public class chooseTank implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank1;
-                game.setScreen(new trialMapScreen(game,tank1,revTank));
+                game.setScreen(new trialMapScreen(game,tank1,revTank,t1,rt1));
 
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank1;
-                game.setScreen(new trialMapScreen(game,tank1,revTank));
+                game.setScreen(new trialMapScreen(game,tank1,revTank,t1,rt1));
                 return true;
             }
         });
@@ -86,12 +92,12 @@ public class chooseTank implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank2;
-                game.setScreen(new trialMapScreen(game,tank2,revTank));
+                game.setScreen(new trialMapScreen(game,tank2,revTank,t2,rt1));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank2;
-                game.setScreen(new trialMapScreen(game,tank2,revTank));
+                game.setScreen(new trialMapScreen(game,tank2,revTank,t2,rt1));
                 return true;
             }
         });
@@ -109,14 +115,14 @@ public class chooseTank implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank3;
-                game.setScreen(new trialMapScreen(game,tank3,revTank));
+                game.setScreen(new trialMapScreen(game,tank3,revTank,t3,rt1));
 //                game.setScreen(new GameOver(game,1));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.tank = tank3;
-                game.setScreen(new trialMapScreen(game,tank3,revTank));
-                game.setScreen(new GameOver(game,1));
+                game.setScreen(new trialMapScreen(game,tank3,revTank,t3,rt1));
+            //    game.setScreen(new GameOver(game,1));
                 return true;
             }
         });

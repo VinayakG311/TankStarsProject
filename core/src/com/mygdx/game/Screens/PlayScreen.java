@@ -198,11 +198,11 @@ public class PlayScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-             game.setScreen(new pauseScreen(game));
+                //  game.setScreen(new pauseScreen(game));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new pauseScreen(game));
+             //   game.setScreen(new pauseScreen(game));
                 return true;
             }
         });

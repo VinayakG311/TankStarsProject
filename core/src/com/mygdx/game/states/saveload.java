@@ -2,6 +2,7 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -20,6 +21,7 @@ public class saveload implements Serializable {
         preferences.putString("save "+noofsaves+"player"+num+" positionX",new Json().toJson(player.getX()));
         preferences.putString("save "+noofsaves+"player"+num+" positionY",new Json().toJson(player.getY()));
         preferences.putString("save "+noofsaves+"player"+num+" Angle",new Json().toJson(player.getAngle()));
+        preferences.putString("save "+noofsaves+"player"+num+" Texture",new Json().toJson(player.getT()));
 //        preferences.putString("save "+noofsaves+"player2 health"+noofsaves,new Json().toJson(player.getHealth()));
 //        preferences.putString("save "+noofsaves+"player2 positionX"+noofsaves,new Json().toJson(player.getX()));
 //        preferences.putString("save "+noofsaves+"player2 positionY"+noofsaves,new Json().toJson(player.getY()));
@@ -29,6 +31,11 @@ public class saveload implements Serializable {
     public Double gethealth(int savenumber,int num){
         final JsonValue jsonval= new JsonReader().parse(preferences.getString("save "+noofsaves+"player"+num+" health"));
         return new Json().fromJson(Double.class, String.valueOf(jsonval));
+
+    }
+    public String getTexture(int savenumber,int num){
+        final JsonValue jsonval= new JsonReader().parse(preferences.getString("save "+noofsaves+"player"+num+" Texture"));
+        return new Json().fromJson(String.class, String.valueOf(jsonval));
 
     }
     public Float getposX(int savenumber,int num){
