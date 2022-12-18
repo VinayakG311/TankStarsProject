@@ -164,11 +164,11 @@ public class trialMapScreen implements Screen {
             body.setUserData("ground");
         }
 
-        player = new Tanktry(world,this,x1,y1,tank_player1,t1);
+        player = new Tanktry(world,this,x1,y1+50,tank_player1,t1);
         player.setHealth(h1);
         player.setAngle(a1);
 
-        player2=new Tanktry(world,this, x2, y2,tank_player2,t2);
+        player2=new Tanktry(world,this, x2, y2+50,tank_player2,t2);
         player2.setHealth(h2);
         player2.setAngle(a2);
         hud = new hud(game.sprite,player,player2);
