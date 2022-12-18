@@ -35,6 +35,8 @@ import com.mygdx.game.missiles;
 import com.mygdx.game.states.saveload;
 import com.mygdx.game.tankStars;
 
+import java.util.ArrayList;
+
 public class trialMapScreen implements Screen {
     private tankStars game;
     private World world;
@@ -47,7 +49,7 @@ public class trialMapScreen implements Screen {
     private com.mygdx.game.missiles missile2;
     private int missilerenderplayer1;
     private int missilerenderplayer2;
-
+    public static ArrayList<Integer> savedGames = new ArrayList<>();
 
     private Box2DDebugRenderer box2DDebugRenderer;
     private Viewport camPort;
@@ -58,7 +60,7 @@ public class trialMapScreen implements Screen {
 
     private Tank1 tank1;
     private Tank1 tank2;
-    private com.mygdx.game.states.saveload saveload;
+//    private com.mygdx.game.states.saveload saveload;
     private Texture explosion;
 
     private Tanktry player;
@@ -77,6 +79,7 @@ public class trialMapScreen implements Screen {
     private BitmapFont font;
     private Vector3 unproject;
     private Texture healthBar;
+    private saveload saveload = new saveload();
 
     private static PolygonShape findPolygoninMap(PolygonMapObject polygonMapObject) {
         PolygonShape polygon = new PolygonShape();
@@ -109,6 +112,7 @@ public class trialMapScreen implements Screen {
         return chain;
     }
     public trialMapScreen(tankStars game,Double a1,Double h1,Float x1,Float y1,String t1,String t2,Double a2,Double h2,Float x2,Float y2){
+
         this.t1=t1;
         this.t2=t2;
         tank_player1=new Texture(t1);
@@ -134,7 +138,7 @@ public class trialMapScreen implements Screen {
         shapeRenderer=new ShapeRenderer();
         world = new World(new Vector2(0,-100),true);
         box2DDebugRenderer = new Box2DDebugRenderer();
-        saveload=new saveload();
+//        saveload=new saveload();
         tank1=new Tank1(300,55,tank_player1,true,false);
         tank2=new Tank1(800,55,tank_player2,false,true);
         BodyDef bodyDef = new BodyDef();
@@ -206,7 +210,7 @@ public class trialMapScreen implements Screen {
         shapeRenderer=new ShapeRenderer();
         world = new World(new Vector2(0,-100),true);
         box2DDebugRenderer = new Box2DDebugRenderer();
-        saveload=new saveload();
+//        saveload=new saveload();
         tank1=new Tank1(300,55,tank_player1,true,false);
         tank2=new Tank1(800,55,tank_player2,false,true);
 
@@ -280,9 +284,15 @@ public class trialMapScreen implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                saveload = new saveload();
+
                 System.out.println("hi");
                 saveload.setstate(getplayer(),1);
                 saveload.setstate(getplayer2(),2);
+                System.out.println(saveload.preferences.get().keySet());
+//                saveload.numberofsaves++;
+                com.mygdx.game.states.saveload.numberofsaves++;
+                savedGames.add(1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
