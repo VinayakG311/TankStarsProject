@@ -124,11 +124,11 @@ public class GameOver implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,tank1,revTank,t1,t2));
+                game.setScreen(new chooseTank(game));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,tank1,revTank,t1,t2));
+                game.setScreen(new chooseTank(game));
                 return true;
             }
         });
