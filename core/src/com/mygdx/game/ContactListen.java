@@ -27,7 +27,7 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
 
                         @Override
                         public void run() {
-                            if(Math.abs(a.getPosition().x-p2.getX())<=100){
+                            if(Math.abs(a.getPosition().x-p2.getX())<=75){
                                 p2.toggle();
                                 float x=Math.abs(a.getPosition().x-p2.getX());
                                 System.out.println("p2"+x);
@@ -78,7 +78,7 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                         @Override
                         public void run() {
                             //    System.out.println(b.getPosition()+" "+p2.getX()+" "+p2.getY());
-                            if(Math.abs(b.getPosition().x-p2.getX())<=100){
+                            if(Math.abs(b.getPosition().x-p2.getX())<=75){
                                 p2.toggle();
                                 float x=Math.abs(b.getPosition().x-p2.getX());
                                 System.out.println("p2"+x);

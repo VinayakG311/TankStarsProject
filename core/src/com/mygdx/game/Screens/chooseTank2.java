@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.tankStars;
 
-public class chooseTank implements Screen {
+public class chooseTank2 implements Screen {
     private Stage stage;
     private Texture tank1;
     private Texture tank2;
@@ -27,10 +27,12 @@ public class chooseTank implements Screen {
     private Texture revTank,revTank2,revTank3;
     private Texture logo;
     private String t1,t2,t3,rt1,rt2,rt3;
+    private Texture tank;
 
 
-    public chooseTank(tankStars game){
+    public chooseTank2(tankStars game,String t,Texture tank){
         this.game = game;
+        this.tank = tank;
         img = new Texture("background.png");
         stage = new Stage(new ScreenViewport());
         logo = new Texture("logo1.png");
@@ -40,7 +42,7 @@ public class chooseTank implements Screen {
         revTank = new Texture("reverseTank1.png");
         revTank2 = new Texture("revTank2.png");
         revTank3 = new Texture("revTank3.png");
-        t1="tank1.png";
+        t1=t;
         t2="tank2.png";
         t3="tank3.png";
         rt1="reverseTank1.png";
@@ -56,7 +58,7 @@ public class chooseTank implements Screen {
 
         Skin mySkin = new Skin(Gdx.files.internal("skin/star-soldier-ui.json"));
 
-        Label title = new Label("CHOOSE YOUR TANK PLAYER 1",mySkin);
+        Label title = new Label("CHOOSE YOUR TANK PLAYER 2",mySkin);
         title.setSize(Gdx.graphics.getWidth(),row_height*2);
         title.setPosition((float) 0, (float) (Gdx.graphics.getHeight()-row_height*3.5));
         title.setAlignment(Align.center);
@@ -71,15 +73,14 @@ public class chooseTank implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.tank1 = tank1;
-                game.setScreen(new chooseTank2(game,t1,tank1));
-//                game.setScreen(new trialMapScreen(game,tank1,revTank,t1,rt1));
+                game.tank2 = tank1;
+                game.setScreen(new trialMapScreen(game,tank,revTank,t1,rt1));
 
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.tank1 = tank1;
-                game.setScreen(new chooseTank2(game,t1,tank1));
+                game.tank2 = tank1;
+                game.setScreen(new trialMapScreen(game,tank,revTank,t1,rt1));
                 return true;
             }
         });
@@ -96,13 +97,13 @@ public class chooseTank implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.tank1 = tank2;
-                game.setScreen(new chooseTank2(game,t2,tank2));
+                game.tank2 = tank2;
+                game.setScreen(new trialMapScreen(game,tank,revTank2,t1,rt2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.tank1 = tank2;
-                game.setScreen(new chooseTank2(game,t2,tank2));
+                game.tank2 = tank2;
+                game.setScreen(new trialMapScreen(game,tank,revTank2,t1,rt2));
                 return true;
             }
         });
@@ -119,15 +120,15 @@ public class chooseTank implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.tank1 = tank3;
-                game.setScreen(new chooseTank2(game,t3,tank3));
+                game.tank2 = tank3;
+                game.setScreen(new trialMapScreen(game,tank,revTank3,t1,rt3));
 //                game.setScreen(new GameOver(game,1));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.tank1 = tank3;
-                game.setScreen(new chooseTank2(game,t3,tank3));
-            //    game.setScreen(new GameOver(game,1));
+                game.tank2 = tank3;
+                game.setScreen(new trialMapScreen(game,tank,revTank3,t1,rt3));
+                //    game.setScreen(new GameOver(game,1));
                 return true;
             }
         });

@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.tankStars;
 
+
 public class GameOver implements Screen {
 
     private tankStars game;
@@ -45,11 +46,12 @@ public class GameOver implements Screen {
 
     private Texture contiue;
     private ImageButton newgameb;
-    private ImageButton continuegameb;
+    private ImageButton continuegameb,exitbutton;
     private Texture logo;
     private String t1,t2;
 
     private BitmapFont font;
+    private Texture exit;
 
     private Texture GameOverImage1;
     private int result;
@@ -57,7 +59,7 @@ public class GameOver implements Screen {
         this.game=game;
         this.result=result;
         font=new BitmapFont();
-
+        exit = new Texture("buttonTalbeexit.png");
         this.game = game;
         logo =  new Texture("logo1.png");
         stage = new Stage();
@@ -94,6 +96,7 @@ public class GameOver implements Screen {
         title.setAlignment(Align.center);
         Drawable newGameButton = new TextureRegionDrawable(newGame);
         Drawable continueGameButton = new TextureRegionDrawable(contiue);
+        Drawable exitButton = new TextureRegionDrawable(exit);
 
         newgameb = new ImageButton(newGameButton);
 
@@ -119,7 +122,7 @@ public class GameOver implements Screen {
 
         continuegameb = new ImageButton(newGameButton);
         continuegameb.setSize((float) (col_width*4), (float) (row_height));
-        continuegameb.setPosition(400,50);
+        continuegameb.setPosition(400,170);
         continuegameb.addListener(new ClickListener(){
 
             @Override
@@ -129,6 +132,25 @@ public class GameOver implements Screen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new chooseTank(game));
+                return true;
+            }
+        });
+
+
+        stage.addActor(continuegameb);
+
+        continuegameb = new ImageButton(exitButton);
+        continuegameb.setSize((float) (col_width*4), (float) (row_height));
+        continuegameb.setPosition(400,40);
+        continuegameb.addListener(new ClickListener(){
+
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+               game.setScreen(new mainMenu(game));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new mainMenu(game));
                 return true;
             }
         });
