@@ -420,7 +420,7 @@
                 font.draw(game.sprite, String.valueOf((int)(player.getAngle())), player.getX(), player.getY() + 50);
                 if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
                     missile=new missiles(new Texture("bullet.png"),world,100,100, (int) player.getX()+40, (int) player.getY()+60);
-                    Vector2 x= new Vector2((float) (100*player.getpower()), (float) (500*player.getpower()));
+                    Vector2 x= new Vector2((float) (100000*player.getpower()), (float) (500000*player.getpower()));
                     x.rotateDeg((float) (player.getAngle()-90));
                     missile.body.setLinearVelocity(x);
                     missilerenderplayer1 = 1;
@@ -446,7 +446,7 @@
                 if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
                     missile2=new missiles(new Texture("bullet.png"),world,100,100, (int) (player2.getX()-30), (int) (player2.getY()+50));
 
-                    Vector2 x= new Vector2((float) (-100*player2.getpower()), (float) (500*player2.getpower()));
+                    Vector2 x= new Vector2((float) (-100000*player2.getpower()), (float) (500000*player2.getpower()));
                     x.rotateDeg((float) (90-player2.getAngle()));
                     missile2.body.setLinearVelocity(x);
                     missilerenderplayer2 = 1;

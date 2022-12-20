@@ -15,8 +15,15 @@ public class homeScreen extends ScreenAdapter {
     private BitmapFont font;
 
     private tankStars game;
+    private static homeScreen homeScreen= null;
+    public static homeScreen getInstance(tankStars game){
+        if(homeScreen==null){
+            homeScreen=new homeScreen(game);
+        }
+        return homeScreen;
+    }
 
-    public homeScreen(tankStars game) {
+    private homeScreen(tankStars game) {
        this.game = game;
 
         font = new BitmapFont();

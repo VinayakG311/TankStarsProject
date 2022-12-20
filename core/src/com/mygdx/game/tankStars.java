@@ -20,20 +20,11 @@ public class tankStars extends Game {
 	public Texture tank1;
 	public Texture tank2;
 
-
-
 	@Override
 	public void create () {
 		sprite = new SpriteBatch();
 		//setScreen(new GameOver(this,1));
-		setScreen(new homeScreen(this));
-		//setScreen(new trialMapScreen(this));
-
-
-		//		GameStateManager = new gameStateManager();
-//		Gdx.gl.glClearColor(1,0,0,1);
-//		GameStateManager.push(new mainMenuState(GameStateManager));
-
+		setScreen(homeScreen.getInstance(this));
 	}
 
 	@Override
