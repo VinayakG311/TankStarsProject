@@ -168,11 +168,11 @@ public class trialMapScreen implements Screen {
             body.setUserData("ground");
         }
 
-        player = new Tanktry(world,this,x1,y1+50,tank_player1,t1);
+        player = new Tanktry(world,this,x1,y1+70,tank_player1,t1);
         player.setHealth(h1);
         player.setAngle(a1);
 
-        player2=new Tanktry(world,this, x2, y2+50,tank_player2,t2);
+        player2=new Tanktry(world,this, x2, y2+70,tank_player2,t2);
         player2.setHealth(h2);
         player2.setAngle(a2);
         hud = new hud(game.sprite,player,player2);
@@ -274,13 +274,13 @@ public class trialMapScreen implements Screen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 saveload.setpause(getplayer(),1);
                 saveload.setpause(getplayer2(),2);
-                game.setScreen(new pauseScreen(game,t1,t2));
+                game.setScreen(new pauseScreen(game,t1,t2,trialMapScreen.this));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 saveload.setpause(getplayer(),1);
                 saveload.setpause(getplayer2(),2);
-                game.setScreen(new pauseScreen(game,t1,t2));
+                game.setScreen(new pauseScreen(game,t1,t2,trialMapScreen.this));
                 return true;
             }
         });
@@ -311,7 +311,7 @@ public class trialMapScreen implements Screen {
 
     }
 
-    private Tanktry getplayer2() {
+    Tanktry getplayer2() {
         return player2;
     }
 

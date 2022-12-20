@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.states.saveload;
 import com.mygdx.game.tankStars;
 
+import static com.mygdx.game.Screens.trialMapScreen.savedGames;
+
 public class pauseScreen extends ScreenAdapter implements Screen {
     private tankStars game;
     private SpriteBatch sb;
@@ -45,10 +47,13 @@ public class pauseScreen extends ScreenAdapter implements Screen {
     private Texture logo;
     private String t1,t2;
     private com.mygdx.game.states.saveload saveload;
+    private trialMapScreen trialMapScreen;
 
 
-    public pauseScreen(final tankStars game,String t1,String t2) {
+    public pauseScreen(final tankStars game,String t1,String t2,trialMapScreen trialMapScreen) {
         super();
+        this.trialMapScreen=trialMapScreen;
+
         this.t1=t1;
         this.t2=t2;
         saveload=new saveload();
@@ -142,11 +147,17 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
+
+                saveload.setstate(trialMapScreen.getplayer(),1);
+                saveload.setstate(trialMapScreen.getplayer2(),2);
+                System.out.println(saveload.preferences.get().keySet());
+//                saveload.numberofsaves++;
+                com.mygdx.game.states.saveload.numberofsaves++;
+                savedGames.add(1);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
+               // game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
                 return true;
             }
         });
