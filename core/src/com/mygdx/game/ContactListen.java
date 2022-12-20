@@ -30,8 +30,9 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                             if(Math.abs(a.getPosition().x-p2.getX())<=100){
                                 p2.toggle();
                                 float x=Math.abs(a.getPosition().x-p2.getX());
+                                System.out.println("p2"+x);
                                 float healthred= 30*(100-x)/100;
-                         //       System.out.println(healthred);
+                             //   System.out.println(healthred);
 
                                 if((a.getPosition().x-p2.getX()<=100)&& (a.getPosition().x-p2.getX()>=0) ){
                                     p2.setHealth(p2.getHealth()-healthred);
@@ -45,11 +46,12 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
 
                                 }
                             }
-                            if(Math.abs(a.getPosition().x-p1.getX())<=100){
+                            if(Math.abs(a.getPosition().x-p1.getX()-50)<=100){
                                 p1.toggle();
-                                float x=Math.abs(a.getPosition().x-p1.getX());
+                                float x=Math.abs(a.getPosition().x-p1.getX()-50);
+                                System.out.println("p1"+x);
                                 float healthred= 30*(100-x)/100;
-                           //     System.out.println(healthred);
+                                System.out.println(healthred);
                                 if((a.getPosition().x-p1.getX()<=100)&& (a.getPosition().x-p1.getX()>=0) ){
                                     p1.setHealth(p1.getHealth()-healthred);
                                     p1.body.setLinearVelocity(new Vector2(-100,0));
@@ -79,7 +81,9 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
                             if(Math.abs(b.getPosition().x-p2.getX())<=100){
                                 p2.toggle();
                                 float x=Math.abs(b.getPosition().x-p2.getX());
+                                System.out.println("p2"+x);
                                 float healthred= 30*(100-x)/100;
+                                System.out.println(healthred);
 
                                 if(b.getPosition().x-p2.getX()<=100 && (b.getPosition().x-p2.getX()>=0)){
                                     p2.setHealth(p2.getHealth()-healthred);
@@ -91,10 +95,12 @@ public class ContactListen implements com.badlogic.gdx.physics.box2d.ContactList
 
                                 }
                             }
-                            if(Math.abs(b.getPosition().x-p1.getX())<=100){
+                            if(Math.abs(b.getPosition().x-p1.getX()-50)<=100){
                                 p1.toggle();
-                                float x=Math.abs(b.getPosition().x-p1.getX());
+                                float x=Math.abs(b.getPosition().x-p1.getX()-50);
+                                System.out.println("p1"+x);
                                 float healthred= 30*(100-x)/100;
+                                System.out.println(healthred);
                                 if((b.getPosition().x-p1.getX()<=100)&& (b.getPosition().x-p1.getX()>=0) ){
                                     p1.setHealth(p1.getHealth()-healthred);
                                     p1.body.setLinearVelocity(new Vector2(-100,0));
