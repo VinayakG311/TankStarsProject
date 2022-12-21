@@ -49,6 +49,8 @@ Press the SPACE bar on your keyboard to go to the Main Menu
 - The Player can exit to the Main Menu.
 
 ## Game Over
+<img width="1200" alt="Screenshot 2022-12-21 at 6 45 12 PM" src="https://user-images.githubusercontent.com/96966973/208914314-65f3199a-61a7-4aab-bd4c-abe6bc22e9b8.png">
+
 
 - The Game is over when the health bar of one of the Tanks reaches 0
 - The Player can exit to the Main Menu, or start a New Game
