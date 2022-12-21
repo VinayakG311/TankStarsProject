@@ -47,3 +47,8 @@ Press the SPACE bar on your keyboard to go to the Main Menu
 - The Player can resume the paused game.
 - The Player can save the game and open it anytime by pressing continue on the Main Menu and selecting the state the Player would want to cintinue from.
 - The Player can exit to the Main Menu.
+
+## Game Over
+
+- The Game is over when the health bar of one of the Tanks reaches 0
+- The Player can exit to the Main Menu, or start a New Game
