@@ -57,6 +57,16 @@ public class missiles extends Sprite {
             body.setUserData("missile");
 
     }
+    public void setVelocity(int power,Double angle){
+        Vector2 x=new Vector2(100,700);
+        x.scl(power*100);
+        x.rotateDeg((float)(angle-90));
+        System.out.println(x);
+        body.setLinearVelocity(x);
+
+
+
+    }
 
 
 }

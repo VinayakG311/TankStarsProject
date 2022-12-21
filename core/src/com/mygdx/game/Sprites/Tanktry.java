@@ -25,7 +25,7 @@
             player1 = tank;
             setBounds(300,320,player1.getWidth(), player1.getHeight());
             setRegion(player1);
-            power=10;
+            power=100;
             angle=45;
             health=175;
         }
