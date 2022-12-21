@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class missiles extends Sprite {
@@ -26,32 +27,17 @@ public class missiles extends Sprite {
     }
     public void update(float dt){
 
-        setPosition(body.getPosition().x-12, body.getPosition().y-12);
-
-        if(body.getLinearVelocity().x<0){
-            System.out.println(body.getLinearVelocity().y);
-            if(body.getLinearVelocity().y>0){
-                body.setLinearVelocity(body.getLinearVelocity().x-50,body.getLinearVelocity().y+(15)*dt*10);
-//                body.setLinearVelocity(body.getLinearVelocity().x-50,body.getLinearVelocity().y-40);
-            }
-
-            else{
-                body.setLinearVelocity(body.getLinearVelocity().x-50,body.getLinearVelocity().y+(15)*dt*10);
-            }
+//        setPosition(body.getPosition().x-12, body.getPosition().y-12);
+        float x = body.getPosition().x;
+        float y = body.getPosition().y;
+        setPosition(body.getPosition().x+body.getLinearVelocity().x*dt,body.getPosition().y+body.getLinearVelocity().y*dt);
+        if(body.getLinearVelocity().x>0){
+            body.applyForce(40.0f,10.0f,x,y,true);
+        }
+        else{
+            body.applyForce(-40.0f,10.0f,x,y,true);
         }
 
-
-        else {
-            System.out.println(body.getLinearVelocity().y);
-            if (body.getLinearVelocity().y > 0) {
-                body.setLinearVelocity(body.getLinearVelocity().x + 50, body.getLinearVelocity().y + (15)*dt);
-//                body.setLinearVelocity(body.getLinearVelocity().x + 50, body.getLinearVelocity().y - 40);
-            } else {
-                body.setLinearVelocity(body.getLinearVelocity().x + 50, body.getLinearVelocity().y+15*dt);
-            }
-        }
-
-//        body.setLinearVelocity(body.getLinearVelocity().x,body.getLinearVelocity().y-40);
 
     }
     private void makebox(int x,int y){
