@@ -28,7 +28,6 @@ public class chooseTank implements Screen {
     private Texture logo;
     private String t1,t2,t3,rt1,rt2,rt3;
 
-
     public chooseTank(tankStars game){
         this.game = game;
         img = new Texture("background.png");

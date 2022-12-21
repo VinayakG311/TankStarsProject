@@ -36,6 +36,7 @@
     import com.mygdx.game.tankStars;
 
     import java.util.ArrayList;
+    import java.util.Iterator;
 
     public class trialMapScreen implements Screen {
         private tankStars game;
@@ -76,7 +77,7 @@
         private ImageButton pauseButton;
         private ImageButton savegame;
 
-        private int turn=0;
+        int turn=0;
         private BitmapFont font;
         private Vector3 unproject;
         private Texture healthBar;
@@ -112,10 +113,11 @@
             chain.createChain(worldVertices);
             return chain;
         }
-        public trialMapScreen(tankStars game,Double a1,Double h1,Float x1,Float y1,String t1,String t2,Double a2,Double h2,Float x2,Float y2){
+        public trialMapScreen(tankStars game,Double a1,Double h1,Float x1,Float y1,String t1,String t2,Double a2,Double h2,Float x2,Float y2,int turn){
 
             this.t1=t1;
             this.t2=t2;
+            this.turn=turn;
             tank_player1=new Texture(t1);
             tank_player2=new Texture(t2);
             font=new BitmapFont();
@@ -149,10 +151,10 @@
             this.Wall(15,-170,15,1700);
             this.Wall(3625,-170,3625,1700);
 
-            for(MapObject object : tiledMap.getLayers().get(2).getObjects()){
-
+            Iterator<MapObject> iterator = tiledMap.getLayers().get(2).getObjects().iterator();
+            while (iterator.hasNext()){
                 Shape shape;
-
+                MapObject object=iterator.next();
                 if (object instanceof PolygonMapObject) {
                     shape = findPolygoninMap((PolygonMapObject) object);
                 } else if (object instanceof PolylineMapObject) {
@@ -167,7 +169,26 @@
                 fixtureDef.shape = shape;
                 body.createFixture(fixtureDef);
                 body.setUserData("ground");
+
             }
+
+//            for(MapObject object : tiledMap.getLayers().get(2).getObjects()){
+//                Shape shape;
+//                if (object instanceof PolygonMapObject) {
+//                    shape = findPolygoninMap((PolygonMapObject) object);
+//                } else if (object instanceof PolylineMapObject) {
+//                    shape = findPolylineinMap((PolylineMapObject) object);
+//                }
+//
+//                else {
+//                    continue;
+//                }
+//                bodyDef.type = BodyDef.BodyType.StaticBody;
+//                body = world.createBody(bodyDef);
+//                fixtureDef.shape = shape;
+//                body.createFixture(fixtureDef);
+//                body.setUserData("ground");
+//            }
             player = new Tanktry(world,this,x1,y1+70,tank_player1,t1);
             player.setHealth(h1);
             player.setAngle(a1);
@@ -275,14 +296,14 @@
 
                 @Override
                 public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                    saveload.setpause(getplayer(),1);
-                    saveload.setpause(getplayer2(),2);
+                    saveload.setpause(getplayer(),1,turn);
+                    saveload.setpause(getplayer2(),2,turn);
                     game.setScreen(new pauseScreen(game,t1,t2,trialMapScreen.this));
                 }
                 @Override
                 public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                    saveload.setpause(getplayer(),1);
-                    saveload.setpause(getplayer2(),2);
+                    saveload.setpause(getplayer(),1,turn);
+                    saveload.setpause(getplayer2(),2,turn);
                     game.setScreen(new pauseScreen(game,t1,t2,trialMapScreen.this));
                     return true;
                 }
@@ -294,8 +315,8 @@
     //                saveload = new saveload();
 
                     System.out.println("hi");
-                    saveload.setstate(getplayer(),1);
-                    saveload.setstate(getplayer2(),2);
+                    saveload.setstate(getplayer(),1,turn);
+                    saveload.setstate(getplayer2(),2,turn);
                     System.out.println(saveload.preferences.get().keySet());
     //                saveload.numberofsaves++;
                     com.mygdx.game.states.saveload.numberofsaves++;
@@ -420,7 +441,7 @@
                 font.draw(game.sprite, String.valueOf((int)(player.getAngle())), player.getX(), player.getY() + 50);
                 if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
                     missile=new missiles(new Texture("bullet.png"),world,100,100, (int) player.getX()+40, (int) player.getY()+60);
-                    Vector2 x= new Vector2((float) (100000*player.getpower()), (float) (500000*player.getpower()));
+                    Vector2 x= new Vector2((100), (500));
                     x.rotateDeg((float) (player.getAngle()-90));
                     missile.body.setLinearVelocity(x);
                     missilerenderplayer1 = 1;
@@ -446,7 +467,7 @@
                 if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
                     missile2=new missiles(new Texture("bullet.png"),world,100,100, (int) (player2.getX()-30), (int) (player2.getY()+50));
 
-                    Vector2 x= new Vector2((float) (-100000*player2.getpower()), (float) (500000*player2.getpower()));
+                    Vector2 x= new Vector2((-100000), 500000);
                     x.rotateDeg((float) (90-player2.getAngle()));
                     missile2.body.setLinearVelocity(x);
                     missilerenderplayer2 = 1;

@@ -15,22 +15,34 @@ public class saveload implements Serializable {
     public static Preferences preferences= Gdx.app.getPreferences("saveload");
 
 
-    public static void setstate(Tanktry player, int num){
+    public static void setstate(Tanktry player, int num,int turn){
         preferences.putString("save "+ numberofsaves +"player"+num+" health",new Json().toJson(player.getHealth()));
         preferences.putString("save "+ numberofsaves +"player"+num+" positionX",new Json().toJson(player.getX()));
         preferences.putString("save "+ numberofsaves +"player"+num+" positionY",new Json().toJson(player.getY()));
         preferences.putString("save "+ numberofsaves +"player"+num+" Angle",new Json().toJson(player.getAngle()));
         preferences.putString("save "+ numberofsaves +"player"+num+" Texture",new Json().toJson(player.getT()));
+        preferences.putString("save "+ numberofsaves +"Turn",new Json().toJson(turn));
+
         preferences.flush();
     }
 
-    public void setpause(Tanktry player,int num){
+    public void setpause(Tanktry player,int num,int turn){
         preferences.putString("resume player"+num+" health",new Json().toJson(player.getHealth()));
         preferences.putString("resume player"+num+" positionX",new Json().toJson(player.getX()));
         preferences.putString("resume player"+num+" positionY",new Json().toJson(player.getY()));
         preferences.putString("resume player"+num+" Angle",new Json().toJson(player.getAngle()));
         preferences.putString("resume player"+num+" Texture",new Json().toJson(player.getT()));
+        preferences.putString("resume turn",new Json().toJson(turn));
         preferences.flush();
+
+    }
+    public int getpauseTurn(){
+        final JsonValue jsonval= new JsonReader().parse(preferences.getString("resume turn"));
+        return new Json().fromJson(int.class, String.valueOf(jsonval));
+    }
+    public int getTurn(int i){
+        final JsonValue jsonval= new JsonReader().parse(preferences.getString("save "+i+"Turn"));
+        return new Json().fromJson(int.class, String.valueOf(jsonval));
 
     }
     public Double getpausehealth(int num){

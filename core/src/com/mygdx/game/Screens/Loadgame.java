@@ -24,6 +24,8 @@ public class Loadgame  implements Screen {
     private Texture cont;
     private Texture img;
     saveload s;
+
+
     public Loadgame(tankStars game){
 //        saveload=new saveload();
         preferences= Gdx.app.getPreferences("saveload");
@@ -54,7 +56,7 @@ public class Loadgame  implements Screen {
                 public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                     System.out.println("player1 "+s.getTexture(finalJ,1)+" "+s.gethealth(finalJ,1)+" "+s.getposX(finalJ,1)+" "+s.getposY(finalJ,1)+" "+s.getAngle(finalJ,1));
                     System.out.println("player2 "+s.getTexture(finalJ,2)+" "+s.gethealth(finalJ,2)+" "+s.getposX(finalJ,2)+" "+s.getposY(finalJ,2)+" "+s.getAngle(finalJ,2));
-                    game.setScreen(new trialMapScreen(game,s.getAngle(finalJ,1),s.gethealth(finalJ,1),s.getposX(finalJ,1),s.getposY(finalJ,1),s.getTexture(finalJ,1),s.getTexture(finalJ,2),s.getAngle(finalJ,2),s.gethealth(finalJ,2),s.getposX(finalJ,2),s.getposY(finalJ,2)));
+                    game.setScreen(new trialMapScreen(game,s.getAngle(finalJ,1),s.gethealth(finalJ,1),s.getposX(finalJ,1),s.getposY(finalJ,1),s.getTexture(finalJ,1),s.getTexture(finalJ,2),s.getAngle(finalJ,2),s.gethealth(finalJ,2),s.getposX(finalJ,2),s.getposY(finalJ,2),s.getTurn(finalJ)));
                 }
                 @Override
                 public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

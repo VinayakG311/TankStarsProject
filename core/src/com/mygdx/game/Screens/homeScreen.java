@@ -37,8 +37,6 @@ public class homeScreen extends ScreenAdapter {
         Texture img = new Texture("img.png");
         sprite = new Sprite(img);
         sprite.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-
-
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keyCode) {

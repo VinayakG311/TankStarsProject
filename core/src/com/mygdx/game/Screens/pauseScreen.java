@@ -127,13 +127,13 @@ public class pauseScreen extends ScreenAdapter implements Screen {
 
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,saveload.getpauseAngle(1),saveload.getpausehealth(1),saveload.getpauseposX(1),saveload.getpauseposY(1),saveload.getpauseTexture(1),saveload.getpauseTexture(2),saveload.getpauseAngle(2),saveload.getpausehealth(2),saveload.getpauseposX(2),saveload.getpauseposY(2)));
+                game.setScreen(new trialMapScreen(game,saveload.getpauseAngle(1),saveload.getpausehealth(1),saveload.getpauseposX(1),saveload.getpauseposY(1),saveload.getpauseTexture(1),saveload.getpauseTexture(2),saveload.getpauseAngle(2),saveload.getpausehealth(2),saveload.getpauseposX(2),saveload.getpauseposY(2),saveload.getpauseTurn()));
 
            //     game.setScreen(new trialMapScreen(game,game.tank,game.tank,t1,t2));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new trialMapScreen(game,saveload.getpauseAngle(1),saveload.getpausehealth(1),saveload.getpauseposX(1),saveload.getpauseposY(1),saveload.getpauseTexture(1),saveload.getpauseTexture(2),saveload.getpauseAngle(2),saveload.getpausehealth(2),saveload.getpauseposX(2),saveload.getpauseposY(2)));
+                game.setScreen(new trialMapScreen(game,saveload.getpauseAngle(1),saveload.getpausehealth(1),saveload.getpauseposX(1),saveload.getpauseposY(1),saveload.getpauseTexture(1),saveload.getpauseTexture(2),saveload.getpauseAngle(2),saveload.getpausehealth(2),saveload.getpauseposX(2),saveload.getpauseposY(2),saveload.getpauseTurn()));
                 return true;
             }
         });
@@ -148,8 +148,8 @@ public class pauseScreen extends ScreenAdapter implements Screen {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
-                saveload.setstate(trialMapScreen.getplayer(),1);
-                saveload.setstate(trialMapScreen.getplayer2(),2);
+                saveload.setstate(trialMapScreen.getplayer(),1,trialMapScreen.turn);
+                saveload.setstate(trialMapScreen.getplayer2(),2, trialMapScreen.turn);
                 System.out.println(saveload.preferences.get().keySet());
 //                saveload.numberofsaves++;
                 com.mygdx.game.states.saveload.numberofsaves++;
