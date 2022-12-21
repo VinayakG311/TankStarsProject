@@ -29,7 +29,6 @@
     import com.badlogic.gdx.utils.viewport.Viewport;
     import com.mygdx.game.ContactListen;
     import com.mygdx.game.Scenes.hud;
-    import com.mygdx.game.Sprites.Tank1;
     import com.mygdx.game.Sprites.Tanktry;
     import com.mygdx.game.missiles;
     import com.mygdx.game.states.saveload;
@@ -60,8 +59,6 @@
         private OrthogonalTiledMapRenderer renderer;
         private OrthographicCamera camera;
 
-        private Tank1 tank1;
-        private Tank1 tank2;
     //    private com.mygdx.game.states.saveload saveload;
         private Texture explosion;
 
@@ -142,9 +139,7 @@
             world = new World(new Vector2(0,-100),true);
             box2DDebugRenderer = new Box2DDebugRenderer();
     //        saveload=new saveload();
-            tank1=new Tank1(300,55,tank_player1,true,false);
-            tank2=new Tank1(800,55,tank_player2,false,true);
-            BodyDef bodyDef = new BodyDef();
+       BodyDef bodyDef = new BodyDef();
             PolygonShape shape2 = new PolygonShape();
             FixtureDef fixtureDef = new FixtureDef();
             Body body;
@@ -234,9 +229,6 @@
             world = new World(new Vector2(0,-100),true);
             box2DDebugRenderer = new Box2DDebugRenderer();
     //        saveload=new saveload();
-            tank1=new Tank1(300,55,tank_player1,true,false);
-            tank2=new Tank1(800,55,tank_player2,false,true);
-
 
             BodyDef bodyDef = new BodyDef();
             PolygonShape shape2 = new PolygonShape();
