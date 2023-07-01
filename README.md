@@ -1,3 +1,5 @@
+Its a multiplayer game where players can control Tanks to shoot down enemies.
+
 # TankStarsProject
 This game is made using the libgdx java framework and using OOPS concepts like inheritance,polymorphism,interface,abstraction,design patterns etc.
 
